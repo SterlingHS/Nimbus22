@@ -19,32 +19,32 @@ import edu.wpi.first.wpilibj.drive.MecanumDrive;
  */
 public class DrivingSystem extends Subsystem {
 
-    //private final WPI_TalonSRX frontLeft;
-    //private final WPI_TalonSRX rearLeft;
-    //private final WPI_TalonSRX frontRight;
-    //private final WPI_TalonSRX rearRight;
-    //private final MecanumDrive MecanumDrive1;
+    private final WPI_TalonSRX frontLeft;
+    private final WPI_TalonSRX rearLeft;
+    private final WPI_TalonSRX frontRight;
+    private final WPI_TalonSRX rearRight;
+    private final MecanumDrive MecanumDrive1;
 
 
     public DrivingSystem() {
-        //frontLeft = new WPI_TalonSRX(RobotMap.DRIVETRAIN_LEFT_FRONT);
-        //addChild("Drive Front Left", frontLeft);
-        //frontLeft.setInverted(false);
+        frontLeft = new WPI_TalonSRX(RobotMap.DRIVETRAIN_LEFT_FRONT);
+        addChild("Drive Front Left", frontLeft);
+        frontLeft.setInverted(false);
 
-        //rearLeft = new WPI_TalonSRX(RobotMap.DRIVETRAIN_LEFT_BACK);
-        //addChild("Speed Controller 2", rearLeft);
-        //rearLeft.setInverted(false);
+        rearLeft = new WPI_TalonSRX(RobotMap.DRIVETRAIN_LEFT_BACK);
+        addChild("Speed Controller 2", rearLeft);
+        rearLeft.setInverted(false);
 
-        //frontRight = new WPI_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_FRONT);
-        //addChild("Speed Controller 3", frontRight);
-        //frontRight.setInverted(false);
+        frontRight = new WPI_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_FRONT);
+        addChild("Speed Controller 3", frontRight);
+        frontRight.setInverted(false);
 
-        //rearRight = new WPI_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_BACK);
-        //addChild("Speed Controller 4", rearRight);
-        //rearRight.setInverted(false);
+        rearRight = new WPI_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_BACK);
+        addChild("Speed Controller 4", rearRight);
+        rearRight.setInverted(false);
 
 
-        //MecanumDrive1 = new MecanumDrive(frontLeft, rearLeft, frontRight, rearRight);
+        MecanumDrive1 = new MecanumDrive(frontLeft, rearLeft, frontRight, rearRight);
     }
 
     @Override
@@ -53,8 +53,7 @@ public class DrivingSystem extends Subsystem {
         // Set the default command for a subsystem here.
         // setDefaultCommand(new MySpecialCommand());
 
-        //setDefaultCommand(new ArcadeDrive());
-        //setDefaultCommand(new MecanumDrive());
+        setDefaultCommand(new MecDrive());
     }
 
     @Override
@@ -66,15 +65,16 @@ public class DrivingSystem extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
-    public void mecanumDrive(double forward, double turn, double slowdown_factor) 
+    public void mecanumDrive(double X, double Y, double Z, double slowdown_factor) 
     {
         if(slowdown_factor < 1 && slowdown_factor > 0)
         {
-            forward*=slowdown_factor;
-            turn*=slowdown_factor;
+            X*=slowdown_factor;
+            Y*=slowdown_factor;
+            Z*=slowdown_factor;
         }
 
-        // MecanumDrive1.driveCartesian(-joyDriver.getY(), joyDriver.getX(), joyDriver.getZ());
+        MecanumDrive1.driveCartesian(-X, Y, Z);
         //MecanumDrive1.drivePolar(-m_stick.getY(), m_stick.getX(), m_stick.getZ());
     }
 

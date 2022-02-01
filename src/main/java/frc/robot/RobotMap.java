@@ -26,6 +26,8 @@ public class RobotMap {
     public static int DRIVETRAIN_RIGHT_BACK = 14;
 
     // Driver configuration
-    public static double DRIVER_SLOWDOWN = .64; 
-
+    public static double DRIVER_SLOWDOWN = .6; 
+    public static int X_AXIS = 1;
+    public static int y_AXIS = 2;
+    public static int Z_AXIS = 3;
 }	

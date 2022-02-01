@@ -35,20 +35,8 @@ public class OI {
     // button.whenReleased(new ExampleCommand());
 
     // Driver's Joystick
-    public JoystickButton intakeBt;
-    public JoystickButton intake_to_transferupBt;
-    public JoystickButton shootBt;
-    public JoystickButton shoulderUpBt;
-    public JoystickButton shoulderDownBt;
-
-    // CO-Driver's Joystick
-    public JoystickButton AddBall;
-    public JoystickButton RemoveBall;
-    public JoystickButton ResetBall;
-    public JoystickButton pickBalls;
-
     public Joystick joyDriver;
-    public Joystick joyCo;
+
 
     public OI() {
 
@@ -59,9 +47,5 @@ public class OI {
     public Joystick getJoyDriver() {
         return joyDriver;
     }
-
-    //public Joystick getJoyCo() {
-    //    return joyCo;
-    //}
 }
 
