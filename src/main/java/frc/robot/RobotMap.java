@@ -20,14 +20,14 @@ public class RobotMap {
     public static int JOYDRIVER_USB_PORT = 0;
 
     // CAN IDs
-    public static int DRIVETRAIN_LEFT_FRONT = 11;
-    public static int DRIVETRAIN_LEFT_BACK = 13;
-    public static int DRIVETRAIN_RIGHT_FRONT = 12;
-    public static int DRIVETRAIN_RIGHT_BACK = 14;
+    public static int DRIVETRAIN_LEFT_FRONT = 10;
+    public static int DRIVETRAIN_LEFT_BACK = 11;
+    public static int DRIVETRAIN_RIGHT_FRONT = 13;
+    public static int DRIVETRAIN_RIGHT_BACK = 12;
 
     // Driver configuration
     public static double DRIVER_SLOWDOWN = .6; 
     public static int X_AXIS = 1;
     public static int Y_AXIS = 2;
-    public static int Z_AXIS = 3;
+    public static int Z_AXIS = 4;
 }	

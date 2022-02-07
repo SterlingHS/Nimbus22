@@ -67,28 +67,17 @@ public class DrivingSystem extends Subsystem {
 
     public void mecanumDrive(double X, double Y, double Z, double slowdown_factor) 
     {
-        if(slowdown_factor < 1 && slowdown_factor > 0)
+    /*    if(slowdown_factor < 1 && slowdown_factor > 0)
         {
+
             X*=slowdown_factor;
             Y*=slowdown_factor;
             Z*=slowdown_factor;
-        }
+        }*/
 
         MecanumDrive1.driveCartesian(-X, Y, Z);
-        //MecanumDrive1.drivePolar(-m_stick.getY(), m_stick.getX(), m_stick.getZ());
+        //MecanumDrive1.drivePolar(-X, Y, Z);
     }
-
-    public void calibrateGyro()
-    {
-        //navx_device.calibrate();
-    }
-
-    public void resetAngle()
-    {
-        //navx_device.reset();
-    }
-
-    
 
 }
 
