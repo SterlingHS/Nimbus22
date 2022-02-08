@@ -65,8 +65,8 @@ rightRear = new WPI_TalonSRX(14);
 
 mecanumDrive1 = new MecanumDrive(leftFront, leftRear,
 rightFront, rightRear);
- addChild("Mecanum Drive 1",mecanumDrive1);
- mecanumDrive1.setSafetyEnabled(true);
+addChild("Mecanum Drive 1",mecanumDrive1);
+mecanumDrive1.setSafetyEnabled(true);
 mecanumDrive1.setExpiration(0.1);
 mecanumDrive1.setMaxOutput(1.0);
 

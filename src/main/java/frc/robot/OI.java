@@ -47,5 +47,9 @@ public class OI {
     public Joystick getJoyDriver() {
         return joyDriver;
     }
+
+    public double getJoyDriverAxis(int axis) {
+        return joyDriver.getRawAxis(axis);
+    }
 }
 
