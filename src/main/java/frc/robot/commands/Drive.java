@@ -59,13 +59,15 @@ public class Drive extends CommandBase {
         double Y = Robot.oi.getJoyDriverAxis(RobotMap.Y_AXIS);
         double Z = Robot.oi.getJoyDriverAxis(RobotMap.Z_AXIS);
 
-        Robot.drivesystem.mecanumDrive(X, Y, Z, RobotMap.DRIVER_SLOWDOWN);
-        
+        //Robot.drivesystem.mecanumDrive(X, Y, Z, RobotMap.DRIVER_SLOWDOWN);
+        System.out.println("Stopped...");
+        m_driveSystem.stop();
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
+        m_driveSystem.stop();
     }
 
     // Returns true when the command should end.

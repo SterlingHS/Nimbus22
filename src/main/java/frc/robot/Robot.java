@@ -4,12 +4,14 @@
 
 package frc.robot;
 
+import frc.robot.commands.AutonomousCommand;
 // import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 //import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 //import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.command.Scheduler;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -22,6 +24,8 @@ public class Robot extends TimedRobot {
   //private static final String kCustomAuto = "My Auto";
   //private String m_autoSelected;
   //private final SendableChooser<String> m_chooser = new SendableChooser<>();
+  private Command autonomousCommand;
+  private RobotContainer robotContainer;
 
   public static OI oi;
   public static DriveSystem drivesystem;
@@ -35,8 +39,8 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     //m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
     //m_chooser.addOption("My Auto", kCustomAuto);
-    //SmartDashboard.putData("Auto choices", m_chooser);
-    
+    // SmartDashboard.putData("Auto choices", m_chooser);
+    // m_robotContainer = new RobotContainer();
     drivesystem = new DriveSystem();
   }
 
@@ -49,6 +53,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    CommandScheduler.getInstance().run();
   }
 
   /**
@@ -66,6 +71,11 @@ public class Robot extends TimedRobot {
     //m_autoSelected = m_chooser.getSelected();
     // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
     //System.out.println("Auto selected: " + m_autoSelected);
+    autonomousCommand = robotContainer.getAutonomousCommand();
+    if (autonomousCommand != null)
+    {
+      autonomousCommand.schedule();
+    }
   }
 
   /** This function is called periodically during autonomous. */
@@ -84,13 +94,16 @@ public class Robot extends TimedRobot {
 
   /** This function is called once when teleop is enabled. */
   @Override
-  public void teleopInit() {}
+  public void teleopInit() {
+    if (autonomousCommand != null)
+    {
+      autonomousCommand.cancel();
+    }
+  }
 
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {
-    Scheduler.getInstance().run();
-  }
+  public void teleopPeriodic() {}
 
   /** This function is called once when the robot is disabled. */
   @Override
