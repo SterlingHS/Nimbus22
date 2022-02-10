@@ -4,9 +4,6 @@
 
 package frc.robot;
 
-import frc.robot.commands.AutonomousCommand;
-// import frc.robot.commands.*;
-import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -25,11 +22,8 @@ public class Robot extends TimedRobot {
   //private String m_autoSelected;
   //private final SendableChooser<String> m_chooser = new SendableChooser<>();
   private Command autonomousCommand;
+
   private RobotContainer robotContainer;
-
-  public static OI oi;
-  public static DriveSystem drivesystem;
-
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -41,7 +35,7 @@ public class Robot extends TimedRobot {
     //m_chooser.addOption("My Auto", kCustomAuto);
     // SmartDashboard.putData("Auto choices", m_chooser);
     // m_robotContainer = new RobotContainer();
-    drivesystem = new DriveSystem();
+    robotContainer = new RobotContainer();
   }
 
   /**
@@ -53,6 +47,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    
     CommandScheduler.getInstance().run();
   }
 
