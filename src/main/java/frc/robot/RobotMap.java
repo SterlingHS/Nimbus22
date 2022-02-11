@@ -37,4 +37,10 @@ public class RobotMap {
     public static int X_AXIS = 0;
     public static int Y_AXIS = 1;
     public static int Z_AXIS = 4;
+
+    //Shooter Constant
+    public static final RobotMap.SHOOTER_TOP_TALON_ID = 12;
+    public static final RobotMap.SHOOTER_BOTTOM_TALON_ID = 13;
+    public static final RobotMap.SHOOT_CARGO_SPEED = 0.5;
+    public static final RobotMap.REVERSE_CARGO_SPEED = -0.1;
 }	

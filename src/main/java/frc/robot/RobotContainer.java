@@ -33,6 +33,7 @@ public class RobotContainer {
 
   // The robot's subsystems
   private final Intake m_intake = new Intake();
+  private final Shooter m_shooter = new Shooter();
   private final DriveSystem drivesystem = new DriveSystem();
 
   // Joysticks
@@ -85,6 +86,11 @@ public class RobotContainer {
     final JoystickButton intakeCargoInBt = new JoystickButton(driverController, XboxController.Button.kA.value);        
     intakeCargoInBt.whenPressed(new IntakeCargoIn( m_intake ) ,true);
     SmartDashboard.putData("IntakeCargoInBt",new IntakeCargoIn( m_intake ) );
+
+     // Button for SimpleShooter
+    final JoystickButton shootSimpleCargoBT = new JoystickButton(driverController, XboxController.Button.kRightBumber.value);        
+    shootSimpleCargoBT.whenPressed(new ShootSimpleCargo( m_shooter ) ,true);
+    SmartDashboard.putData("shootSimpleCargoBT",new ShootSimpleCargo( m_shooter ) );
   }
   public XboxController getDriverController() {
     return driverController;
