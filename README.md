@@ -6,4 +6,9 @@ Sterling High School, Illinois
 Subsystems:
 - Mecanum Drive
 - Intake
+- Index
 - Shooter
+
+Commands:
+- drive
+- IntakeCargoIn
