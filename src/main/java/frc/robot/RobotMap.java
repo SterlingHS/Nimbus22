@@ -16,6 +16,13 @@ public class RobotMap {
     // public static int rangefinderPort = 1;
     // public static int rangefinderModule = 1;
 
+    // Intake constants
+    public static final int INTAKECARGO_TALON_ID = 10;
+    public static final int INTAKESHOULDER_TALON_ID = 11;
+    public static final double INTAKECARGO_SPEED = 0.5;
+    public static final double INTAKESHOULDER_SPEED = 0;
+    public static final int INTAKELIMITSWITCH_ID = 0;
+
     // Joysitck configuration
     public static int JOYDRIVER_USB_PORT = 0;
 
