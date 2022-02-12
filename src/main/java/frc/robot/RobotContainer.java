@@ -92,15 +92,15 @@ public class RobotContainer {
     intakeCargoOutBt.whilePressed(new IntakeCargoOut( m_intake ) ,true);
     SmartDashboard.putData("IntakeCargoOutBt",new IntakeCargoOut( m_intake ) );
 
-//     // Button for Intake shoulder UP // we still need to add a button to the intake shoulder Up
-//     final JoystickButton intakeShoulderUpBt = new JoystickButton(driverController, XboxController.Button.kY.value);        
-//     intakeShoulderUpBt.whilePressed(new IntakeShoulderUp( m_intake ) ,true);
-//     SmartDashboard.putData("IntakeShoulderUpBt",new IntakeShoulderUp( m_intake ) );
+    // Button for Intake shoulder UP // we still need to add a button to the intake shoulder Up
+    final POVButton intakeShoulderUpBt = new POVButton(driverController, 90);        
+    intakeShoulderUpBt.whilePressed(new IntakeShoulderUp( m_intake ) ,true);
+    SmartDashboard.putData("IntakeShoulderUpBt",new IntakeShoulderUp( m_intake ) );
 
-    // // Button for Intake shoulder DOWN // we still need to add a button to the intake shoulder down
-    // final JoystickButton intakeShoulderDownBt = new JoystickButton(driverController, XboxController.Button.kY.value);        
-    // intakeShoulderDownBt.whilePressed(new IntakeShoulderDown( m_intake ) ,true);
-    // SmartDashboard.putData("IntakeShoulderDownBt",new IntakeShoulderDown( m_intake ) );
+    // Button for Intake shoulder DOWN // we still need to add a button to the intake shoulder down
+    final POVButton intakeShoulderDownBt = new POVButton(driverController, 270);        
+    intakeShoulderDownBt.whilePressed(new IntakeShoulderDown( m_intake ) ,true);
+    SmartDashboard.putData("IntakeShoulderDownBt",new IntakeShoulderDown( m_intake ) );
 
      // Button for SimpleShooter
     final JoystickButton shootSimpleCargoBT = new JoystickButton(driverController, XboxController.Button.kRightBumber.value);        
