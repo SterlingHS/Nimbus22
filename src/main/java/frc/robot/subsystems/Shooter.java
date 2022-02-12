@@ -17,6 +17,7 @@ import frc.robot.RobotMap;
 import frc.robot.commands.*;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -38,7 +39,7 @@ public class Shooter extends SubsystemBase
     {
         shooterTopMotor = new WPI_TalonSRX(RobotMap.SHOOTER_TOP_TALON_ID);
         shooterBottomMotor = new WPI_TalonSRX(RobotMap.SHOOTER_BOTTOM_TALON_ID);
-        shooterMotor = new MotorControllerGrou(shooterTopMotor,shooterBottomMotor);
+        shooterMotor = new MotorControllerGroup(shooterTopMotor,shooterBottomMotor);
     }
 
     @Override
@@ -63,7 +64,7 @@ public class Shooter extends SubsystemBase
     }
     public void shootCargoStop()
     {
-        shooterMotor.stopMotor());
+        shooterMotor.stopMotor();
     }
     
     public void shootBallCargoIn ()

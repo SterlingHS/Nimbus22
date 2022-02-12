@@ -18,11 +18,11 @@ import frc.robot.subsystems.Index;
 /**
  *
  */
-public class IndexBringCargoIn extends CommandBase {
+public class IndexBringCargoOut extends CommandBase {
 
     private final Index m_index;
  
-    public IndexBringCargoIn(Index subsystem) {
+    public IndexBringCargoOut(Index subsystem) {
         m_index = subsystem;
         addRequirements(m_index);
     }
