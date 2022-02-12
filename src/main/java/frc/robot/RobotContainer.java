@@ -87,10 +87,20 @@ public class RobotContainer {
     intakeCargoInBt.whilePressed(new IntakeCargoIn( m_intake ) ,true);
     SmartDashboard.putData("IntakeCargoInBt",new IntakeCargoIn( m_intake ) );
 
-// Button for Intake OUT
+    // Button for Intake OUT
     final JoystickButton intakeCargoOutBt = new JoystickButton(driverController, XboxController.Button.kY.value);        
     intakeCargoOutBt.whilePressed(new IntakeCargoOut( m_intake ) ,true);
     SmartDashboard.putData("IntakeCargoOutBt",new IntakeCargoOut( m_intake ) );
+
+//     // Button for Intake shoulder UP // we still need to add a button to the intake shoulder Up
+//     final JoystickButton intakeShoulderUpBt = new JoystickButton(driverController, XboxController.Button.kY.value);        
+//     intakeShoulderUpBt.whilePressed(new IntakeShoulderUp( m_intake ) ,true);
+//     SmartDashboard.putData("IntakeShoulderUpBt",new IntakeShoulderUp( m_intake ) );
+
+    // // Button for Intake shoulder DOWN // we still need to add a button to the intake shoulder down
+    // final JoystickButton intakeShoulderDownBt = new JoystickButton(driverController, XboxController.Button.kY.value);        
+    // intakeShoulderDownBt.whilePressed(new IntakeShoulderDown( m_intake ) ,true);
+    // SmartDashboard.putData("IntakeShoulderDownBt",new IntakeShoulderDown( m_intake ) );
 
      // Button for SimpleShooter
     final JoystickButton shootSimpleCargoBT = new JoystickButton(driverController, XboxController.Button.kRightBumber.value);        
@@ -102,7 +112,7 @@ public class RobotContainer {
     IndexCargoInBT.whilePressed(new IndexCargoIn( m_index ) ,true);
     SmartDashboard.putData("IndexCargoInBT",new IndexCargoIn( m_index ) );
 
-    // Button for IndexCargoOUt
+    // Button for IndexCargoOut
     final JoystickButton IndexCargoOutBT = new JoystickButton(driverController, XboxController.Button.kX.value);        
     IndexCargoOutBT.whilePressed(new IndexCargoOut( m_index ) ,true);
     SmartDashboard.putData("IndexCargoOutBT",new IndexCargoOut( m_index ) );

@@ -49,11 +49,13 @@ public class IntakeShoulderDown extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
+    m_intake.intake_down();
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
+    m_intake.intake_stop();
     }
 
     // Called once the command ends or is interrupted.
