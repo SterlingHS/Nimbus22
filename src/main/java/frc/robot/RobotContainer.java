@@ -87,6 +87,11 @@ public class RobotContainer {
     intakeCargoInBt.whilePressed(new IntakeCargoIn( m_intake ) ,true);
     SmartDashboard.putData("IntakeCargoInBt",new IntakeCargoIn( m_intake ) );
 
+// Button for Intake OUT
+    final JoystickButton intakeCargoOutBt = new JoystickButton(driverController, XboxController.Button.kY.value);        
+    intakeCargoOutBt.whilePressed(new IntakeCargoOut( m_intake ) ,true);
+    SmartDashboard.putData("IntakeCargoOutBt",new IntakeCargoOut( m_intake ) );
+
      // Button for SimpleShooter
     final JoystickButton shootSimpleCargoBT = new JoystickButton(driverController, XboxController.Button.kRightBumber.value);        
     shootSimpleCargoBT.whilePressed(new ShootSimpleCargo( m_shooter ) ,true);
