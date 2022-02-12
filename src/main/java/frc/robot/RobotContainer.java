@@ -93,12 +93,12 @@ public class RobotContainer {
     SmartDashboard.putData("IntakeCargoOutBt",new IntakeCargoOut( m_intake ) );
 
     // Button for Intake shoulder UP // we still need to add a button to the intake shoulder Up
-    final POVButton intakeShoulderUpBt = new POVButton(driverController, 90);        
+    final POVButton intakeShoulderUpBt = new POVButton(driverController,RobotMap.POV_UP);        
     intakeShoulderUpBt.whilePressed(new IntakeShoulderUp( m_intake ) ,true);
     SmartDashboard.putData("IntakeShoulderUpBt",new IntakeShoulderUp( m_intake ) );
 
     // Button for Intake shoulder DOWN // we still need to add a button to the intake shoulder down
-    final POVButton intakeShoulderDownBt = new POVButton(driverController, 270);        
+    final POVButton intakeShoulderDownBt = new POVButton(driverController,RobotMap.POV_DOWN);        
     intakeShoulderDownBt.whilePressed(new IntakeShoulderDown( m_intake ) ,true);
     SmartDashboard.putData("IntakeShoulderDownBt",new IntakeShoulderDown( m_intake ) );
 

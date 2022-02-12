@@ -48,4 +48,16 @@ public class RobotMap {
     public static int INDEX_MOTOR_TALON_ID = 14;
     public static int INDEX_LIMIT_SWITCH_ID = 15;
     public static double INDEX_MOTOR_SPEED = 0.2;
-}	
+
+    //POV Buttons
+    public static int POV_UP = 90;
+    public static int POV_DOWN = 270;
+    public static int POV_LEFT = 180;
+    public static int POV_RIGHT = 0;
+    public static int POV_TOPRIGHT_DIAGONAL = 45;
+    public static int POV_BOTTOMRIGHT_DIAGONAL = 315;
+    public static int POV_TOPLEFT_DIAGONAL = 135;
+    public static int POV_BOTTOMLEFT_DIAGONAL = 225;
+
+}
+
