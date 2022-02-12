@@ -37,4 +37,27 @@ public class RobotMap {
     public static int X_AXIS = 0;
     public static int Y_AXIS = 1;
     public static int Z_AXIS = 4;
-}	
+
+    //Shooter Constant
+    public static int SHOOTER_TOP_TALON_ID = 12;
+    public static int SHOOTER_BOTTOM_TALON_ID = 13;
+    public static double SHOOT_CARGO_SPEED = 0.5;
+    public static double REVERSE_CARGO_SPEED = -0.1;
+
+    //Index Constants
+    public static int INDEX_MOTOR_TALON_ID = 14;
+    public static int INDEX_LIMIT_SWITCH_ID = 15;
+    public static double INDEX_MOTOR_SPEED = 0.2;
+
+    //POV Buttons
+    public static int POV_UP = 90;
+    public static int POV_DOWN = 270;
+    public static int POV_LEFT = 180;
+    public static int POV_RIGHT = 0;
+    public static int POV_TOPRIGHT_DIAGONAL = 45;
+    public static int POV_BOTTOMRIGHT_DIAGONAL = 315;
+    public static int POV_TOPLEFT_DIAGONAL = 135;
+    public static int POV_BOTTOMLEFT_DIAGONAL = 225;
+
+}
+
