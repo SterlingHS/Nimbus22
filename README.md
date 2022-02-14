@@ -12,3 +12,9 @@ Subsystems:
 Commands:
 - drive
 - IntakeCargoIn
+- IntakeCargoOut
+- IndexBringCargoIn
+- IndexBringCargoOut
+- IntakeShoulderDown
+- IntakeShourlderUp
+- ShootSimpleCargo
