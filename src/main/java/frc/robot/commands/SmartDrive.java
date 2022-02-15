@@ -25,8 +25,12 @@ import frc.robot.subsystems.Shooter;
     public SmartDrive(Shooter subsystem) {
         m_drive = subsystems;
         m_pixie = subsystems;
+        m_intake = subsystems;
+        m_index = subsystems;
         addRequirements(m_drive);
         addRequirements(m_pixie);
+        addRequirements(m_intake);
+        addRequirements(m_index);
     }
 
     // Called when the command is initially scheduled.
@@ -37,7 +41,29 @@ import frc.robot.subsystems.Shooter;
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        
+        if m_pixie.Read_Pixy_is_Ball() == false {
+            m_drive.turnRight();
+        }
+        else{
+            int x = m_pixie.Read_Pixy_x();
+            int y = m_pixes.Read_Pixy_y();
+
+            if x < 20 && x > -20{
+                m_drive.turnLeft();
+            }
+            else {
+                m_drive.turnRight();
+            }//Fix this later
+            if x < 20 && x > -20 {
+                m_drive.forward();
+             // m_intake.intake_down() // The shoulder might already be down
+                m_intake.cargointake()
+                
+            }
+            else {
+                //something might be here
+            }
+        }
     }
 
     // Called once the command ends or is interrupted.
