@@ -89,7 +89,7 @@ public class Intake extends SubsystemBase
         intakeShoulder.set(-RobotMap.INTAKESHOULDER_SPEED); 
     }
 
-    public void intake_stop()
+    public void shoulder_stop()
     {
         intakeShoulder.stopMotor();
     }

@@ -48,28 +48,32 @@ import frc.robot.subsystems.Shooter;
             int x = m_pixie.Read_Pixy_x();
             int y = m_pixes.Read_Pixy_y();
 
+            // If the ball is in sight then go forward
             if x < 20 && x > -20{
-                m_drive.turnLeft();
-            }
-            else {
-                m_drive.turnRight();
-            }//Fix this later
-            if x < 20 && x > -20 {
-                m_drive.forward();
+               m_drive.forward();
              // m_intake.intake_down() // The shoulder might already be down
-                m_intake.cargointake()
-                
+                m_intake.cargointake();
+                m_index.cargo_index_in();
             }
             else {
-                //something might be here
-            }
+                if x <= 20 {
+                    m_drive.turnleft();
+                }
+                else {
+                    m_drive.turnRight();
+                }
+            }//Fix this later
+            
         }
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        m_shooter.shootCargoStop();
+        m_drive.stopMotor();
+        m_index.index_stop();
+        m_intake.cargointake_stop();
+        m_intake.shoulder_stop();
     }
 
     // Returns true when the command should end.
