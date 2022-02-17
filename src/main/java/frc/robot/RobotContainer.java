@@ -132,5 +132,22 @@ public class RobotContainer {
     return m_chooser.getSelected();
   }
 
+ public void update_smartboard(){
+        //SmartDashboard.putBoolean("Rotator Right", rotator...);
+        SmartDashboard.putNumber("shooter speed",RobotMap.SHOOT_CARGO_SPEED);
+        SmartDashboard.putNumber("intake speed",RobotMap.INTAKECARGO_SPEED);
+        SmartDashboard.putNumber("drive speed",RobotMap.DRIVER_SLOWDOWN);
+        SmartDashboard.putNumber("Index speed",RobotMap.INDEX_MOTOR_SPEED);
+        SmartDashboard.putBoolean("Index Limit switch",m_index.is_cargo_in_index());
+        SmartDashboard.putBoolean("Intake limit switch",m_intake.is_intake_up());
+        
+       
+        // SmartDashboard.putNumber("Limelight TX", shooter.Read_Limelight_tx());
+        // SmartDashboard.putNumber("Limelight TY", shooter.Read_Limelight_ty());
+        // SmartDashboard.putNumber("Limelight TA", shooter.Read_Limelight_ta());
+        // SmartDashboard.putNumber("Limelight TV", shooter.Read_Limelight_tv());
+        SmartDashboard.putBoolean("Pixy Ball",pixyTracker.Read_Pixy_is_Ball());
+        SmartDashboard.putNumber("x from pixy",pixyTracker.Read_Pixy_x());
+    }
 }
 
