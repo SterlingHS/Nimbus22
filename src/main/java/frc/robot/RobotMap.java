@@ -39,8 +39,8 @@ public class RobotMap {
     public static int Z_AXIS = 4;
 
     //Shooter Constant
-    public static int SHOOTER_TOP_TALON_ID = 12;
-    public static int SHOOTER_BOTTOM_TALON_ID = 13;
+    public static int SHOOTER_TOP_TALON_ID = 22;
+    public static int SHOOTER_BOTTOM_TALON_ID = 23;
     public static double SHOOT_CARGO_SPEED = 0.5;
     public static double REVERSE_CARGO_SPEED = -0.1;
 

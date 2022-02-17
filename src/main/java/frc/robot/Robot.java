@@ -47,7 +47,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    
+    robotContainer.update_smartboard();
     CommandScheduler.getInstance().run();
   }
 
@@ -116,4 +116,6 @@ public class Robot extends TimedRobot {
   @Override
   public void testPeriodic() {
   }
+
+  
 }
