@@ -5,6 +5,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 //import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -36,6 +37,9 @@ public class Robot extends TimedRobot {
     // SmartDashboard.putData("Auto choices", m_chooser);
     // m_robotContainer = new RobotContainer();
     robotContainer = new RobotContainer();
+    SmartDashboard.putNumber("Shooter Speed", RobotMap.SHOOT_CARGO_SPEED);
+    SmartDashboard.putNumber("Index Speed", RobotMap.INDEX_MOTOR_SPEED);
+    SmartDashboard.putNumber("Intake Speed", RobotMap.INTAKECARGO_SPEED);
   }
 
   /**
@@ -94,6 +98,7 @@ public class Robot extends TimedRobot {
     {
       autonomousCommand.cancel();
     }
+    SmartDashboard.putNumber("Shooter Speed", RobotMap.SHOOT_CARGO_SPEED);
   }
 
   /** This function is called periodically during operator control. */

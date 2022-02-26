@@ -17,11 +17,11 @@ public class RobotMap {
     // public static int rangefinderModule = 1;
 
     // Intake constants
-    public static final int INTAKECARGO_TALON_ID = 10;
-    public static final int INTAKESHOULDER_TALON_ID = 11;
-    public static final double INTAKECARGO_SPEED = 0.5;
-    public static final double INTAKESHOULDER_SPEED = 0;
-    public static final int INTAKELIMITSWITCH_ID = 0;
+    public static int INTAKECARGO_TALON_ID = 13;
+    public static int INTAKESHOULDER_TALON_ID = 11;
+    public static double INTAKECARGO_SPEED = 0.5;
+    public static double INTAKESHOULDER_SPEED = 0.5;
+    public static int INTAKELIMITSWITCH_ID = 0;
 
     // Joysitck configuration
     public static int JOYDRIVER_USB_PORT = 0;
@@ -45,7 +45,7 @@ public class RobotMap {
     public static double REVERSE_CARGO_SPEED = -0.1;
 
     //Index Constants
-    public static int INDEX_MOTOR_TALON_ID = 14;
+    public static int INDEX_MOTOR_TALON_ID = 21;
     public static int INDEX_LIMIT_SWITCH_ID = 15;
     public static double INDEX_MOTOR_SPEED = 0.2;
 
