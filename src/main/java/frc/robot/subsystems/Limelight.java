@@ -5,7 +5,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
+import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
@@ -21,6 +21,34 @@ public class Limelight extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+  }
+
+  // Limelight readers
+  public double Read_Limelight_tx()
+  {
+    return NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);	
+  }
+
+    public double Read_Limelight_ty()
+  {
+    return NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0);
+  }
+    
+    public double Read_Limelight_ta()
+  {
+    return NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
+  }
+    
+    public double Read_Limelight_tv()
+  {
+    return NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0);
+  }
+
+  public double Distance_to_target()
+  {
+    double angle_of_elevation = Read_Limelight_ty()+RobotMap.limelight_angle;
+    double distance=5/Math.atan(angle_of_elevation*Math.PI/180);
+    return distance;
   }
 }
 
@@ -40,7 +68,7 @@ double area = ta.getDouble(0.0);
 //post to smart dashboard periodically
 SmartDashboard.putNumber("LimelightX", x);
 SmartDashboard.putNumber("LimelightY", y);
-SmartDashboard.putNumber("LimelightArea", area);
+SmartDashboard.putNumber("LimelightArea", area);  
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.

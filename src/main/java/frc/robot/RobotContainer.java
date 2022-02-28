@@ -151,7 +151,7 @@ public class RobotContainer {
         RobotMap.INDEX_MOTOR_SPEED = SmartDashboard.getNumber("Index speed", .2);
         RobotMap.DRIVER_SLOWDOWN = SmartDashboard.getNumber("Drive speed", .6);
         RobotMap.INTAKECARGO_SPEED = SmartDashboard.getNumber("Intake Speed", .5);
-        RobotMap.INTAKESHOULDER_SPEED = SmartDashboard.getNumber("Shoulder Speed", 0)
+        RobotMap.INTAKESHOULDER_SPEED = SmartDashboard.getNumber("Shoulder Speed", 0);
 
         //Limit switches
         SmartDashboard.putBoolean("Index Limit switch",m_index.is_cargo_in_index());

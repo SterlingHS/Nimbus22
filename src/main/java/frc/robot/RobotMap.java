@@ -59,5 +59,8 @@ public class RobotMap {
     public static int POV_TOPLEFT_DIAGONAL = 135;
     public static int POV_BOTTOMLEFT_DIAGONAL = 225;
 
+    // Limelight
+    public static double limelight_angle = 27.56417632;
+
 }
 
