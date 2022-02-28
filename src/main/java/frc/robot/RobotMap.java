@@ -61,6 +61,7 @@ public class RobotMap {
 
     // Limelight
     public static double limelight_angle = 27.56417632;
+    public static double limelight_height = 2.3;
 
 }
 

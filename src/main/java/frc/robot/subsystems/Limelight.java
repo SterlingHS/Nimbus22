@@ -50,78 +50,15 @@ public class Limelight extends SubsystemBase {
     double distance=(9-RobotMap.limelight_height)/Math.atan(angle_of_elevation*Math.PI/180);
     return distance;
   }
-}
 
-
-/*
-
-NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
-NetworkTableEntry tx = table.getEntry("tx");
-NetworkTableEntry ty = table.getEntry("ty");
-NetworkTableEntry ta = table.getEntry("ta");
-
-//read values periodically
-double x = tx.getDouble(0.0);
-double y = ty.getDouble(0.0);
-double area = ta.getDouble(0.0);
-
-//post to smart dashboard periodically
-SmartDashboard.putNumber("LimelightX", x);
-SmartDashboard.putNumber("LimelightY", y);
-SmartDashboard.putNumber("LimelightArea", area);  
-
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
-    public static Pixy2 getPixyCamera1() {
-		return pixy;
-  }
-  
-  public static void getBiggestBlock() 
+  public double Align_target()
   {
-		// Gets the number of "blocks", identified targets, that match signature 1 on the Pixy2,
-		// does not wait for new data if none is available,
-		// and limits the number of returned blocks to 25, for a slight increase in efficiency
-		int blockCount = pixy.getCCC().getBlocks(false, Pixy2CCC.CCC_SIG1, 25);
-		// System.out.println("Found " + blockCount + " blocks!"); // Reports number of blocks found
-		if (blockCount > 0)//might need to be >=
-		{
-			ArrayList<Block> blocks = pixy.getCCC().getBlocks(); // Gets a list of all blocks found by the Pixy2
-			Block largestBlock = null;
-			for (Block block : blocks) 
-			{ // Loops through all blocks and finds the widest one
-				if (largestBlock == null) {
-					largestBlock = block;
-				} else if (block.getWidth() > largestBlock.getWidth()) {
-					largestBlock = block;
-				}
-			
-			}
-            ball = true;
-            x = largestBlock.getX();
-			y = largestBlock.getY();
-		}
-		else
-		{
-			x = 0;
-			y = 0;
-			ball = false;
-		}
+    return Read_Limelight_tx();
+  }
 
-
-	}
-	public double Read_Pixy_x()
-	{
-		return x;
-	}
-	public double Read_Pixy_y()
-	{
-		return y;
-	}
-	public boolean Read_Pixy_is_Ball()
-	{
-		return ball;
-    }
+  public boolean is_there_target()
+  {
+    if (Read_Limelight_tv() == 1) return true;
+    return false;
+  }
 }
-*/   
-
-
