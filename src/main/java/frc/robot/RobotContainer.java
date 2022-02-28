@@ -134,7 +134,6 @@ public class RobotContainer {
 
  public void update_smartboard(){
         //SmartDashboard.putBoolean("Rotator Right", rotator...);
-<<<<<<< HEAD
         //SmartDashboard.putNumber("intake speed",RobotMap.INTAKECARGO_SPEED);
         
         SmartDashboard.putNumber("drive speed",RobotMap.DRIVER_SLOWDOWN);
@@ -147,7 +146,6 @@ public class RobotContainer {
         RobotMap.INTAKECARGO_SPEED = SmartDashboard.getNumber("Intake Speed", RobotMap.INTAKECARGO_SPEED);
         
        
-=======
         // SmartDashboard.putNumber("shooter speed",RobotMap.SHOOT_CARGO_SPEED);
         RobotMap.SHOOT_CARGO_SPEED = SmartDashboard.getNumber("shooter speed", .5);
         RobotMap.INDEX_MOTOR_SPEED = SmartDashboard.getNumber("Index speed", .2);
@@ -159,7 +157,6 @@ public class RobotContainer {
         SmartDashboard.putBoolean("Index Limit switch",m_index.is_cargo_in_index());
         SmartDashboard.putBoolean("Intake limit switch",m_intake.is_intake_up());
 
->>>>>>> 5f1696f9493dd92e21db1fbbb785bf7976383587
         // SmartDashboard.putNumber("Limelight TX", shooter.Read_Limelight_tx());
         // SmartDashboard.putNumber("Limelight TY", shooter.Read_Limelight_ty());
         // SmartDashboard.putNumber("Limelight TA", shooter.Read_Limelight_ta());
