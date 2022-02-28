@@ -3,13 +3,23 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.commands;
+import frc.robot.subsystems.Limelight;
+import frc.robot.subsystems.Shooter;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class SmartShooter extends CommandBase {
+
+  private final Shooter m_shooter;
+  private final Limelight m_limelight;
+
   /** Creates a new SmartShooter. */
-  public SmartShooter() {
+  public SmartShooter(Shooter subsystem1, Limelight subsystem2) {
     // Use addRequirements() here to declare subsystem dependencies.
+    m_shooter = subsystem1;
+    addRequirements(m_shooter);
+    m_limelight = subsystem2;
+    addRequirements(m_limelight);
   }
 
   // Called when the command is initially scheduled.

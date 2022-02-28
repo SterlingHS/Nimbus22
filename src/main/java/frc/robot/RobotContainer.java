@@ -35,6 +35,7 @@ public class RobotContainer {
   private final Intake m_intake = new Intake();
   private final Shooter m_shooter = new Shooter();
   private final DriveSystem drivesystem = new DriveSystem();
+  private final Limelight m_limelight = new Limelight();
 
   // Joysticks
   private final XboxController driverController = new XboxController(RobotMap.JOYDRIVER_USB_PORT);
@@ -106,6 +107,11 @@ public class RobotContainer {
     final JoystickButton shootSimpleCargoBT = new JoystickButton(driverController, XboxController.Button.kRightBumper.value);        
     shootSimpleCargoBT.whileHeld(new ShootSimpleCargo( m_shooter ) ,true);
     SmartDashboard.putData("shootSimpleCargoBT",new ShootSimpleCargo( m_shooter ) );
+
+    // Button for SmartShooter
+    final JoystickButton SmartShooterBT = new JoystickButton(driverController, XboxController.Button.kLeftBumper.value);        
+    SmartShooterBT.whenPressed(new SmartShooter( m_shooter, m_limelight ) ,true);
+    SmartDashboard.putData("SmartShooterBT",new SmartShooter( m_shooter, m_limelight) );
 
     // Button for IndexCargoIn
     final JoystickButton IndexCargoInBT = new JoystickButton(driverController, XboxController.Button.kB.value);        
