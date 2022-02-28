@@ -47,7 +47,7 @@ public class Limelight extends SubsystemBase {
   public double Distance_to_target()
   {
     double angle_of_elevation = Read_Limelight_ty()+RobotMap.limelight_angle;
-    double distance=5/Math.atan(angle_of_elevation*Math.PI/180);
+    double distance=(9-RobotMap.limelight_height)/Math.atan(angle_of_elevation*Math.PI/180);
     return distance;
   }
 }
