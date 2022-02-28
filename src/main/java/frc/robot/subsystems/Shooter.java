@@ -14,6 +14,8 @@ package frc.robot.subsystems;
 
 
 import frc.robot.RobotMap;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.CounterBase;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -28,6 +30,7 @@ public class Shooter extends SubsystemBase
     private WPI_TalonSRX shooterTopMotor;
     private WPI_TalonSRX shooterBottomMotor;
     private MotorControllerGroup shooterMotor;
+    private final Encoder m_encoder;
 
     /**
     *
@@ -37,6 +40,8 @@ public class Shooter extends SubsystemBase
         shooterTopMotor = new WPI_TalonSRX(RobotMap.SHOOTER_TOP_TALON_ID);
         shooterBottomMotor = new WPI_TalonSRX(RobotMap.SHOOTER_BOTTOM_TALON_ID);
         shooterMotor = new MotorControllerGroup(shooterTopMotor,shooterBottomMotor);
+        m_encoder = new Encoder(RobotMap.ShooterEncoderChannel1, RobotMap.ShooterEncoderChannel2,true, CounterBase.EncodingType.k4X);
+        m_encoder.setSamplesToAverage(10);
     }
 
     @Override
@@ -59,6 +64,7 @@ public class Shooter extends SubsystemBase
     {
         shooterMotor.set(RobotMap.SHOOT_CARGO_SPEED);
     }
+
     public void shootCargoStop()
     {
         shooterMotor.stopMotor();
@@ -69,5 +75,17 @@ public class Shooter extends SubsystemBase
         shooterMotor.set(RobotMap.REVERSE_CARGO_SPEED);
     }    
     
+    public void shootCargo_to_speed(double target_speed)
+    {
+        /* Reads speed sensor and sets speed to motor */
+        shooterMotor.set(RobotMap.SHOOT_CARGO_SPEED);
+    }
+
+    public double read_speed_shooter()
+    {   
+        double speed = m_encoder.getRate();
+        return speed;
+    }
+
 }
 
