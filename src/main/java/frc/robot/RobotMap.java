@@ -17,11 +17,11 @@ public class RobotMap {
     // public static int rangefinderModule = 1;
 
     // Intake constants
-    public static final int INTAKECARGO_TALON_ID = 10;
-    public static final int INTAKESHOULDER_TALON_ID = 11;
-    public static final double INTAKECARGO_SPEED = 0.5;
-    public static final double INTAKESHOULDER_SPEED = 0;
-    public static final int INTAKELIMITSWITCH_ID = 0;
+    public static int INTAKECARGO_TALON_ID = 13;
+    public static int INTAKESHOULDER_TALON_ID = 11;
+    public static double INTAKECARGO_SPEED = 0.5;
+    public static double INTAKESHOULDER_SPEED = 0.5;
+    public static int INTAKELIMITSWITCH_ID = 0;
 
     // Joysitck configuration
     public static int JOYDRIVER_USB_PORT = 0;
@@ -39,13 +39,13 @@ public class RobotMap {
     public static int Z_AXIS = 4;
 
     //Shooter Constant
-    public static int SHOOTER_TOP_TALON_ID = 12;
-    public static int SHOOTER_BOTTOM_TALON_ID = 13;
+    public static int SHOOTER_TOP_TALON_ID = 22;
+    public static int SHOOTER_BOTTOM_TALON_ID = 23;
     public static double SHOOT_CARGO_SPEED = 0.5;
     public static double REVERSE_CARGO_SPEED = -0.1;
 
     //Index Constants
-    public static int INDEX_MOTOR_TALON_ID = 14;
+    public static int INDEX_MOTOR_TALON_ID = 21;
     public static int INDEX_LIMIT_SWITCH_ID = 15;
     public static double INDEX_MOTOR_SPEED = 0.2;
 
@@ -58,6 +58,10 @@ public class RobotMap {
     public static int POV_BOTTOMRIGHT_DIAGONAL = 315;
     public static int POV_TOPLEFT_DIAGONAL = 135;
     public static int POV_BOTTOMLEFT_DIAGONAL = 225;
+
+    // Limelight
+    public static double limelight_angle = 27.56417632;
+    public static double limelight_height = 2.3;
 
 }
 

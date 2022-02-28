@@ -16,7 +16,6 @@ import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj.XboxController;
@@ -70,9 +69,9 @@ public class RobotContainer {
     SmartDashboard.putData("Auto Mode", m_chooser);
   }
 
-  /*public static RobotContainer getInstance() {
+  /* public static RobotContainer getInstance() {
     return m_robotContainer;
-  }*/
+  } */
 
   /**
    * Use this method to define your button->command mappings.  Buttons can be created by
@@ -132,5 +131,37 @@ public class RobotContainer {
     return m_chooser.getSelected();
   }
 
+ public void update_smartboard(){
+        //SmartDashboard.putBoolean("Rotator Right", rotator...);
+        //SmartDashboard.putNumber("intake speed",RobotMap.INTAKECARGO_SPEED);
+        
+        SmartDashboard.putNumber("drive speed",RobotMap.DRIVER_SLOWDOWN);
+        //SmartDashboard.putNumber("Index speed",RobotMap.INDEX_MOTOR_SPEED);
+        SmartDashboard.putBoolean("Index Limit switch",m_index.is_cargo_in_index());
+        SmartDashboard.putBoolean("Intake limit switch",m_intake.is_intake_up());
+
+        RobotMap.SHOOT_CARGO_SPEED = SmartDashboard.getNumber("Shooter Speed", RobotMap.SHOOT_CARGO_SPEED);
+        RobotMap.INDEX_MOTOR_SPEED = SmartDashboard.getNumber("Index Speed", RobotMap.INDEX_MOTOR_SPEED);
+        RobotMap.INTAKECARGO_SPEED = SmartDashboard.getNumber("Intake Speed", RobotMap.INTAKECARGO_SPEED);
+        
+       
+        // SmartDashboard.putNumber("shooter speed",RobotMap.SHOOT_CARGO_SPEED);
+        RobotMap.SHOOT_CARGO_SPEED = SmartDashboard.getNumber("shooter speed", .5);
+        RobotMap.INDEX_MOTOR_SPEED = SmartDashboard.getNumber("Index speed", .2);
+        RobotMap.DRIVER_SLOWDOWN = SmartDashboard.getNumber("Drive speed", .6);
+        RobotMap.INTAKECARGO_SPEED = SmartDashboard.getNumber("Intake Speed", .5);
+        RobotMap.INTAKESHOULDER_SPEED = SmartDashboard.getNumber("Shoulder Speed", 0);
+
+        //Limit switches
+        SmartDashboard.putBoolean("Index Limit switch",m_index.is_cargo_in_index());
+        SmartDashboard.putBoolean("Intake limit switch",m_intake.is_intake_up());
+
+        // SmartDashboard.putNumber("Limelight TX", shooter.Read_Limelight_tx());
+        // SmartDashboard.putNumber("Limelight TY", shooter.Read_Limelight_ty());
+        // SmartDashboard.putNumber("Limelight TA", shooter.Read_Limelight_ta());
+        // SmartDashboard.putNumber("Limelight TV", shooter.Read_Limelight_tv());
+        // SmartDashboard.putBoolean("Pixy Ball",pixyTracker.Read_Pixy_is_Ball());
+        // SmartDashboard.putNumber("x from pixy",pixyTracker.Read_Pixy_x());
+    }
 }
 
