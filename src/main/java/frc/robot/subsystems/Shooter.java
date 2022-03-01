@@ -75,10 +75,11 @@ public class Shooter extends SubsystemBase
         shooterMotor.set(RobotMap.REVERSE_CARGO_SPEED);
     }    
     
-    public void shootCargo_to_speed(double target_speed)
+    public void shootCargo_percent(double percent)
     {
-        /* Reads speed sensor and sets speed to motor */
-        shooterMotor.set(RobotMap.SHOOT_CARGO_SPEED);
+        if (percent > 1) percent = 1;
+        if (percent < -1) percent = -1;
+        shooterMotor.set(percent);
     }
 
     public double read_speed_shooter()

@@ -50,7 +50,7 @@ public class Limelight extends SubsystemBase {
 
   public boolean is_istance_to_target_correct()
   {
-    double distance = Distance_to_target();
+    // double distance = Distance_to_target();
     /* Test distance and check with speed of shooter */
     /* if distance and shooter are good, return true */
     /* otherwise, return false                       */

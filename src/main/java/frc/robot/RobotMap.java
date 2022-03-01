@@ -68,5 +68,9 @@ public class RobotMap {
     public static double limelight_angle = 27.56417632;
     public static double limelight_height = 2.3;
 
+    // SHooting variables
+    public static double DISTANCE_TO_SHOOT = 10; // TBD with testing
+    public static double DISTANCE_ACCURACY = .1; // TBD with testing
+
 }
 
