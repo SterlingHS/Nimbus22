@@ -111,7 +111,7 @@ public class RobotContainer {
     // Button for SmartShooter
     final JoystickButton SmartShooterBT = new JoystickButton(driverController, XboxController.Button.kLeftBumper.value);        
     SmartShooterBT.whileHeld(new SmartShooter( m_shooter, m_limelight ) ,true);
-    SmartDashboard.putData("SmartShooterBT",new SmartShooter( m_shooter, m_limelight) );
+    SmartDashboard.putData("SmartShooterBT",new SmartShooter( m_shooter, m_limelight, m_index) );
 
     // Button for IndexCargoIn
     final JoystickButton IndexCargoInBT = new JoystickButton(driverController, XboxController.Button.kB.value);        
