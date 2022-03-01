@@ -3,6 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.commands;
+import frc.robot.subsystems.Index;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Shooter;
 
@@ -16,26 +17,24 @@ public class SmartShooterPID extends CommandBase {
 
   private final Shooter m_shooter;
   private final Limelight m_limelight;
+  private final Index m_index;
+
 
   /** Creates a new SmartShooter. */
-  public SmartShooterPID(PIDController controller,
-                         DoubleSupplier measurementSource,
-                         DoubleSupplier setpointSource,
-                         DoubleConsumer useOutput,
-                         Shooter subsystem1, 
-                         Limelight subsystem2) {
+  public SmartShooterPID(Shooter subsystem1, Limelight subsystem2, Index subsystem3) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_shooter = subsystem1;
     addRequirements(m_shooter);
     m_limelight = subsystem2;
     addRequirements(m_limelight);
+    m_index = subsystem3;
+    addRequirements(m_index);
 
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -52,4 +51,5 @@ public class SmartShooterPID extends CommandBase {
   public boolean isFinished() {
     return false;
   }
+
 }
