@@ -6,8 +6,6 @@ package frc.robot.commands;
 import frc.robot.subsystems.Index;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Shooter;
-import edu.wpi.first.math.controller.ProfiledPIDController;
-import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class SmartShooterPID extends CommandBase {
