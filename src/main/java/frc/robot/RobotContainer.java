@@ -146,7 +146,7 @@ public class RobotContainer {
         SmartDashboard.putBoolean("Index Limit switch",m_index.is_cargo_in_index());
         SmartDashboard.putBoolean("Intake limit switch",m_intake.is_intake_up());
 
-        RobotMap.SHOOT_CARGO_SPEED = SmartDashboard.getNumber("Shooter Speed", RobotMap.SHOOT_CARGO_SPEED);
+        RobotMap.SHOOT_CARGO_PERCENT = SmartDashboard.getNumber("Shooter Speed", RobotMap.SHOOT_CARGO_PERCENT);
         RobotMap.INDEX_MOTOR_SPEED = SmartDashboard.getNumber("Index Speed", RobotMap.INDEX_MOTOR_SPEED);
         RobotMap.INTAKECARGO_SPEED = SmartDashboard.getNumber("Intake Speed", RobotMap.INTAKECARGO_SPEED);
         
@@ -157,6 +157,9 @@ public class RobotContainer {
         RobotMap.DRIVER_SLOWDOWN = SmartDashboard.getNumber("Drive speed", .6);
         RobotMap.INTAKECARGO_SPEED = SmartDashboard.getNumber("Intake Speed", .5);
         RobotMap.INTAKESHOULDER_SPEED = SmartDashboard.getNumber("Shoulder Speed", 0);
+
+        // Shooter
+        SmartDashboard.getNumber("Current Speed", m_shooter.read_speed_shooter());
 
         //Limit switches
         SmartDashboard.putBoolean("Index Limit switch",m_index.is_cargo_in_index());

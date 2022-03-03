@@ -7,7 +7,7 @@ import frc.robot.RobotMap;
 import frc.robot.subsystems.Index;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Shooter;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class SmartShooter extends CommandBase {
@@ -45,7 +45,7 @@ public class SmartShooter extends CommandBase {
 
       if(current_speed > RobotMap.SHOOT_CARGO_SPEED)         // Waits until speed is over the desired speed
       {                                                      // When we reach the speed
-        m_index.cargo_index_in();                            // Get the cargo into the shooter
+        //m_index.cargo_index_in();                            // Get the cargo into the shooter
         is_speed_reached = true;                             // Set flag to regulate speed
       }
 
@@ -58,13 +58,17 @@ public class SmartShooter extends CommandBase {
             power_to_shooter = .90;  // Adjust speeds with % 
           else power_to_shooter = .80; // Power that should hit the target
       }
-      m_shooter.shootCargo_percent(power_to_shooter); // Send value to motor
+      SmartDashboard.getNumber("Power Shooter", power_to_shooter);
+      m_shooter.shootCargoPercent(power_to_shooter); // Send value to motor
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    m_shooter.shootCargoStop();
+    is_speed_reached = false;
+  }
 
   // Returns true when the command should end.
   @Override

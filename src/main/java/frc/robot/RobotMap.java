@@ -42,10 +42,10 @@ public class RobotMap {
     //Shooter Constant
     public static int SHOOTER_TOP_TALON_ID = 22;
     public static int SHOOTER_BOTTOM_TALON_ID = 23;
-    public static double SHOOT_CARGO_SPEED = 0.5;
-    public static double REVERSE_CARGO_SPEED = -0.1;
-    public static final int ShooterEncoderChannel1 = 0;
-    public static final int ShooterEncoderChannel2 = 1;
+    public static double SHOOT_CARGO_PERCENT = 0.5;
+    public static double REVERSE_CARGO_PERCENT = 0;
+    public static final int ShooterEncoderChannel1 = 5;
+    public static final int ShooterEncoderChannel2 = 6;
 
     //Index Constants
     public static int INDEX_MOTOR_TALON_ID = 21;
@@ -66,9 +66,13 @@ public class RobotMap {
     public static double limelight_angle = 27.56417632;
     public static double limelight_height = 2.3;
 
-    // SHooting variables
+    // Shooting variables
     public static double DISTANCE_TO_SHOOT = 10; // TBD with testing
     public static double DISTANCE_ACCURACY = .1; // TBD with testing
+    public static double SHOOT_CARGO_SPEED = 500;
+    public static double Kp = 1.3;
+    public static double Ki = 0;
+    public static double Kd = 0.7;
 
 }
 

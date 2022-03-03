@@ -15,6 +15,8 @@ package frc.robot.subsystems;
 
 import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.math.controller.ProfiledPIDController;
+import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj.CounterBase;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -32,16 +34,26 @@ public class Shooter extends SubsystemBase
     private MotorControllerGroup shooterMotor;
     private final Encoder m_encoder;
 
+    private final TrapezoidProfile.Constraints m_constraints;
+    private final ProfiledPIDController m_controller;
+
     /**
     *
     */
     public Shooter() 
     {
+        final double kDt = 0.02;
+
         shooterTopMotor = new WPI_TalonSRX(RobotMap.SHOOTER_TOP_TALON_ID);
         shooterBottomMotor = new WPI_TalonSRX(RobotMap.SHOOTER_BOTTOM_TALON_ID);
         shooterMotor = new MotorControllerGroup(shooterTopMotor,shooterBottomMotor);
+
+        m_constraints = new TrapezoidProfile.Constraints(1.75, 0.75);
+        m_controller = new ProfiledPIDController(1.3, 0.0, 0.7, m_constraints, kDt);
+  
         m_encoder = new Encoder(RobotMap.ShooterEncoderChannel1, RobotMap.ShooterEncoderChannel2,true, CounterBase.EncodingType.k4X);
         m_encoder.setSamplesToAverage(10);
+        m_encoder.setReverseDirection(false);
     }
 
     @Override
@@ -62,7 +74,7 @@ public class Shooter extends SubsystemBase
 
     public void shootCargo()
     {
-        shooterMotor.set(RobotMap.SHOOT_CARGO_SPEED);
+        shooterMotor.set(RobotMap.SHOOT_CARGO_PERCENT);
     }
 
     public void shootCargoStop()
@@ -72,14 +84,20 @@ public class Shooter extends SubsystemBase
     
     public void shootBallCargoIn ()
     {
-        shooterMotor.set(RobotMap.REVERSE_CARGO_SPEED);
+        shooterMotor.set(RobotMap.REVERSE_CARGO_PERCENT);
     }    
     
-    public void shootCargo_percent(double percent)
+    public void shootCargoPercent(double percent)
     {
         if (percent > 1) percent = 1;
         if (percent < -1) percent = -1;
         shooterMotor.set(percent);
+    }
+
+    public void shootCargoPID(double speed)
+    {
+        m_controller.setGoal(speed);
+        shooterMotor.set(m_controller.calculate(m_encoder.getRate()));
     }
 
     public double read_speed_shooter()

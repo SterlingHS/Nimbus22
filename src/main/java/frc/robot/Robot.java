@@ -32,12 +32,12 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    //m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
+    //m_chooser.setDefaultOption("Default Auto", kDefaultAuto); 
     //m_chooser.addOption("My Auto", kCustomAuto);
     // SmartDashboard.putData("Auto choices", m_chooser);
     // m_robotContainer = new RobotContainer();
     robotContainer = new RobotContainer();
-    SmartDashboard.putNumber("Shooter Speed", RobotMap.SHOOT_CARGO_SPEED);
+    SmartDashboard.putNumber("Shooter Speed", RobotMap.SHOOT_CARGO_PERCENT);
     SmartDashboard.putNumber("Index Speed", RobotMap.INDEX_MOTOR_SPEED);
     SmartDashboard.putNumber("Intake Speed", RobotMap.INTAKECARGO_SPEED);
   }
