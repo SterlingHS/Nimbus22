@@ -74,6 +74,8 @@ public class RobotMap {
     public static double Ki = 0;
     public static double Kd = 0;
     public static double SPEED_ACCURACY = .02;
+    public static final double MAX_DISTANCE = 20;
+    public static final double MIN_DISTANCE = 5;
 
 }
 

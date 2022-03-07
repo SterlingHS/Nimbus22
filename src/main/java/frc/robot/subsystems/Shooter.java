@@ -117,19 +117,26 @@ public class Shooter extends SubsystemBase
     }
 
     public double speed_from_distance(double desired_distance)
-    {
+    { // Calculates speed for shooter in function of the distance to target
         // 100% power is 93k   GET DATA
         // 90% power is 87k
         // 80% power is 79k
         // 70% power is 70k
         // 60% power is 60k
         // 50% power is 50k
+        // check first if we are too close or to far away
+
+        if(desired_distance > RobotMap.MAX_DISTANCE || desired_distance < RobotMap.MIN_DISTANCE) return 0;
+
         double a = 1;
         double b = 1;
         double c = 1;
 
         double new_speed = a*desired_distance*desired_distance+b*desired_distance+c;
-        System.out.println("desired distance: " + desired_distance: + " - new_speed: " + new_speed;
+        System.out.println("desired distance: " + desired_distance + " - new_speed: " + new_speed);
+
+        if(desired_distance > RobotMap.MAX_DISTANCE || desired_distance < RobotMap.MIN_DISTANCE) return 0;
+
         return new_speed;
     }
 
@@ -141,6 +148,7 @@ public class Shooter extends SubsystemBase
         // 70% power is 70k
         // 60% power is 60k
         // 50% power is 50k
+        // Then we used 
         double a = 0.0074086;
         double b = 0.077617;
         double c = 28.007;
@@ -150,7 +158,7 @@ public class Shooter extends SubsystemBase
         double new_power = (a*desired_speed*desired_speed+b*desired_speed+c)/100;
         double actual_speed = read_speed_shooter()/1000;
         double error_percent = (actual_speed-desired_speed)/desired_speed;
-        System.out.println("New_power: " + new_power + " - actual_speed: " + actual_speed + " - error: " + error_percent);
+        // System.out.println("New_power: " + new_power + " - actual_speed: " + actual_speed + " - error: " + error_percent);
         if( error_percent < -RobotMap.SPEED_ACCURACY )
         {
             new_power *= (1+Math.abs(error_percent));
@@ -161,7 +169,7 @@ public class Shooter extends SubsystemBase
         }
         if( new_power > 1 ) new_power = 1;
         if( new_power < 0 ) new_power = 0;
-        System.out.println("New_power: " + new_power);
+        // System.out.println("New_power: " + new_power);
         return new_power;
     }
 
