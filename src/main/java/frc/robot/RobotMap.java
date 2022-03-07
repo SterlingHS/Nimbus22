@@ -70,9 +70,10 @@ public class RobotMap {
     public static double DISTANCE_TO_SHOOT = 10; // TBD with testing
     public static double DISTANCE_ACCURACY = .1; // TBD with testing
     public static double SHOOT_CARGO_SPEED = 500;
-    public static double Kp = 1.3;
+    public static double Kp = 1;
     public static double Ki = 0;
-    public static double Kd = 0.7;
+    public static double Kd = 0;
+    public static double SPEED_ACCURACY = .02;
 
 }
 

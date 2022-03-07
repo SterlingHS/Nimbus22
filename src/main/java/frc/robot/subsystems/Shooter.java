@@ -16,9 +16,14 @@ package frc.robot.subsystems;
 import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.math.controller.ProfiledPIDController;
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.CounterBase;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -36,7 +41,7 @@ public class Shooter extends SubsystemBase
 
     private final TrapezoidProfile.Constraints m_constraints;
     private final ProfiledPIDController m_controller;
-
+    private final SimpleMotorFeedforward feedforward;
     /**
     *
     */
@@ -49,8 +54,9 @@ public class Shooter extends SubsystemBase
         shooterMotor = new MotorControllerGroup(shooterTopMotor,shooterBottomMotor);
 
         m_constraints = new TrapezoidProfile.Constraints(1.75, 0.75);
-        m_controller = new ProfiledPIDController(1.3, 0.0, 0.7, m_constraints, kDt);
-  
+        m_controller = new ProfiledPIDController(1.0, 0.0, 0.0, m_constraints, kDt);
+        feedforward = new SimpleMotorFeedforward(1, 0, 0);
+
         m_encoder = new Encoder(RobotMap.ShooterEncoderChannel1, RobotMap.ShooterEncoderChannel2,true, CounterBase.EncodingType.k4X);
         m_encoder.setSamplesToAverage(10);
         m_encoder.setReverseDirection(false);
@@ -58,9 +64,7 @@ public class Shooter extends SubsystemBase
 
     @Override
     public void periodic() 
-    {
-        // This method will be called once per scheduler run
-    }
+    {}
 
     @Override
     public void simulationPeriodic() 
@@ -96,8 +100,14 @@ public class Shooter extends SubsystemBase
 
     public void shootCargoPID(double speed)
     {
-        m_controller.setGoal(speed);
-        shooterMotor.set(m_controller.calculate(m_encoder.getRate()));
+        //m_controller.setGoal(50000.0);
+        //double power = m_controller.calculate(-m_encoder.getRate());
+        //shooterMotor.set(power);
+        // System.out.println("Speed: " + speed + " - Rate: " + m_encoder.getRate() + " - Power: " + power);
+
+        double power = m_controller.calculate(feedforward.calculate(-m_encoder.getRate(),20));
+        System.out.println("Speed: " + speed + " - Rate: " + m_encoder.getRate() + " - Power: " + power);
+        shooterMotor.set(power);
     }
 
     public double read_speed_shooter()
@@ -105,6 +115,57 @@ public class Shooter extends SubsystemBase
         double speed = m_encoder.getRate();
         return speed;
     }
+
+    public double speed_from_distance(double desired_distance)
+    {
+        // 100% power is 93k   GET DATA
+        // 90% power is 87k
+        // 80% power is 79k
+        // 70% power is 70k
+        // 60% power is 60k
+        // 50% power is 50k
+        double a = 1;
+        double b = 1;
+        double c = 1;
+
+        double new_speed = a*desired_distance*desired_distance+b*desired_distance+c;
+        System.out.println("desired distance: " + desired_distance: + " - new_speed: " + new_speed;
+        return new_speed;
+    }
+
+    public double power_from_speed(double desired_speed)
+    {
+        // 100% power is 93k
+        // 90% power is 87k
+        // 80% power is 79k
+        // 70% power is 70k
+        // 60% power is 60k
+        // 50% power is 50k
+        double a = 0.0074086;
+        double b = 0.077617;
+        double c = 28.007;
+
+        desired_speed /= 1000;
+
+        double new_power = (a*desired_speed*desired_speed+b*desired_speed+c)/100;
+        double actual_speed = read_speed_shooter()/1000;
+        double error_percent = (actual_speed-desired_speed)/desired_speed;
+        System.out.println("New_power: " + new_power + " - actual_speed: " + actual_speed + " - error: " + error_percent);
+        if( error_percent < -RobotMap.SPEED_ACCURACY )
+        {
+            new_power *= (1+Math.abs(error_percent));
+        }
+        if( error_percent > RobotMap.SPEED_ACCURACY )
+        {
+            new_power *= (1-Math.abs(error_percent));
+        }
+        if( new_power > 1 ) new_power = 1;
+        if( new_power < 0 ) new_power = 0;
+        System.out.println("New_power: " + new_power);
+        return new_power;
+    }
+
+    
 
 }
 

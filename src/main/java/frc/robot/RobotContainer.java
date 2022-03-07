@@ -37,6 +37,8 @@ public class RobotContainer {
   private final DriveSystem drivesystem = new DriveSystem();
   private final Limelight m_limelight = new Limelight();
 
+  public static double speed;
+
   // Joysticks
   private final XboxController driverController = new XboxController(RobotMap.JOYDRIVER_USB_PORT);
   
@@ -50,6 +52,7 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
       
+    speed = 50000;
     //Smartdashboard Subsystems
     //SmartDashboard.putData(m_intake);
     //SmartDashboard.putData(Robot.drivesystem);
@@ -111,9 +114,9 @@ public class RobotContainer {
     // Button for SmartShooter
     final JoystickButton SmartShooterBT = new JoystickButton(driverController, XboxController.Button.kLeftBumper.value);        
     SmartShooterBT.whileHeld(new SmartShooter( m_shooter, m_limelight, m_index) ,true);        
-    // SmartShooterBT.whileHeld(new SmartShooterPID( m_shooter, m_limelight, m_index, 6000) ,true);
+    // SmartShooterBT.whileHeld(new SmartShooterPID( m_shooter, m_limelight, m_index, 50000) ,true);
     SmartDashboard.putData("SmartShooterBT",new SmartShooter( m_shooter, m_limelight, m_index) );
-
+    
     // Button for IndexCargoIn
     final JoystickButton IndexCargoInBT = new JoystickButton(driverController, XboxController.Button.kB.value);        
     IndexCargoInBT.whileHeld(new IndexBringCargoIn( m_index ) ,true);
@@ -155,6 +158,8 @@ public class RobotContainer {
         RobotMap.DRIVER_SLOWDOWN = SmartDashboard.getNumber("Drive speed", .6);
         RobotMap.INTAKECARGO_SPEED = SmartDashboard.getNumber("Intake Speed", .5);
         RobotMap.INTAKESHOULDER_SPEED = SmartDashboard.getNumber("Shoulder Speed", 0);
+
+        speed = SmartDashboard.getNumber("Speed PID", 50000);
 
         // Shooter
         SmartDashboard.getNumber("Current Speed", m_shooter.read_speed_shooter());

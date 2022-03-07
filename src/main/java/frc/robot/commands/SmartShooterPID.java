@@ -36,7 +36,7 @@ public class SmartShooterPID extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_shooter.shootCargoPID(speed); // Test to shoot to 6000 of "speed"
+    m_shooter.shootCargoPID(speed); // Test to shoot to 50000 of "speed"
   }
 
   // Called once the command ends or is interrupted.

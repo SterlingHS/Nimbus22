@@ -40,6 +40,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Shooter Speed", RobotMap.SHOOT_CARGO_PERCENT);
     SmartDashboard.putNumber("Index Speed", RobotMap.INDEX_MOTOR_SPEED);
     SmartDashboard.putNumber("Intake Speed", RobotMap.INTAKECARGO_SPEED);
+    SmartDashboard.putNumber("Speed PID", 50000);
   }
 
   /**
