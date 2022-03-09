@@ -55,12 +55,12 @@ public class Index extends SubsystemBase
 
     public void cargo_index_in()
     {
-        indexMotor.set(RobotMap.INDEX_MOTOR_SPEED);
+        indexMotor.set(.3); //RobotMap.INDEX_MOTOR_SPEED);
     }
 
     public void cargo_index_out()
     {
-        indexMotor.set(-RobotMap.INDEX_MOTOR_SPEED);
+        indexMotor.set(-.3); //RobotMap.INDEX_MOTOR_SPEED);
     }
     
     public void index_stop()

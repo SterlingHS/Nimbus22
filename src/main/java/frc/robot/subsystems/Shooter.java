@@ -18,12 +18,8 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.CounterBase;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -118,40 +114,32 @@ public class Shooter extends SubsystemBase
 
     public double speed_from_distance(double desired_distance)
     { // Calculates speed for shooter in function of the distance to target
-        // 100% power is 93k   GET DATA
-        // 90% power is 87k
-        // 80% power is 79k
-        // 70% power is 70k
-        // 60% power is 60k
-        // 50% power is 50k
-        // check first if we are too close or to far away
+        // 15 ft with 150k
+        // 10 ft with 110k 
 
         if(desired_distance > RobotMap.MAX_DISTANCE || desired_distance < RobotMap.MIN_DISTANCE) return 0;
 
-        double a = 1;
-        double b = 1;
-        double c = 1;
+        double m = (170-110)/(15-10);
+        double b = 170 - m * 15;
 
-        double new_speed = a*desired_distance*desired_distance+b*desired_distance+c;
-        System.out.println("desired distance: " + desired_distance + " - new_speed: " + new_speed);
-
-        if(desired_distance > RobotMap.MAX_DISTANCE || desired_distance < RobotMap.MIN_DISTANCE) return 0;
-
+        double new_speed = (m*desired_distance+b)*1000;
+        //System.out.println("desired distance: " + desired_distance + " - new_speed: " + new_speed);
         return new_speed;
     }
 
     public double power_from_speed(double desired_speed)
     {
-        // 100% power is 93k
-        // 90% power is 87k
-        // 80% power is 79k
-        // 70% power is 70k
-        // 60% power is 60k
-        // 50% power is 50k
+        // 60% power is 160k
+        // 55% power is 150k
+        // 50% power is 140k
+        // 45% power is 125k
+        // 40% power is 110k
+        // 35% power is 90k
+        // 30% power is 80k
         // Then we used 
-        double a = 0.0074086;
-        double b = 0.077617;
-        double c = 28.007;
+        double a = .00124662;
+        double b = .0568888;
+        double c = 18.4751;
 
         desired_speed /= 1000;
 

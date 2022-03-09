@@ -50,7 +50,7 @@ public class RobotMap {
     //Index Constants
     public static int INDEX_MOTOR_TALON_ID = 21;
     public static int INDEX_LIMIT_SWITCH_ID = 15;
-    public static double INDEX_MOTOR_SPEED = 0.2;
+    public static double INDEX_MOTOR_SPEED = 0.7;
 
     //POV Buttons
     public static int POV_UP = 90;
@@ -63,8 +63,8 @@ public class RobotMap {
     public static int POV_BOTTOMLEFT_DIAGONAL = 225;
 
     // Limelight
-    public static double limelight_angle = 27.56417632;
-    public static double limelight_height = 2.3;
+    public static double limelight_angle = 43;
+    public static double limelight_height = 2;
 
     // Shooting variables
     public static double DISTANCE_TO_SHOOT = 10; // TBD with testing

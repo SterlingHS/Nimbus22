@@ -44,13 +44,14 @@ public class SmartShooter extends CommandBase {
       double distance = m_limelight.Distance_to_target();
       double speed_to_shoot = m_shooter.speed_from_distance(distance);
       double power_to_shooter = m_shooter.power_from_speed(speed_to_shoot);
-      System.out.println("Distance: " + distance + " - Power: " + power_to_shooter);
+      System.out.println("Distance: " + distance + "Target Speed: " + speed_to_shoot +" - Power: " + power_to_shooter + " - Speed: " + m_shooter.read_speed_shooter() + " - Ready: " + ready);
       m_shooter.shootCargoPercent(power_to_shooter); // Send value to motor
-      if(speed_to_shoot>(1-RobotMap.SPEED_ACCURACY))
+
+      if(m_shooter.read_speed_shooter()>(1-RobotMap.SPEED_ACCURACY)*speed_to_shoot)
         ready = true;
       
       if(ready == true)
-        m_index.cargo_index_in();
+        m_index.cargo_index_out();
     }
   }
 
@@ -59,6 +60,7 @@ public class SmartShooter extends CommandBase {
   public void end(boolean interrupted) {
     m_shooter.shootCargoStop();
     m_index.index_stop();
+    ready = false;
   }
 
   // Returns true when the command should end.
