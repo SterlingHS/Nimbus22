@@ -60,7 +60,7 @@ public class IntakeShoulderDown extends CommandBase {
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-   m_intake.intake_stop();
+   m_intake.shoulder_stop();
     }
 
     // Returns true when the command should end.

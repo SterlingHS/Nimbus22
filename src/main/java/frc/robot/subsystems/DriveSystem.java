@@ -83,5 +83,17 @@ private MecanumDrive mecanumDrive1 = new MecanumDrive(leftFront, leftRear, right
         leftRear.stopMotor();
         rightRear.stopMotor();
     }
+    public void turnRight() {
+        mecanumDrive(0,0,0.25,1)
+    }// might need to swap the negative signs
+    public void turnLeft(){
+        mecanumDrive(0,0,-0.25,1)
+    }
+    public void forward(){
+        mecanumDrive(0.25,0,0,1)
+    }
+    public void backward(){
+        mecanumDrive(-0.25,0,0,1)
+    }
 }
 
