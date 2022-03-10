@@ -12,6 +12,10 @@
 
 package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.DriveSystem;
+import frc.robot.subsystems.Index;
+import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Pixie;
 import frc.robot.subsystems.Shooter;
 
 
@@ -22,11 +26,12 @@ import frc.robot.subsystems.Shooter;
 
     private final Shooter m_shooter;
  
-    public SmartDrive(Shooter subsystem) {
-        m_drive = subsystems;
-        m_pixie = subsystems;
-        m_intake = subsystems;
-        m_index = subsystems;
+    public SmartDrive(Shooter sub1, Pixie sub2, DriveSystem sub3, Intake sub4, Index sub5) {
+        m_drive = sub3;
+        m_pixie = sub2;
+        m_intake = sub4;
+        m_index = sub5;
+        m_shooter = sub1;
         addRequirements(m_drive);
         addRequirements(m_pixie);
         addRequirements(m_intake);
