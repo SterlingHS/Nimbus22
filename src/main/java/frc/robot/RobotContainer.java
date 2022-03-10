@@ -35,6 +35,9 @@ public class RobotContainer {
   private final Intake m_intake = new Intake();
   private final Shooter m_shooter = new Shooter();
   private final DriveSystem drivesystem = new DriveSystem();
+  private final Limelight m_limelight = new Limelight();
+
+  public static double speed;
 
   // Joysticks
   private final XboxController driverController = new XboxController(RobotMap.JOYDRIVER_USB_PORT);
@@ -49,6 +52,7 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
       
+    speed = 50000;
     //Smartdashboard Subsystems
     //SmartDashboard.putData(m_intake);
     //SmartDashboard.putData(Robot.drivesystem);
@@ -93,20 +97,28 @@ public class RobotContainer {
     SmartDashboard.putData("IntakeCargoOutBt",new IntakeCargoOut( m_intake ) );
 
     // Button for Intake shoulder UP // we still need to add a button to the intake shoulder Up
-    // final POVButton intakeShoulderUpBt = new POVButton(driverController,RobotMap.POV_UP);        
-    // intakeShoulderUpBt.whileHeld(new IntakeShoulderUp( m_intake ) ,true);
-    // SmartDashboard.putData("IntakeShoulderUpBt",new IntakeShoulderUp( m_intake ) );
+    //final POVButton intakeShoulderUpBt = new POVButton(driverController,RobotMap.POV_UP);        
+    final JoystickButton intakeShoulderUpBt = new JoystickButton(driverController, XboxController.Button.kBack.value);
+    intakeShoulderUpBt.whileHeld(new IntakeShoulderUp( m_intake ) ,true);
+    SmartDashboard.putData("IntakeShoulderUpBt",new IntakeShoulderUp( m_intake ) );
 
     // Button for Intake shoulder DOWN // we still need to add a button to the intake shoulder down
-    // final POVButton intakeShoulderDownBt = new POVButton(driverController,RobotMap.POV_DOWN);        
-    // intakeShoulderDownBt.whileHeld(new IntakeShoulderDown( m_intake ) ,true);
-    // SmartDashboard.putData("IntakeShoulderDownBt",new IntakeShoulderDown( m_intake ) );
+    //final POVButton intakeShoulderDownBt = new POVButton(driverController,RobotMap.POV_DOWN);        
+    final JoystickButton intakeShoulderDownBt = new JoystickButton(driverController, XboxController.Button.kStart.value);
+    intakeShoulderDownBt.whileHeld(new IntakeShoulderDown( m_intake ) ,true);
+    SmartDashboard.putData("IntakeShoulderDownBt",new IntakeShoulderDown( m_intake ) );
 
      // Button for SimpleShooter
     final JoystickButton shootSimpleCargoBT = new JoystickButton(driverController, XboxController.Button.kRightBumper.value);        
     shootSimpleCargoBT.whileHeld(new ShootSimpleCargo( m_shooter ) ,true);
     SmartDashboard.putData("shootSimpleCargoBT",new ShootSimpleCargo( m_shooter ) );
 
+    // Button for SmartShooter
+    final JoystickButton SmartShooterBT = new JoystickButton(driverController, XboxController.Button.kLeftBumper.value);        
+    SmartShooterBT.whileHeld(new SmartShooter( m_shooter, m_limelight, m_index) ,true);        
+    // SmartShooterBT.whileHeld(new SmartShooterPID( m_shooter, m_limelight, m_index, 50000) ,true);
+    SmartDashboard.putData("SmartShooterBT",new SmartShooter( m_shooter, m_limelight, m_index) );
+    
     // Button for IndexCargoIn
     final JoystickButton IndexCargoInBT = new JoystickButton(driverController, XboxController.Button.kB.value);        
     IndexCargoInBT.whileHeld(new IndexBringCargoIn( m_index ) ,true);
@@ -132,36 +144,37 @@ public class RobotContainer {
   }
 
  public void update_smartboard(){
-        //SmartDashboard.putBoolean("Rotator Right", rotator...);
-        //SmartDashboard.putNumber("intake speed",RobotMap.INTAKECARGO_SPEED);
-        
         SmartDashboard.putNumber("drive speed",RobotMap.DRIVER_SLOWDOWN);
         //SmartDashboard.putNumber("Index speed",RobotMap.INDEX_MOTOR_SPEED);
         SmartDashboard.putBoolean("Index Limit switch",m_index.is_cargo_in_index());
         SmartDashboard.putBoolean("Intake limit switch",m_intake.is_intake_up());
 
-        RobotMap.SHOOT_CARGO_SPEED = SmartDashboard.getNumber("Shooter Speed", RobotMap.SHOOT_CARGO_SPEED);
+        RobotMap.SHOOT_CARGO_PERCENT = SmartDashboard.getNumber("Shooter Speed", RobotMap.SHOOT_CARGO_PERCENT);
         RobotMap.INDEX_MOTOR_SPEED = SmartDashboard.getNumber("Index Speed", RobotMap.INDEX_MOTOR_SPEED);
         RobotMap.INTAKECARGO_SPEED = SmartDashboard.getNumber("Intake Speed", RobotMap.INTAKECARGO_SPEED);
         
        
         // SmartDashboard.putNumber("shooter speed",RobotMap.SHOOT_CARGO_SPEED);
-        RobotMap.SHOOT_CARGO_SPEED = SmartDashboard.getNumber("shooter speed", .5);
-        RobotMap.INDEX_MOTOR_SPEED = SmartDashboard.getNumber("Index speed", .2);
-        RobotMap.DRIVER_SLOWDOWN = SmartDashboard.getNumber("Drive speed", .6);
-        RobotMap.INTAKECARGO_SPEED = SmartDashboard.getNumber("Intake Speed", .5);
-        RobotMap.INTAKESHOULDER_SPEED = SmartDashboard.getNumber("Shoulder Speed", 0);
+        RobotMap.SHOOT_CARGO_SPEED = SmartDashboard.getNumber("shooter speed", RobotMap.SHOOT_CARGO_SPEED);
+        RobotMap.INDEX_MOTOR_SPEED = SmartDashboard.getNumber("Index speed", RobotMap.INDEX_MOTOR_SPEED);
+        RobotMap.DRIVER_SLOWDOWN = SmartDashboard.getNumber("Drive speed", RobotMap.DRIVER_SLOWDOWN);
+        RobotMap.INTAKECARGO_SPEED = SmartDashboard.getNumber("Intake Speed", RobotMap.INTAKECARGO_SPEED);
+        RobotMap.INTAKESHOULDER_SPEED = SmartDashboard.getNumber("Shoulder Speed", RobotMap.INTAKESHOULDER_SPEED);
+
+        // Shooter
+        SmartDashboard.getNumber("Current Speed", m_shooter.read_speed_shooter());
 
         //Limit switches
         SmartDashboard.putBoolean("Index Limit switch",m_index.is_cargo_in_index());
         SmartDashboard.putBoolean("Intake limit switch",m_intake.is_intake_up());
 
-        // SmartDashboard.putNumber("Limelight TX", shooter.Read_Limelight_tx());
-        // SmartDashboard.putNumber("Limelight TY", shooter.Read_Limelight_ty());
-        // SmartDashboard.putNumber("Limelight TA", shooter.Read_Limelight_ta());
-        // SmartDashboard.putNumber("Limelight TV", shooter.Read_Limelight_tv());
         // SmartDashboard.putBoolean("Pixy Ball",pixyTracker.Read_Pixy_is_Ball());
         // SmartDashboard.putNumber("x from pixy",pixyTracker.Read_Pixy_x());
+
+        SmartDashboard.putNumber("Distance", m_limelight.Distance_to_target());
+        SmartDashboard.putNumber("Angle Target", RobotMap.limelight_angle+m_limelight.Read_Limelight_ty());
+        SmartDashboard.putNumber("Speed Target", m_shooter.speed_from_distance(m_limelight.Distance_to_target()));
+        SmartDashboard.putNumber("Power Target", m_shooter.power_from_speed(m_shooter.speed_from_distance(m_limelight.Distance_to_target())));
+
     }
 }
-

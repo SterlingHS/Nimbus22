@@ -1,4 +1,5 @@
 package frc.robot;
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -41,13 +42,15 @@ public class RobotMap {
     //Shooter Constant
     public static int SHOOTER_TOP_TALON_ID = 22;
     public static int SHOOTER_BOTTOM_TALON_ID = 23;
-    public static double SHOOT_CARGO_SPEED = 0.5;
-    public static double REVERSE_CARGO_SPEED = -0.1;
+    public static double SHOOT_CARGO_PERCENT = 0.5;
+    public static double REVERSE_CARGO_PERCENT = 0;
+    public static final int ShooterEncoderChannel1 = 5;
+    public static final int ShooterEncoderChannel2 = 6;
 
     //Index Constants
     public static int INDEX_MOTOR_TALON_ID = 21;
     public static int INDEX_LIMIT_SWITCH_ID = 15;
-    public static double INDEX_MOTOR_SPEED = 0.2;
+    public static double INDEX_MOTOR_SPEED = 0.7;
 
     //POV Buttons
     public static int POV_UP = 90;
@@ -60,8 +63,19 @@ public class RobotMap {
     public static int POV_BOTTOMLEFT_DIAGONAL = 225;
 
     // Limelight
-    public static double limelight_angle = 27.56417632;
-    public static double limelight_height = 2.3;
+    public static double limelight_angle = 43;
+    public static double limelight_height = 2;
+
+    // Shooting variables
+    public static double DISTANCE_TO_SHOOT = 10; // TBD with testing
+    public static double DISTANCE_ACCURACY = .1; // TBD with testing
+    public static double SHOOT_CARGO_SPEED = 500;
+    public static double Kp = 1;
+    public static double Ki = 0;
+    public static double Kd = 0;
+    public static double SPEED_ACCURACY = .02;
+    public static final double MAX_DISTANCE = 20;
+    public static final double MIN_DISTANCE = 5;
 
 }
 
