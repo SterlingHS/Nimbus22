@@ -22,17 +22,23 @@ import frc.robot.subsystems.Shooter;
 /**
  *
  */
-    public class SmartDrive extends CommandBase {
+    public class Autonomous1 extends CommandBase {
 
     private final Shooter m_shooter;
+    private final DriveSystem drivesystem;
+    private final Pixie m_pixie;
+    private final Intake m_intake;
+    private final Index m_index;
+
  
-    public SmartDrive(Shooter sub1, Pixie sub2, DriveSystem sub3, Intake sub4, Index sub5) {
-        m_drive = sub3;
+    public Autonomous1(Shooter sub1, Pixie sub2, DriveSystem sub3, Intake sub4, Index sub5) {
+        drivesystem = sub3;
         m_pixie = sub2;
         m_intake = sub4;
         m_index = sub5;
         m_shooter = sub1;
-        addRequirements(m_drive);
+        addRequirements(m_shooter);
+        addRequirements(drivesystem);
         addRequirements(m_pixie);
         addRequirements(m_intake);
         addRequirements(m_index);
@@ -46,26 +52,28 @@ import frc.robot.subsystems.Shooter;
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        if m_pixie.Read_Pixy_is_Ball() == false {
-            m_drive.turnRight();
+        if(m_pixie.Read_Pixy_is_Ball() == false) {
+            drivesystem.turnRight();
         }
-        else{
-            int x = m_pixie.Read_Pixy_x();
-            int y = m_pixes.Read_Pixy_y();
+        else
+        {
+            double x = m_pixie.Read_Pixy_x();
+            // double y = m_pixie.Read_Pixy_y();
 
             // If the ball is in sight then go forward
-            if x < 20 && x > -20{
-               m_drive.forward();
+            if(x < 20 && x > -20){
+               drivesystem.forward();
              // m_intake.intake_down() // The shoulder might already be down
                 m_intake.cargointake();
                 m_index.cargo_index_in();
             }
             else {
-                if x <= 20 {
-                    m_drive.turnleft();
+                if(x <= 20){
+                    drivesystem.turnLeft();
                 }
-                else {
-                    m_drive.turnRight();
+                else 
+                {
+                    drivesystem.turnRight();
                 }
             }//Fix this later
             
@@ -75,7 +83,7 @@ import frc.robot.subsystems.Shooter;
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        m_drive.stopMotor();
+        drivesystem.stop();
         m_index.index_stop();
         m_intake.cargointake_stop();
         m_intake.shoulder_stop();

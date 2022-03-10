@@ -58,6 +58,5 @@ public class RobotMap {
     public static int POV_BOTTOMRIGHT_DIAGONAL = 315;
     public static int POV_TOPLEFT_DIAGONAL = 135;
     public static int POV_BOTTOMLEFT_DIAGONAL = 225;
-
 }
 

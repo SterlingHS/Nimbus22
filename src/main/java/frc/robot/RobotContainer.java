@@ -16,11 +16,11 @@ import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 
 
 /**
@@ -32,6 +32,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
 
   // The robot's subsystems
+  private final Pixie m_pixie = new Pixie();
   private final Index m_index = new Index();
   private final Intake m_intake = new Intake();
   private final Shooter m_shooter = new Shooter();
@@ -49,17 +50,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
-      
-    //Smartdashboard Subsystems
-    //SmartDashboard.putData(m_intake);
-    //SmartDashboard.putData(Robot.drivesystem);
-    //SmartDashboard Buttons
-    //SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
-    //SmartDashboard.putData("Drive", new Drive( Robot.drivesystem ));
-    //SmartDashboard.putData("IntakeCargoIn", new IntakeCargoIn( m_intake ));
-    //SmartDashboard.putData("IntakeCargoOut", new IntakeCargoOut( m_intake ));
-    //SmartDashboard.putData("IntakeShoulderUp", new IntakeShoulderUp( m_intake ));
-    //SmartDashboard.putData("IntakeShoulderDown", new IntakeShoulderDown( m_intake ));
+
 
     // Configure default commands
     drivesystem.setDefaultCommand(new Drive( drivesystem, driverController::getLeftX, driverController::getLeftY, driverController::getRightX) ); //driverController::getRightZ) );
@@ -117,7 +108,12 @@ public class RobotContainer {
     final JoystickButton IndexCargoOutBT = new JoystickButton(driverController, XboxController.Button.kX.value);        
     IndexCargoOutBT.whileHeld(new IndexBringCargoOut( m_index ) ,true);
     SmartDashboard.putData("IndexBringCargoOutBT",new IndexBringCargoOut( m_index ) );
-  }
+
+    // Button for Autonomous test
+    final POVButton AutonomnousBt = new POVButton(driverController, 90);        
+    AutonomnousBt.whileHeld(new Autonomous1( m_shooter, m_pixie, drivesystem, m_intake, m_index ) ,true);
+    SmartDashboard.putData("IndexBringCargoOutBT",new Autonomous1( m_shooter, m_pixie, drivesystem, m_intake, m_index ) );
+    }
   public XboxController getDriverController() {
     return driverController;
   }

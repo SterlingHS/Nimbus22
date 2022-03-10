@@ -14,8 +14,6 @@ package frc.robot.subsystems;
 
 
 import frc.robot.RobotMap;
-import frc.robot.commands.*;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
@@ -94,16 +92,18 @@ private MecanumDrive mecanumDrive1 = new MecanumDrive(leftFront, leftRear, right
         rightRear.stopMotor();
     }
     public void turnRight() {
-        mecanumDrive(0,0,0.25,1)
+        mecanumDrive(0,0,0.25,1);
     }// might need to swap the negative signs
+
     public void turnLeft(){
-        mecanumDrive(0,0,-0.25,1)
+        mecanumDrive(0,0,-0.25,1);
     }
     public void forward(){
-        mecanumDrive(0.25,0,0,1)
+        mecanumDrive(0.25,0,0,1);
     }
+    
     public void backward(){
-        mecanumDrive(-0.25,0,0,1)
+        mecanumDrive(-0.25,0,0,1);
     }
 }
 
