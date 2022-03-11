@@ -52,8 +52,12 @@ import frc.robot.subsystems.Shooter;
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
+        //drivesystem.stop();
+        m_index.index_stop();
+        m_intake.cargointake_stop();
+        m_intake.shoulder_stop();
         if(m_pixie.Read_Pixy_is_Ball() == false) {
-            drivesystem.turnRight();
+            //drivesystem.turnRight();
         }
         else
         {
@@ -62,18 +66,21 @@ import frc.robot.subsystems.Shooter;
 
             // If the ball is in sight then go forward
             if(x < 20 && x > -20){
-               drivesystem.forward();
-             // m_intake.intake_down() // The shoulder might already be down
-                m_intake.cargointake();
-                m_index.cargo_index_in();
+                //drivesystem.forward();
+                //m_intake.intake_down() // The shoulder might already be down
+                //m_intake.cargointake();
+                //m_index.cargo_index_in();
+                System.out.println("center x: " + x);
             }
             else {
                 if(x <= 20){
-                    drivesystem.turnLeft();
+                    //drivesystem.turnLeft();
+                    System.out.println("left x: " + x);
                 }
                 else 
                 {
-                    drivesystem.turnRight();
+                    //drivesystem.turnRight();
+                    System.out.println("right x: " + x);
                 }
             }//Fix this later
             
