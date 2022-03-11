@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 
 
 /**
@@ -29,15 +30,13 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  * (including subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-
   // The robot's subsystems
+  private final Pixie m_pixie = new Pixie();
   private final Index m_index = new Index();
   private final Intake m_intake = new Intake();
   private final Shooter m_shooter = new Shooter();
-  private final DriveSystem drivesystem = new DriveSystem();
   private final Limelight m_limelight = new Limelight();
-
-  public static double speed;
+  private final DriveSystem drivesystem = new DriveSystem();
 
   // Joysticks
   private final XboxController driverController = new XboxController(RobotMap.JOYDRIVER_USB_PORT);
@@ -51,18 +50,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
-      
-    speed = 50000;
-    //Smartdashboard Subsystems
-    //SmartDashboard.putData(m_intake);
-    //SmartDashboard.putData(Robot.drivesystem);
-    //SmartDashboard Buttons
-    //SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
-    //SmartDashboard.putData("Drive", new Drive( Robot.drivesystem ));
-    //SmartDashboard.putData("IntakeCargoIn", new IntakeCargoIn( m_intake ));
-    //SmartDashboard.putData("IntakeCargoOut", new IntakeCargoOut( m_intake ));
-    //SmartDashboard.putData("IntakeShoulderUp", new IntakeShoulderUp( m_intake ));
-    //SmartDashboard.putData("IntakeShoulderDown", new IntakeShoulderDown( m_intake ));
+
 
     // Configure default commands
     drivesystem.setDefaultCommand(new Drive( drivesystem, driverController::getLeftX, driverController::getLeftY, driverController::getRightX) ); //driverController::getRightZ) );
@@ -73,9 +61,9 @@ public class RobotContainer {
     SmartDashboard.putData("Auto Mode", m_chooser);
   }
 
-  /* public static RobotContainer getInstance() {
+  /*public static RobotContainer getInstance() {
     return m_robotContainer;
-  } */
+  }*/
 
   /**
    * Use this method to define your button->command mappings.  Buttons can be created by
@@ -97,28 +85,20 @@ public class RobotContainer {
     SmartDashboard.putData("IntakeCargoOutBt",new IntakeCargoOut( m_intake ) );
 
     // Button for Intake shoulder UP // we still need to add a button to the intake shoulder Up
-    //final POVButton intakeShoulderUpBt = new POVButton(driverController,RobotMap.POV_UP);        
-    final JoystickButton intakeShoulderUpBt = new JoystickButton(driverController, XboxController.Button.kBack.value);
-    intakeShoulderUpBt.whileHeld(new IntakeShoulderUp( m_intake ) ,true);
-    SmartDashboard.putData("IntakeShoulderUpBt",new IntakeShoulderUp( m_intake ) );
+    // final POVButton intakeShoulderUpBt = new POVButton(driverController,RobotMap.POV_UP);        
+    // intakeShoulderUpBt.whileHeld(new IntakeShoulderUp( m_intake ) ,true);
+    // SmartDashboard.putData("IntakeShoulderUpBt",new IntakeShoulderUp( m_intake ) );
 
     // Button for Intake shoulder DOWN // we still need to add a button to the intake shoulder down
-    //final POVButton intakeShoulderDownBt = new POVButton(driverController,RobotMap.POV_DOWN);        
-    final JoystickButton intakeShoulderDownBt = new JoystickButton(driverController, XboxController.Button.kStart.value);
-    intakeShoulderDownBt.whileHeld(new IntakeShoulderDown( m_intake ) ,true);
-    SmartDashboard.putData("IntakeShoulderDownBt",new IntakeShoulderDown( m_intake ) );
+    // final POVButton intakeShoulderDownBt = new POVButton(driverController,RobotMap.POV_DOWN);        
+    // intakeShoulderDownBt.whileHeld(new IntakeShoulderDown( m_intake ) ,true);
+    // SmartDashboard.putData("IntakeShoulderDownBt",new IntakeShoulderDown( m_intake ) );
 
      // Button for SimpleShooter
     final JoystickButton shootSimpleCargoBT = new JoystickButton(driverController, XboxController.Button.kRightBumper.value);        
     shootSimpleCargoBT.whileHeld(new ShootSimpleCargo( m_shooter ) ,true);
     SmartDashboard.putData("shootSimpleCargoBT",new ShootSimpleCargo( m_shooter ) );
 
-    // Button for SmartShooter
-    final JoystickButton SmartShooterBT = new JoystickButton(driverController, XboxController.Button.kLeftBumper.value);        
-    SmartShooterBT.whileHeld(new SmartShooter( m_shooter, m_limelight, m_index) ,true);        
-    // SmartShooterBT.whileHeld(new SmartShooterPID( m_shooter, m_limelight, m_index, 50000) ,true);
-    SmartDashboard.putData("SmartShooterBT",new SmartShooter( m_shooter, m_limelight, m_index) );
-    
     // Button for IndexCargoIn
     final JoystickButton IndexCargoInBT = new JoystickButton(driverController, XboxController.Button.kB.value);        
     IndexCargoInBT.whileHeld(new IndexBringCargoIn( m_index ) ,true);
@@ -128,7 +108,12 @@ public class RobotContainer {
     final JoystickButton IndexCargoOutBT = new JoystickButton(driverController, XboxController.Button.kX.value);        
     IndexCargoOutBT.whileHeld(new IndexBringCargoOut( m_index ) ,true);
     SmartDashboard.putData("IndexBringCargoOutBT",new IndexBringCargoOut( m_index ) );
-  }
+
+    // Button for Autonomous test
+    final POVButton AutonomnousBt = new POVButton(driverController, 90);        
+    AutonomnousBt.whileHeld(new Autonomous1( m_shooter, m_pixie, drivesystem, m_intake, m_index ) ,true);
+    SmartDashboard.putData("IndexBringCargoOutBT",new Autonomous1( m_shooter, m_pixie, drivesystem, m_intake, m_index ) );
+    }
   public XboxController getDriverController() {
     return driverController;
   }

@@ -13,13 +13,10 @@
 package frc.robot.subsystems;
 
 
-import frc.robot.RobotMap;
-import frc.robot.commands.*;
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import java.util.ArrayList;
+
 import io.github.pseudoresonance.pixy2api.Pixy2;
 import io.github.pseudoresonance.pixy2api.Pixy2CCC;
 import io.github.pseudoresonance.pixy2api.Pixy2CCC.Block;
@@ -74,7 +71,7 @@ public class Pixie extends SubsystemBase
 		// System.out.println("Found " + blockCount + " blocks!"); // Reports number of blocks found
 		if (blockCount > 0)//might need to be >=
 		{
-			ArrayList<Block> blocks = pixy.getCCC().getBlocks(); // Gets a list of all blocks found by the Pixy2
+			ArrayList<Block> blocks = pixy.getCCC().getBlockCache(); // Gets a list of all blocks found by the Pixy2
 			Block largestBlock = null;
 			for (Block block : blocks) 
 			{ // Loops through all blocks and finds the widest one

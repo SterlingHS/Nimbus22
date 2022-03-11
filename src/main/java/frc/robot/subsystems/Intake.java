@@ -73,7 +73,7 @@ public class Intake extends SubsystemBase
     {
         if (is_intake_up())
         {
-            intake_stop();
+            cargointake_stop();
         }
         else 
         { 
