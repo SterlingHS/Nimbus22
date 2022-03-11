@@ -37,9 +37,10 @@ public class Robot extends TimedRobot {
     // SmartDashboard.putData("Auto choices", m_chooser);
     // m_robotContainer = new RobotContainer();
     robotContainer = new RobotContainer();
+    // robotContainer.update_smartboard();
     SmartDashboard.putNumber("Shooter Speed", RobotMap.SHOOT_CARGO_PERCENT);
-    SmartDashboard.putNumber("Intake Speed", RobotMap.INTAKECARGO_SPEED);
-    SmartDashboard.putNumber("Speed PID", 50000);
+    //SmartDashboard.putNumber("Intake Speed", RobotMap.INTAKECARGO_SPEED);
+    //SmartDashboard.putNumber("Speed PID", 50000);
   }
 
   /**

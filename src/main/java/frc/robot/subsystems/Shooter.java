@@ -119,8 +119,8 @@ public class Shooter extends SubsystemBase
 
         if(desired_distance > RobotMap.MAX_DISTANCE || desired_distance < RobotMap.MIN_DISTANCE) return 0;
 
-        double m = (170-110)/(15-10);
-        double b = 170 - m * 15;
+        double m = (150-110)/(15-10);
+        double b = 150 - m * 15;
 
         double new_speed = (m*desired_distance+b)*1000;
         //System.out.println("desired distance: " + desired_distance + " - new_speed: " + new_speed);

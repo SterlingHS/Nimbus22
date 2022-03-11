@@ -19,7 +19,7 @@ public class RobotMap {
 
     // Intake constants
     public static int INTAKECARGO_TALON_ID = 13;
-    public static int INTAKESHOULDER_TALON_ID = 11;
+    public static int INTAKESHOULDER_TALON_ID = 10;
     public static double INTAKECARGO_SPEED = 0.5;
     public static double INTAKESHOULDER_SPEED = 0.5;
     public static int INTAKELIMITSWITCH_ID = 0;

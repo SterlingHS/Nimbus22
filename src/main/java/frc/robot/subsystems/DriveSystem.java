@@ -91,10 +91,11 @@ private MecanumDrive mecanumDrive1 = new MecanumDrive(leftFront, leftRear, right
         mecanumDrive(0,0,-0.25,1);
     }
     public void forward(){
-        mecanumDrive(0.25,0,0,1);
+        System.out.println("Forward");
+        mecanumDrive(0,-0.35,0,1);
     }
     public void backward(){
-        mecanumDrive(-0.25,0,0,1);
+        mecanumDrive(0,0.35,0,1);
     }
 }
 

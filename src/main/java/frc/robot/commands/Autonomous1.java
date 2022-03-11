@@ -11,6 +11,7 @@
 // ROBOTBUILDER TYPE: Command.
 
 package frc.robot.commands;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveSystem;
 import frc.robot.subsystems.Index;
@@ -30,6 +31,8 @@ import frc.robot.subsystems.Shooter;
     private final Intake m_intake;
     private final Index m_index;
 
+    private static boolean center;
+
  
     public Autonomous1(Shooter sub1, Pixie sub2, DriveSystem sub3, Intake sub4, Index sub5) {
         drivesystem = sub3;
@@ -47,40 +50,60 @@ import frc.robot.subsystems.Shooter;
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
+        center = false;
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        //drivesystem.stop();
-        m_index.index_stop();
-        m_intake.cargointake_stop();
-        m_intake.shoulder_stop();
-        if(m_pixie.Read_Pixy_is_Ball() == false) {
-            //drivesystem.turnRight();
+        m_pixie.getBiggestBlock();
+        // System.out.println("Autonomous");
+        SmartDashboard.putNumber("Pixie x", m_pixie.Read_Pixy_x());
+        SmartDashboard.putNumber("Pixie y", m_pixie.Read_Pixy_y());
+        SmartDashboard.putBoolean("Pixie ball", m_pixie.Read_Pixy_is_Ball());
+        SmartDashboard.putNumber("Pixie angle", m_pixie.Read_Pixy_angle());
+        SmartDashboard.putNumber("Pixie signature", m_pixie.Read_Pixy_signature());
+        SmartDashboard.putNumber("Pixie dimx", m_pixie.Read_Pixy_dimx());
+        SmartDashboard.putNumber("Pixie dimy", m_pixie.Read_Pixy_dimy());
+        if(m_pixie.Read_Pixy_is_Ball() == false && center == false) {
+            drivesystem.turnRight();
+            m_intake.cargointake_stop();
+            m_index.index_stop();
+            // System.out.println("Nothing");
         }
         else
         {
-            double x = m_pixie.Read_Pixy_x();
+            double x = m_pixie.Read_Pixy_x() - 240;
             // double y = m_pixie.Read_Pixy_y();
 
             // If the ball is in sight then go forward
-            if(x < 20 && x > -20){
-                //drivesystem.forward();
-                //m_intake.intake_down() // The shoulder might already be down
-                //m_intake.cargointake();
-                //m_index.cargo_index_in();
-                System.out.println("center x: " + x);
+            if(x < 20 && x > -20 || center == true){
+                double turn = 0;
+                if(x <= 20) turn = -.2;
+                if(x > 20) turn = .2;
+                drivesystem.mecanumDrive(0 , -.35, turn, 1);
+                //m_intake.intake_down(); // The shoulder might already be down
+                m_intake.cargointake();
+                m_index.cargo_index_in();
+                center = true;
+                
+                // System.out.println("center x: " + x);
             }
             else {
                 if(x <= 20){
-                    //drivesystem.turnLeft();
-                    System.out.println("left x: " + x);
+                    drivesystem.turnLeft();
+                    m_intake.cargointake_stop();
+                    m_index.index_stop();
+                    center = false;
+                    // System.out.println("left x: " + x);
                 }
                 else 
                 {
-                    //drivesystem.turnRight();
-                    System.out.println("right x: " + x);
+                    drivesystem.turnRight();
+                    m_intake.cargointake_stop();
+                    m_index.index_stop();
+                    center = false;
+                    // System.out.println("right x: " + x);
                 }
             }//Fix this later
             
