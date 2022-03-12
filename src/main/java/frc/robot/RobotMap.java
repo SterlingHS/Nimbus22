@@ -22,7 +22,8 @@ public class RobotMap {
     public static int INTAKESHOULDER_TALON_ID = 10;
     public static double INTAKECARGO_SPEED = 0.5;
     public static double INTAKESHOULDER_SPEED = 0.5;
-    public static int INTAKELIMITSWITCH_ID = 0;
+    public static int SHOULDER_LIMIT_SWITCH_UP = 2;
+    public static int SHOULDER_LIMIT_SWITCH_DOWN = 3;
 
     // Joysitck configuration
     public static int JOYDRIVER_USB_PORT = 0;
@@ -49,8 +50,9 @@ public class RobotMap {
 
     //Index Constants
     public static int INDEX_MOTOR_TALON_ID = 21;
-    public static int INDEX_LIMIT_SWITCH_ID = 15;
-    public static double INDEX_MOTOR_SPEED = 0.7;
+    public static double INDEX_MOTOR_SPEED = 0.3;
+    public static int INDEXLIMITSWITCH_ID1 = 0;
+    public static int INDEXLIMITSWITCH_ID2 = 1;
 
     //POV Buttons
     public static int POV_UP = 90;

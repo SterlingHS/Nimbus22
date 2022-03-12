@@ -26,7 +26,8 @@ public class Intake extends SubsystemBase
     
     private WPI_TalonSRX intakeCargo;
     private WPI_TalonSRX intakeShoulder;
-    private DigitalInput intaketoplimitSwitch;
+    private DigitalInput shoulderLimitSwitchUP;
+    private DigitalInput shoulderLimitSwitchDOWN;
 
     /**
     *
@@ -35,7 +36,8 @@ public class Intake extends SubsystemBase
     {
         intakeCargo = new WPI_TalonSRX(RobotMap.INTAKECARGO_TALON_ID);
         intakeShoulder = new WPI_TalonSRX(RobotMap.INTAKESHOULDER_TALON_ID);
-        intaketoplimitSwitch = new DigitalInput(RobotMap.INTAKELIMITSWITCH_ID);
+        shoulderLimitSwitchUP = new DigitalInput(RobotMap.SHOULDER_LIMIT_SWITCH_UP);
+        shoulderLimitSwitchDOWN = new DigitalInput(RobotMap.SHOULDER_LIMIT_SWITCH_DOWN);
     }
 
     @Override
@@ -93,7 +95,12 @@ public class Intake extends SubsystemBase
 
     public boolean is_intake_up()
     {
-        return intaketoplimitSwitch.get();
+        return shoulderLimitSwitchUP.get();
+    }
+
+    public boolean is_intake_down()
+    {
+        return shoulderLimitSwitchDOWN.get();
     }
 }
 
