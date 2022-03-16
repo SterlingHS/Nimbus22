@@ -11,7 +11,7 @@
 // ROBOTBUILDER TYPE: Command.
 
 package frc.robot.commands;
-import edu.wpi.first.wpilibj.Timer;
+//import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotMap;
@@ -44,7 +44,7 @@ import frc.robot.subsystems.Shooter;
     private static boolean center;
     private static boolean ready;
 
-    private static Timer timer_shooter;
+    //private static Timer timer_shooter;
  
     public Autonomous1(Shooter sub1, Pixie sub2, DriveSystem sub3, Intake sub4, Index sub5, Limelight sub6) {
         drivesystem = sub3;
@@ -84,7 +84,7 @@ import frc.robot.subsystems.Shooter;
 
         if( stage == 0) SmartShot();
         if( stage == 1) stage1();
-        if( stage == 2) stage2();
+        //if( stage == 2) stage2();
         if( stage == 3) SmartShot();
 
         
@@ -123,7 +123,6 @@ import frc.robot.subsystems.Shooter;
     
           if(m_shooter.read_speed_shooter()>(1-RobotMap.SPEED_ACCURACY)*speed_to_shoot)
           {
-            timer_shooter.wait(3000);
             ready = true;
           }
           if(ready == true)
@@ -137,7 +136,6 @@ import frc.robot.subsystems.Shooter;
             drivesystem.turnRight();
             m_intake.cargointake_stop();
             m_index.index_stop();
-            // System.out.println("Nothing");
         }
         else
         {

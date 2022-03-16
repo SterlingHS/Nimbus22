@@ -45,7 +45,7 @@ public class RobotContainer {
     drivesystem.setDefaultCommand(new Drive( drivesystem, driverController::getLeftX, driverController::getLeftY, driverController::getRightX) ); //driverController::getRightZ) );
 
     // Configure autonomous sendable chooser
-    m_chooser.setDefaultOption("Autonomous Command", new Autonomous1( m_shooter, m_pixie, drivesystem, m_intake, m_index, m_limelight));
+    m_chooser.setDefaultOption("Autonomous Command", new Autonomous1Ball( m_shooter, m_pixie, drivesystem, m_intake, m_index, m_limelight));
 
     SmartDashboard.putData("Auto Mode", m_chooser);
   }
@@ -63,17 +63,17 @@ public class RobotContainer {
   private void configureButtonBindings() {
     // Create some buttons
 
-    // Button for Intake IN
-    final JoystickButton intakeCargoInBt = new JoystickButton(driverController, XboxController.Button.kA.value);        
-    intakeCargoInBt.whileHeld(new IntakeCargoIn( m_intake ) ,true);
-    //SmartDashboard.putData("IntakeCargoInBt",new IntakeCargoIn( m_intake ) );
+    // Button To PickUpBall
+    final JoystickButton PickUpBallBt = new JoystickButton(driverController, XboxController.Button.kA.value);        
+    PickUpBallBt.whileHeld(new PickUpBall( m_intake, m_index ) ,true);
+    SmartDashboard.putData("IntakeCargoInBt",new IntakeCargoIn( m_intake ) );
 
     // Button for Intake OUT
     final JoystickButton intakeCargoOutBt = new JoystickButton(driverController, XboxController.Button.kY.value);        
     intakeCargoOutBt.whileHeld(new IntakeCargoOut( m_intake ) ,true);
-    //SmartDashboard.putData("IntakeCargoOutBt",new IntakeCargoOut( m_intake ) );
+    SmartDashboard.putData("IntakeCargoOutBt",new IntakeCargoOut( m_intake ) );
 
-    // Button for Intake shoulder UP // we still need to add a button to the intake shoulder Up
+    // Button for Intake shoulder UP 
     final POVButton intakeShoulderUpBt = new POVButton(driverController,RobotMap.POV_UP);        
     intakeShoulderUpBt.whileHeld(new IntakeShoulderUp( m_intake ) ,true);
     //SmartDashboard.putData("IntakeShoulderUpBt",new IntakeShoulderUp( m_intake ) );
@@ -88,9 +88,9 @@ public class RobotContainer {
     shootSimpleCargoBT.whileHeld(new ShootSimpleCargo( m_shooter ) ,true);
     //SmartDashboard.putData("shootSimpleCargoBT",new ShootSimpleCargo( m_shooter ) );
 
-      // Button for SimpleShooter
+      // Button for SmartShooter
     final JoystickButton shootSmartCargoBT = new JoystickButton(driverController, XboxController.Button.kLeftBumper.value);        
-    shootSmartCargoBT.whileHeld(new SmartShooter( m_shooter, m_limelight, m_index ) ,true);
+    shootSmartCargoBT.whenPressed(new SmartShooter1( m_shooter, m_limelight, m_index ) ,true);
     //SmartDashboard.putData("shootSimpleCargoBT",new ShootSimpleCargo( m_shooter ) );
 
     // Button for IndexCargoIn
@@ -102,7 +102,6 @@ public class RobotContainer {
     final JoystickButton IndexCargoOutBT = new JoystickButton(driverController, XboxController.Button.kX.value);        
     IndexCargoOutBT.whileHeld(new IndexBringCargoOut( m_index ) ,true);
     //SmartDashboard.putData("IndexBringCargoOutBT",new IndexBringCargoOut( m_index ) );
-
   }
 
   public XboxController getDriverController() {
@@ -122,7 +121,7 @@ public class RobotContainer {
  public void update_smartboard(){     
        
         // SmartDashboard.putNumber("shooter speed",RobotMap.SHOOT_CARGO_SPEED);
-        RobotMap.SHOOT_CARGO_SPEED = SmartDashboard.getNumber("shooter speed", RobotMap.SHOOT_CARGO_SPEED);
+        RobotMap.SHOOT_CARGO_PERCENT = SmartDashboard.getNumber("shooter speed", RobotMap.SHOOT_CARGO_PERCENT);
         RobotMap.INDEX_MOTOR_SPEED = SmartDashboard.getNumber("Index speed", RobotMap.INDEX_MOTOR_SPEED);
         RobotMap.DRIVER_SLOWDOWN = SmartDashboard.getNumber("Drive speed", RobotMap.DRIVER_SLOWDOWN);
         RobotMap.INTAKECARGO_SPEED = SmartDashboard.getNumber("Intake Speed", RobotMap.INTAKECARGO_SPEED);
@@ -135,9 +134,9 @@ public class RobotContainer {
         //SmartDashboard.putBoolean("Index Limit switch",m_index.is_cargo_in_index());
 
         //Limelight
-        //SmartDashboard.putNumber("Distance", m_limelight.Distance_to_target());
+        SmartDashboard.putNumber("Distance", m_limelight.Distance_to_target());
         //SmartDashboard.putNumber("Angle Target", RobotMap.limelight_angle+m_limelight.Read_Limelight_ty());
-        //SmartDashboard.putNumber("Speed Target", m_shooter.speed_from_distance(m_limelight.Distance_to_target()));
+        SmartDashboard.putNumber("Speed Target", m_shooter.speed_from_distance(m_limelight.Distance_to_target()));
         //SmartDashboard.putNumber("Power Target", m_shooter.power_from_speed(m_shooter.speed_from_distance(m_limelight.Distance_to_target())));
 
     }

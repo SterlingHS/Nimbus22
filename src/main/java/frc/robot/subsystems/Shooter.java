@@ -85,6 +85,8 @@ public class Shooter extends SubsystemBase
     public void shootBallCargoIn ()
     {
         shooterMotor.set(RobotMap.REVERSE_CARGO_PERCENT);
+        System.out.println("Speed: " + m_encoder.getRate() + " - Power: " + RobotMap.REVERSE_CARGO_PERCENT);
+
     }    
     
     public void shootCargoPercent(double percent)
@@ -119,11 +121,11 @@ public class Shooter extends SubsystemBase
 
         if(desired_distance > RobotMap.MAX_DISTANCE || desired_distance < RobotMap.MIN_DISTANCE) return 0;
 
-        double m = (150-110)/(15-10);
-        double b = 150 - m * 15;
+        double m = 7; //(150-110)/(15-10);
+        double b = 57; //150 - m * 15;
 
         double new_speed = (m*desired_distance+b)*1000;
-        //System.out.println("desired distance: " + desired_distance + " - new_speed: " + new_speed);
+        System.out.println("desired distance: " + desired_distance + " - new_speed: " + new_speed);
         return new_speed;
     }
 
