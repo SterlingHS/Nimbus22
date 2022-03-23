@@ -8,8 +8,6 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-//import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -32,14 +30,12 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    //m_chooser.setDefaultOption("Default Auto", kDefaultAuto); 
-    //m_chooser.addOption("My Auto", kCustomAuto);
-    // SmartDashboard.putData("Auto choices", m_chooser);
-    // m_robotContainer = new RobotContainer();
+    
     robotContainer = new RobotContainer();
     SmartDashboard.putNumber("Shooter Speed", RobotMap.SHOOT_CARGO_PERCENT);
     SmartDashboard.putNumber("Intake Speed", RobotMap.INTAKECARGO_SPEED);
-    SmartDashboard.putNumber("Speed PID", 50000);
+  
+    //CameraServer.startAutomaticCapture();
   }
 
   /**
@@ -80,15 +76,15 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
-    //switch (m_autoSelected) {
-    //  case kCustomAuto:
-        // Put custom auto code here
-    //    break;
-    //  case kDefaultAuto:
-    //  default:
+    /*switch (m_autoSelected) {
+      case kCustomAuto:
+         //Put custom auto code here
+        break;
+      case kDefaultAuto:
+      default:
         // Put default auto code here
-    //    break;
-    //}
+        break;
+    }*/
   }
 
   /** This function is called once when teleop is enabled. */
@@ -98,7 +94,6 @@ public class Robot extends TimedRobot {
     {
       autonomousCommand.cancel();
     }
-    SmartDashboard.putNumber("Shooter Speed", RobotMap.SHOOT_CARGO_SPEED);
   }
 
   /** This function is called periodically during operator control. */

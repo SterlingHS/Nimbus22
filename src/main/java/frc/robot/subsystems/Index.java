@@ -26,7 +26,8 @@ public class Index extends SubsystemBase
 {
     
     private WPI_TalonSRX indexMotor;
-    private DigitalInput indexLimitSwitch;
+    private DigitalInput indexLimitSwitch1;
+    private DigitalInput indexLimitSwitch2;
 
     /**
     *
@@ -34,7 +35,8 @@ public class Index extends SubsystemBase
     public Index() 
     {
         indexMotor = new WPI_TalonSRX(RobotMap.INDEX_MOTOR_TALON_ID);
-        indexLimitSwitch = new DigitalInput(RobotMap.INDEX_LIMIT_SWITCH_ID);
+        indexLimitSwitch1 = new DigitalInput(RobotMap.INDEXLIMITSWITCH_ID1);
+        indexLimitSwitch2 = new DigitalInput(RobotMap.INDEXLIMITSWITCH_ID2);
     }
 
     @Override
@@ -55,12 +57,12 @@ public class Index extends SubsystemBase
 
     public void cargo_index_in()
     {
-        indexMotor.set(.3); //RobotMap.INDEX_MOTOR_SPEED);
+        indexMotor.set(-.3); //RobotMap.INDEX_MOTOR_SPEED);
     }
 
     public void cargo_index_out()
     {
-        indexMotor.set(-.3); //RobotMap.INDEX_MOTOR_SPEED);
+        indexMotor.set(.3); //RobotMap.INDEX_MOTOR_SPEED);
     }
     
     public void index_stop()
@@ -70,7 +72,7 @@ public class Index extends SubsystemBase
 
     public boolean is_cargo_in_index()
     {
-        return indexLimitSwitch.get();
+        return (indexLimitSwitch1.get() || indexLimitSwitch2.get());
     }
 }
 

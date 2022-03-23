@@ -54,7 +54,8 @@ public class IntakeShoulderUp extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-    m_intake.intake_up();
+        if(m_intake.is_intake_up() == false) m_intake.intake_up();
+        else m_intake.shoulder_stop();
     }
 
     // Called once the command ends or is interrupted.
@@ -66,7 +67,7 @@ public class IntakeShoulderUp extends CommandBase {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return false;
+        return m_intake.is_intake_up();
     }
 
     @Override

@@ -85,6 +85,8 @@ public class Shooter extends SubsystemBase
     public void shootBallCargoIn ()
     {
         shooterMotor.set(RobotMap.REVERSE_CARGO_PERCENT);
+        //System.out.println("Speed: " + m_encoder.getRate() + " - Power: " + RobotMap.REVERSE_CARGO_PERCENT);
+
     }    
     
     public void shootCargoPercent(double percent)
@@ -102,28 +104,30 @@ public class Shooter extends SubsystemBase
         // System.out.println("Speed: " + speed + " - Rate: " + m_encoder.getRate() + " - Power: " + power);
 
         double power = m_controller.calculate(feedforward.calculate(-m_encoder.getRate(),20));
-        System.out.println("Speed: " + speed + " - Rate: " + m_encoder.getRate() + " - Power: " + power);
+        //System.out.println("Speed: " + speed + " - Rate: " + m_encoder.getRate() + " - Power: " + power);
         shooterMotor.set(power);
     }
 
     public double read_speed_shooter()
     {   
         double speed = m_encoder.getRate();
+        // System.out.println("Speed: " + speed + " " + m_encoder.getRaw()) ;
         return speed;
     }
 
     public double speed_from_distance(double desired_distance)
     { // Calculates speed for shooter in function of the distance to target
-        // 15 ft with 150k
-        // 10 ft with 110k 
+        // 13 ft with 140k
+        // 10 ft with 120k 
+        //  7 ft with 
 
         if(desired_distance > RobotMap.MAX_DISTANCE || desired_distance < RobotMap.MIN_DISTANCE) return 0;
 
-        double m = (170-110)/(15-10);
-        double b = 170 - m * 15;
+        double m = (140-120)/(13-10);
+        double b = 140 - m * 13;
 
         double new_speed = (m*desired_distance+b)*1000;
-        //System.out.println("desired distance: " + desired_distance + " - new_speed: " + new_speed);
+        // System.out.println("desired distance: " + desired_distance + " - new_speed: " + new_speed);
         return new_speed;
     }
 

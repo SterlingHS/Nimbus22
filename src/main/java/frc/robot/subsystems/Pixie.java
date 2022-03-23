@@ -12,14 +12,10 @@
 
 package frc.robot.subsystems;
 
-
-import frc.robot.RobotMap;
-import frc.robot.commands.*;
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import java.util.ArrayList;
+
 import io.github.pseudoresonance.pixy2api.Pixy2;
 import io.github.pseudoresonance.pixy2api.Pixy2CCC;
 import io.github.pseudoresonance.pixy2api.Pixy2CCC.Block;
@@ -30,7 +26,8 @@ import io.github.pseudoresonance.pixy2api.links.SPILink;
 public class Pixie extends SubsystemBase 
 {
     private static Pixy2 pixy = null;
-    private static double x , y;
+    private static double x , y, angle, dimx, dimy;
+	private static int signature;
     private static boolean ball;
 
     /**
@@ -50,6 +47,7 @@ public class Pixie extends SubsystemBase
     public void periodic() 
     {
         // This method will be called once per scheduler run
+		// getBiggestBlock();
     }
 
     @Override
@@ -65,29 +63,48 @@ public class Pixie extends SubsystemBase
 		return pixy;
   }
   
-  public static void getBiggestBlock() 
-  {
+  	public void getBiggestBlock() 
+  	{
 		// Gets the number of "blocks", identified targets, that match signature 1 on the Pixy2,
 		// does not wait for new data if none is available,
 		// and limits the number of returned blocks to 25, for a slight increase in efficiency
 		int blockCount = pixy.getCCC().getBlocks(false, Pixy2CCC.CCC_SIG1, 25);
-		// System.out.println("Found " + blockCount + " blocks!"); // Reports number of blocks found
-		if (blockCount > 0)//might need to be >=
+		//System.out.println("Found " + blockCount + " blocks!"); // Reports number of blocks found
+		// SmartDashboard.putNumber("Pixy BlocksCount", blockCount);
+
+		if (blockCount > 0)
 		{
-			ArrayList<Block> blocks = pixy.getCCC().getBlocks(); // Gets a list of all blocks found by the Pixy2
-			Block largestBlock = null;
-			for (Block block : blocks) 
-			{ // Loops through all blocks and finds the widest one
-				if (largestBlock == null) {
-					largestBlock = block;
-				} else if (block.getWidth() > largestBlock.getWidth()) {
-					largestBlock = block;
+			ArrayList<Block> blocks = pixy.getCCC().getBlockCache(); // Gets a list of all blocks found by the Pixy2
+			/*for (Block block : blocks)
+			{
+				System.out.println(block.getSignature());
+				block.print();
+				if(block.getSignature() == 1)
+				{
+					blocks.remove(block);
 				}
-			
+			}*/
+			if (blocks.size() > 0)
+			{
+				Block largestBlock = null;
+				for (Block block : blocks) 
+				{ // Loops through all blocks and finds the widest one
+					if (largestBlock == null) {
+						largestBlock = block;
+					} else if (block.getWidth() > largestBlock.getWidth()) {
+						largestBlock = block;
+					}
+				
+				}
+				ball = true;
+				x = largestBlock.getX();
+				y = largestBlock.getY();
+				angle = largestBlock.getAngle();
+				signature = largestBlock.getSignature();
+				dimx = largestBlock.getWidth();
+				dimy = largestBlock.getHeight();
+				// largestBlock.print();
 			}
-            ball = true;
-            x = largestBlock.getX();
-			y = largestBlock.getY();
 		}
 		else
 		{
@@ -106,10 +123,27 @@ public class Pixie extends SubsystemBase
 	{
 		return y;
 	}
+	public double Read_Pixy_angle()
+	{
+		return angle;
+	}
+	public double Read_Pixy_signature()
+	{
+		return signature;
+	}
+	public double Read_Pixy_dimx()
+	{
+		return dimx;
+	}
+	public double Read_Pixy_dimy()
+	{
+		return dimy;
+	}
 	public boolean Read_Pixy_is_Ball()
 	{
 		return ball;
     }
+	
 }
    
 

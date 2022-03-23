@@ -3,7 +3,6 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.commands;
-import frc.robot.RobotMap;
 import frc.robot.subsystems.Index;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Shooter;
@@ -49,15 +48,6 @@ public class SmartShooterPID extends CommandBase {
   @Override
   public boolean isFinished() {
     return false;
-  }
-
-  public boolean is_speed_reached(){
-    double current_speed = m_shooter.read_speed_shooter();
-    if(current_speed > RobotMap.SHOOT_CARGO_SPEED*(1+RobotMap.DISTANCE_ACCURACY) 
-          && current_speed < RobotMap.SHOOT_CARGO_SPEED*(1+RobotMap.DISTANCE_ACCURACY))
-            return true;
-          
-    return false;  
   }
 
 }
