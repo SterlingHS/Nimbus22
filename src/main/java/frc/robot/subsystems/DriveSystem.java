@@ -84,11 +84,11 @@ private MecanumDrive mecanumDrive1 = new MecanumDrive(leftFront, leftRear, right
         rightRear.stopMotor();
     }
     public void turnRight() {
-        mecanumDrive(0,0,0.25,1);
+        mecanumDrive(0,0,0.4,1);
     }// might need to swap the negative signs
 
     public void turnLeft(){
-        mecanumDrive(0,0,-0.25,1);
+        mecanumDrive(0,0,-0.4,1);
     }
     public void forward(){
         System.out.println("Forward");

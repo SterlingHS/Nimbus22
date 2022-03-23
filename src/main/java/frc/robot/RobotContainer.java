@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 
-
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -42,12 +41,15 @@ public class RobotContainer {
 
 
     // Configure default commands
-    drivesystem.setDefaultCommand(new Drive( drivesystem, driverController::getLeftX, driverController::getLeftY, driverController::getRightX) ); //driverController::getRightZ) );
+    drivesystem.setDefaultCommand(new Drive( drivesystem, driverController::getLeftX, driverController::getLeftY, driverController::getRightX) ); 
 
     // Configure autonomous sendable chooser
-    m_chooser.setDefaultOption("Autonomous Command", new Autonomous1Ball( m_shooter, m_pixie, drivesystem, m_intake, m_index, m_limelight));
+    m_chooser.setDefaultOption("Auto Shoot and Back", new Autonomous1BallandBack( m_shooter, m_pixie, drivesystem, m_intake, m_index, m_limelight));
+    m_chooser.addOption("Auto Shoot, Search-Shoot", new Autonomous1Ball( m_shooter, m_pixie, drivesystem, m_intake, m_index, m_limelight));
+
 
     SmartDashboard.putData("Auto Mode", m_chooser);
+    
   }
 
   /*public static RobotContainer getInstance() {
@@ -85,7 +87,7 @@ public class RobotContainer {
 
      // Button for SimpleShooter
     final JoystickButton shootSimpleCargoBT = new JoystickButton(driverController, XboxController.Button.kRightBumper.value);        
-    shootSimpleCargoBT.whileHeld(new ShootSimpleCargo( m_shooter ) ,true);
+    shootSimpleCargoBT.whileHeld(new ShootSimpleCargo( m_shooter , m_index) ,true);
     //SmartDashboard.putData("shootSimpleCargoBT",new ShootSimpleCargo( m_shooter ) );
 
       // Button for SmartShooter
@@ -128,7 +130,7 @@ public class RobotContainer {
         RobotMap.INTAKESHOULDER_SPEED = SmartDashboard.getNumber("Shoulder Speed", RobotMap.INTAKESHOULDER_SPEED);
 
         // Shooter
-        //SmartDashboard.getNumber("Current Speed", m_shooter.read_speed_shooter());
+        SmartDashboard.putNumber("Current Speed", m_shooter.read_speed_shooter());
 
         //Limit switches
         //SmartDashboard.putBoolean("Index Limit switch",m_index.is_cargo_in_index());

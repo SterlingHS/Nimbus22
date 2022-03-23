@@ -80,6 +80,7 @@ import frc.robot.subsystems.Pixie;
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
+        if(m_index.is_cargo_in_index() == true) return true;
         return false;
     }
 
@@ -105,7 +106,7 @@ import frc.robot.subsystems.Pixie;
                 double turn = 0;
                 if(x <= 10) turn = -.2;
                 if(x > 10) turn = .2;
-                drivesystem.mecanumDrive(0 , -.35, turn, 1);
+                drivesystem.mecanumDrive(0 , -.25, turn, 1);
                 m_intake.cargointake();
                 m_index.cargo_index_in();
                 center = true;

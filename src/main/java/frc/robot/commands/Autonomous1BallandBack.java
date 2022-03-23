@@ -15,7 +15,7 @@ import frc.robot.subsystems.Shooter;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class Autonomous1Ball extends SequentialCommandGroup {
+public class Autonomous1BallandBack extends SequentialCommandGroup {
   /** Creates a new Autonomous1Ball. */
 
   private final Shooter m_shooter;
@@ -25,7 +25,7 @@ public class Autonomous1Ball extends SequentialCommandGroup {
   private final Pixie m_pixie;
   private final Intake m_intake;
 
-  public Autonomous1Ball(Shooter sub1, Pixie sub2, DriveSystem sub3, Intake sub4, Index sub5, Limelight sub6) {
+  public Autonomous1BallandBack(Shooter sub1, Pixie sub2, DriveSystem sub3, Intake sub4, Index sub5, Limelight sub6) {
     drivesystem = sub3;
     m_pixie = sub2;
     m_intake = sub4;
@@ -42,8 +42,7 @@ public class Autonomous1Ball extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(new Shoot0andDropIntake(m_shooter, m_limelight, m_index, m_intake), 
-                new SearchCargo(m_pixie, drivesystem, m_intake, m_index), 
-                new SearchTarget(drivesystem, m_limelight), 
-                new SmartShooter1(m_shooter, m_limelight, m_index));
+    new MoveBack(drivesystem));
   }
+
 }

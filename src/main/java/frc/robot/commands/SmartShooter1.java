@@ -39,7 +39,6 @@ public class SmartShooter1 extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    System.out.println("Test");
     if(m_limelight.is_there_target())
     {
       double distance = m_limelight.Distance_to_target();
