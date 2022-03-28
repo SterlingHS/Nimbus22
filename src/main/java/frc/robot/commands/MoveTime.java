@@ -7,14 +7,18 @@ import frc.robot.subsystems.DriveSystem;
 /**
  *
  */
-    public class MoveBack extends CommandBase {
+    public class MoveTime extends CommandBase {
 
     private final DriveSystem drivesystem;
     private static long starting_time;
 
+    private static double time, speed;
+
  
-    public MoveBack(DriveSystem sub) {
+    public MoveTime(DriveSystem sub, double speed1, double time1) {
         drivesystem = sub;
+        time = time1;
+        speed = speed1;
 
         addRequirements(drivesystem);
     }
@@ -28,7 +32,7 @@ import frc.robot.subsystems.DriveSystem;
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        if(get_timer()<1200) drivesystem.mecanumDrive(0, .5, 0, 1);
+        if(get_timer()<time) drivesystem.mecanumDrive(0, speed, 0, 1);
         else drivesystem.stop();
     }
 
@@ -41,7 +45,7 @@ import frc.robot.subsystems.DriveSystem;
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        if(get_timer()>1250)
+        if(get_timer()>time)
         {
             end(false);
             return true;

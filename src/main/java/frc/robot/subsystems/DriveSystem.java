@@ -5,8 +5,9 @@ package frc.robot.subsystems;
 import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
+import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
+import edu.wpi.first.wpilibj.SerialPort;
 
 
 /**
@@ -20,6 +21,8 @@ private WPI_TalonSRX rightFront  = new WPI_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_FR
 private WPI_TalonSRX rightRear  = new WPI_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_BACK);
 private MecanumDrive mecanumDrive1 = new MecanumDrive(leftFront, leftRear, rightFront, rightRear);
     
+private AHRS navx_device;
+
     /**
     *
     */
@@ -33,6 +36,9 @@ private MecanumDrive mecanumDrive1 = new MecanumDrive(leftFront, leftRear, right
     mecanumDrive1.setSafetyEnabled(true);
     mecanumDrive1.setExpiration(0.1);
     mecanumDrive1.setMaxOutput(1.0);
+
+    navx_device = new AHRS(SerialPort.Port.kUSB1);  
+    navx_device.enableLogging(true);
 
 }
 

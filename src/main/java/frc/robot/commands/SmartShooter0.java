@@ -51,7 +51,7 @@ public class SmartShooter0 extends CommandBase {
       {
         m_shooter.shootCargoStop();
         m_index.index_stop();
-        end(true);
+        end(false);
       }
   }
 
