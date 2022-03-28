@@ -35,24 +35,13 @@ public class SmartShooter0 extends CommandBase {
   @Override
   public void execute() {
     
-      //double distance = m_limelight.Distance_to_target();
-      //double speed_to_shoot = m_shooter.speed_from_distance(distance);
-      //double power_to_shooter = m_shooter.power_from_speed(speed_to_shoot);
-      //System.out.println("Distance: " + distance + "Target Speed: " + speed_to_shoot +" - Power: " + power_to_shooter + " - Speed: " + m_shooter.read_speed_shooter() + " - Ready: " + ready);
       m_shooter.shootCargoPercent(RobotMap.Shoot0Speed); // Send value to motor
 
-      
-      if(get_timer()>2000)
+      if(get_timer()>1500)
       {
         m_index.cargo_index_in();
       }
-    
-      if(get_timer()>5000)
-      {
-        m_shooter.shootCargoStop();
-        m_index.index_stop();
-        end(false);
-      }
+
   }
 
   // Called once the command ends or is interrupted.
@@ -60,13 +49,12 @@ public class SmartShooter0 extends CommandBase {
   public void end(boolean interrupted) {
     m_shooter.shootCargoStop();
     m_index.index_stop();
-    System.out.println("Shooting stop");
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(get_timer()>5000) return true;
+    if(get_timer()>3000) return true;
     return false;
   }
 

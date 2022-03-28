@@ -48,7 +48,6 @@ public class SmartShooter1 extends CommandBase {
       {
         ready = true;
         start_timer();
-        System.out.println("Timer Start");
       }
       
       if(ready == true)
