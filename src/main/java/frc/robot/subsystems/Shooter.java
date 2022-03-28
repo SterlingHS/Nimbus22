@@ -4,9 +4,6 @@ package frc.robot.subsystems;
 
 import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.math.controller.ProfiledPIDController;
-import edu.wpi.first.math.controller.SimpleMotorFeedforward;
-import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj.CounterBase;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -21,27 +18,19 @@ public class Shooter extends SubsystemBase
     
     private WPI_TalonSRX shooterTopMotor;
     private WPI_TalonSRX shooterBottomMotor;
+    private WPI_TalonSRX antiTopSpinMotor;
     private MotorControllerGroup shooterMotor;
     private final Encoder m_encoder;
 
-    private final TrapezoidProfile.Constraints m_constraints;
-    private final ProfiledPIDController m_controller;
-    private final SimpleMotorFeedforward feedforward;
     /**
     *
     */
     public Shooter() 
     {
-        final double kDt = 0.02;
-
         shooterTopMotor = new WPI_TalonSRX(RobotMap.SHOOTER_TOP_TALON_ID);
         shooterBottomMotor = new WPI_TalonSRX(RobotMap.SHOOTER_BOTTOM_TALON_ID);
         shooterMotor = new MotorControllerGroup(shooterTopMotor,shooterBottomMotor);
-
-        m_constraints = new TrapezoidProfile.Constraints(1.75, 0.75);
-        m_controller = new ProfiledPIDController(1.0, 0.0, 0.0, m_constraints, kDt);
-        feedforward = new SimpleMotorFeedforward(1, 0, 0);
-
+        antiTopSpinMotor = new WPI_TalonSRX(RobotMap.SHOOTER_ANTI_TOP_ID);
         m_encoder = new Encoder(RobotMap.ShooterEncoderChannel1, RobotMap.ShooterEncoderChannel2,true, CounterBase.EncodingType.k4X);
         m_encoder.setSamplesToAverage(10);
         m_encoder.setReverseDirection(false);
@@ -64,16 +53,25 @@ public class Shooter extends SubsystemBase
     public void shootCargo()
     {
         shooterMotor.set(RobotMap.SHOOT_CARGO_PERCENT);
+        antiTopSpinMotor.set(RobotMap.SHOOTER_ANTI_TOP_PERCENT);
+    }
+
+    public void shootVolts(double outputVolts)
+    {
+        shooterMotor.setVoltage(outputVolts);
+        antiTopSpinMotor.setVoltage(outputVolts);
     }
 
     public void shootCargoStop()
     {
         shooterMotor.stopMotor();
+        antiTopSpinMotor.stopMotor();
     }
     
     public void shootBallCargoIn ()
     {
         shooterMotor.set(RobotMap.REVERSE_CARGO_PERCENT);
+        antiTopSpinMotor.set(RobotMap.REVERSE_CARGO_PERCENT);
         //System.out.println("Speed: " + m_encoder.getRate() + " - Power: " + RobotMap.REVERSE_CARGO_PERCENT);
 
     }    
@@ -83,20 +81,11 @@ public class Shooter extends SubsystemBase
         if (percent > 1) percent = 1;
         if (percent < -1) percent = -1;
         shooterMotor.set(percent);
+        antiTopSpinMotor.set(percent);
+        //shootVolts(12*percent);
     }
 
-    public void shootCargoPID(double speed)
-    {
-        //m_controller.setGoal(50000.0);
-        //double power = m_controller.calculate(-m_encoder.getRate());
-        //shooterMotor.set(power);
-        // System.out.println("Speed: " + speed + " - Rate: " + m_encoder.getRate() + " - Power: " + power);
-
-        double power = m_controller.calculate(feedforward.calculate(-m_encoder.getRate(),20));
-        //System.out.println("Speed: " + speed + " - Rate: " + m_encoder.getRate() + " - Power: " + power);
-        shooterMotor.set(power);
-    }
-
+    
     public double read_speed_shooter()
     {   
         double speed = m_encoder.getRate();
