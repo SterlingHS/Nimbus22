@@ -87,5 +87,33 @@ private AHRS navx_device;
     public void backward(){
         mecanumDrive(0,0.35,0,1);
     }
+
+    public void calibrateGyro()
+    {
+        navx_device.calibrate();
+    }
+
+    public void resetAngle()
+    {
+        navx_device.reset();
+    }
+
+    public double getAngle()
+    {
+        return navx_device.getAngle();
+    }
+
+    public double getAngle360()
+    {
+        double angle = navx_device.getAngle();
+
+        double correctedAngle = angle % 360;
+        if (correctedAngle < 0){
+            correctedAngle += 360;
+        }
+        return correctedAngle;
+    }
+
+
 }
 
