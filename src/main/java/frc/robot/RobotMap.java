@@ -4,7 +4,7 @@ public class RobotMap {
 
     // Intake constants
     public static int INTAKECARGO_TALON_ID = 13;
-    public static int INTAKESHOULDER_TALON_ID = 12;
+    public static int INTAKESHOULDER_TALON_ID = 10;
     public static double INTAKECARGO_SPEED = 0.65;
     public static double INTAKESHOULDER_SPEED = 0.4;
     public static int SHOULDER_LIMIT_SWITCH_UP = 2;
@@ -28,15 +28,15 @@ public class RobotMap {
     //Shooter Constant
     public static int SHOOTER_TOP_TALON_ID = 22;
     public static int SHOOTER_BOTTOM_TALON_ID = 23;
-    public static int SHOOTER_ANTI_TOP_ID = 10;
+    public static int SHOOTER_ANTI_TOP_ID = 21;
     public static double SHOOT_CARGO_PERCENT = 0.45;
     public static double REVERSE_CARGO_PERCENT = 0;
     public static final int ShooterEncoderChannel1 = 4;
     public static final int ShooterEncoderChannel2 = 5;
 
     //Index Constants
-    public static int INDEX_MOTOR_TALON_ID = 21;
-    public static double INDEX_MOTOR_SPEED = 0.6;
+    public static int INDEX_MOTOR_TALON_ID = 12;
+    public static double INDEX_MOTOR_SPEED = 0.45;
     public static int INDEXLIMITSWITCH_ID1 = 0;
     public static int INDEXLIMITSWITCH_ID2 = 1;
 
@@ -61,7 +61,7 @@ public class RobotMap {
     public static final double MAX_DISTANCE = 20;
     public static final double MIN_DISTANCE = 5;
     public static final double Shoot0Speed = 0.37;
-    public static final double SHOOTER_ANTI_TOP_PERCENT = .40;
+    public static final double SHOOTER_ANTI_TOP_PERCENT = .80;
 
 }
 

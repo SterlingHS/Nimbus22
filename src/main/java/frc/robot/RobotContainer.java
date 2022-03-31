@@ -50,6 +50,8 @@ public class RobotContainer {
 
     SmartDashboard.putData("Auto Mode", m_chooser);
     
+    //drivesystem.calibrateGyro();
+    drivesystem.resetAngle();
   }
 
   /*public static RobotContainer getInstance() {
@@ -87,7 +89,7 @@ public class RobotContainer {
 
      // Button for SimpleShooter
     final JoystickButton shootSimpleCargoBT = new JoystickButton(driverController, XboxController.Button.kRightBumper.value);        
-    shootSimpleCargoBT.whileHeld(new ShootSimpleCargo( m_shooter , m_index) ,true);
+    shootSimpleCargoBT.whileHeld(new SmartShooter0( m_shooter , m_limelight, m_index) ,true);
     //SmartDashboard.putData("shootSimpleCargoBT",new ShootSimpleCargo( m_shooter ) );
 
       // Button for SmartShooter
@@ -128,6 +130,7 @@ public class RobotContainer {
         RobotMap.DRIVER_SLOWDOWN = SmartDashboard.getNumber("Drive speed", RobotMap.DRIVER_SLOWDOWN);
         RobotMap.INTAKECARGO_SPEED = SmartDashboard.getNumber("Intake Speed", RobotMap.INTAKECARGO_SPEED);
         RobotMap.INTAKESHOULDER_SPEED = SmartDashboard.getNumber("Shoulder Speed", RobotMap.INTAKESHOULDER_SPEED);
+        SmartDashboard.putNumber("angle", drivesystem.getAngle());
 
         // Shooter
         SmartDashboard.putNumber("Current Speed", m_shooter.read_speed_shooter());

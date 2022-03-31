@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 /**
  *
@@ -14,7 +15,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 public class Index extends SubsystemBase 
 {
     
-    private WPI_TalonSRX indexMotor;
+    private WPI_VictorSPX indexMotor;
     private DigitalInput indexLimitSwitch1;
     private DigitalInput indexLimitSwitch2;
 
@@ -23,7 +24,7 @@ public class Index extends SubsystemBase
     */
     public Index() 
     {
-        indexMotor = new WPI_TalonSRX(RobotMap.INDEX_MOTOR_TALON_ID);
+        indexMotor = new WPI_VictorSPX(RobotMap.INDEX_MOTOR_TALON_ID);
         indexLimitSwitch1 = new DigitalInput(RobotMap.INDEXLIMITSWITCH_ID1);
         indexLimitSwitch2 = new DigitalInput(RobotMap.INDEXLIMITSWITCH_ID2);
     }
@@ -44,12 +45,12 @@ public class Index extends SubsystemBase
 
     public void cargo_index_in()
     {
-        indexMotor.set(-.3); //RobotMap.INDEX_MOTOR_SPEED);
+        indexMotor.set(-RobotMap.INDEX_MOTOR_SPEED);
     }
 
     public void cargo_index_out()
     {
-        indexMotor.set(.3); //RobotMap.INDEX_MOTOR_SPEED);
+        indexMotor.set(RobotMap.INDEX_MOTOR_SPEED);
     }
     
     public void index_stop()

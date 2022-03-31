@@ -37,7 +37,7 @@ private AHRS navx_device;
     mecanumDrive1.setExpiration(0.1);
     mecanumDrive1.setMaxOutput(1.0);
 
-    navx_device = new AHRS(SerialPort.Port.kUSB1);  
+    navx_device = new AHRS(SerialPort.Port.kOnboard);  
     navx_device.enableLogging(true);
 
 }

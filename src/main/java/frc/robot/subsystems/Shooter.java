@@ -53,13 +53,13 @@ public class Shooter extends SubsystemBase
     public void shootCargo()
     {
         shooterMotor.set(RobotMap.SHOOT_CARGO_PERCENT);
-        antiTopSpinMotor.set(RobotMap.SHOOTER_ANTI_TOP_PERCENT);
+        antiTopSpinMotor.set(-RobotMap.SHOOTER_ANTI_TOP_PERCENT);
     }
 
     public void shootVolts(double outputVolts)
     {
         shooterMotor.setVoltage(outputVolts);
-        antiTopSpinMotor.setVoltage(outputVolts);
+        antiTopSpinMotor.setVoltage(-outputVolts);
     }
 
     public void shootCargoStop()
@@ -70,7 +70,7 @@ public class Shooter extends SubsystemBase
     
     public void shootBallCargoIn ()
     {
-        shooterMotor.set(RobotMap.REVERSE_CARGO_PERCENT);
+        shooterMotor.set(-RobotMap.REVERSE_CARGO_PERCENT);
         antiTopSpinMotor.set(RobotMap.REVERSE_CARGO_PERCENT);
         //System.out.println("Speed: " + m_encoder.getRate() + " - Power: " + RobotMap.REVERSE_CARGO_PERCENT);
 
@@ -81,7 +81,7 @@ public class Shooter extends SubsystemBase
         if (percent > 1) percent = 1;
         if (percent < -1) percent = -1;
         shooterMotor.set(percent);
-        antiTopSpinMotor.set(percent);
+        antiTopSpinMotor.set(-percent*1.5);
         //shootVolts(12*percent);
     }
 
