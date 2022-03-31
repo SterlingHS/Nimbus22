@@ -107,9 +107,8 @@ public class RobotContainer {
     IndexCargoOutBT.whileHeld(new IndexBringCargoOut( m_index ) ,true);
     //SmartDashboard.putData("IndexBringCargoOutBT",new IndexBringCargoOut( m_index ) );
 
-
     // Button to calibrate Navx
-    //SmartDashboard.putData("IndexBringCargoOutBT",new drivesystem.calibrate() );
+    SmartDashboard.putData("Calibrate NavX",new CalibrateNavX(drivesystem) );
   }
 
   public XboxController getDriverController() {
