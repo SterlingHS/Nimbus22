@@ -51,7 +51,7 @@ public class RobotContainer {
     SmartDashboard.putData("Auto Mode", m_chooser);
     
     //drivesystem.calibrateGyro();
-    drivesystem.resetAngle();
+    //drivesystem.resetAngle();
   }
 
   /*public static RobotContainer getInstance() {
@@ -106,6 +106,10 @@ public class RobotContainer {
     final JoystickButton IndexCargoOutBT = new JoystickButton(driverController, XboxController.Button.kX.value);        
     IndexCargoOutBT.whileHeld(new IndexBringCargoOut( m_index ) ,true);
     //SmartDashboard.putData("IndexBringCargoOutBT",new IndexBringCargoOut( m_index ) );
+
+
+    // Button to calibrate Navx
+    //SmartDashboard.putData("IndexBringCargoOutBT",new drivesystem.calibrate() );
   }
 
   public XboxController getDriverController() {

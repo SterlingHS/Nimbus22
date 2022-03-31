@@ -37,7 +37,7 @@ private AHRS navx_device;
     mecanumDrive1.setExpiration(0.1);
     mecanumDrive1.setMaxOutput(1.0);
 
-    navx_device = new AHRS(SerialPort.Port.kOnboard);  
+    navx_device = new AHRS(SerialPort.Port.kMXP);  
     navx_device.enableLogging(true);
 
 }
@@ -91,6 +91,11 @@ private AHRS navx_device;
     public void calibrateGyro()
     {
         navx_device.calibrate();
+    }
+
+    public boolean iscalibrating()
+    {
+        return navx_device.isCalibrating();
     }
 
     public void resetAngle()
