@@ -46,7 +46,10 @@ public class RobotContainer {
     // Configure autonomous sendable chooser
     m_chooser.setDefaultOption("Auto Shoot and Back", new Autonomous1BallandBack( m_shooter, m_pixie, drivesystem, m_intake, m_index, m_limelight));
     m_chooser.addOption("Auto Shoot, Search-Shoot", new Autonomous1Ball( m_shooter, m_pixie, drivesystem, m_intake, m_index, m_limelight));
-
+    m_chooser.addOption("Rotate 180", new TurnAngle(drivesystem, 180));
+    m_chooser.addOption("Go forward for 1sec", new MoveTime(drivesystem, -.5, 1000));
+    m_chooser.addOption("Pick Up Ball with Pixy", new PickUpBall(m_intake, m_index));
+    m_chooser.addOption("Smart Shooter 1", new SmartShooter1(m_shooter, m_limelight, m_index));
 
     SmartDashboard.putData("Auto Mode", m_chooser);
     
