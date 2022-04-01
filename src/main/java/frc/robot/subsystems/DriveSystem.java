@@ -74,14 +74,13 @@ private AHRS navx_device;
         rightRear.stopMotor();
     }
     public void turnRight() {
-        mecanumDrive(0,0,0.4,1);
+        mecanumDrive(0,0,0.5,1);
     }// might need to swap the negative signs
 
     public void turnLeft(){
-        mecanumDrive(0,0,-0.4,1);
+        mecanumDrive(0,0,-0.5,1);
     }
     public void forward(){
-        System.out.println("Forward");
         mecanumDrive(0,-0.35,0,1);
     }
     public void backward(){

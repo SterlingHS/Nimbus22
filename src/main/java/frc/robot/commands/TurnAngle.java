@@ -9,7 +9,7 @@ import frc.robot.subsystems.DriveSystem;
 
 public class TurnAngle extends CommandBase {
 
-  DriveSystem drivesystem;
+  private final DriveSystem drivesystem;
   private static double angle;
   private static double startingAngle;
 
@@ -17,7 +17,7 @@ public class TurnAngle extends CommandBase {
     drivesystem = subs;
     angle = angle1;
     
-
+    addRequirements(drivesystem);
 
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -34,14 +34,15 @@ public class TurnAngle extends CommandBase {
   public void execute() {
     if (angle < 0) drivesystem.turnLeft();
     else           drivesystem.turnRight();
-  
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   public boolean isFinished() {
-    if (angle >= 0 && angle + startingAngle < drivesystem.getAngle()) return true;
-    if (angle <= 0 && angle + startingAngle > drivesystem.getAngle()) return true;
+    //double a = angle + startingAngle;
+    //System.out.println("Desired Angle: " + a + " - Actual angle: " + drivesystem.getAngle() + " - Inital angle: " + startingAngle);
+    if (angle >= 0 && drivesystem.getAngle() > (angle + startingAngle)*.90) return true;
+    if (angle <= 0 && drivesystem.getAngle() < (startingAngle + angle)*.90) return true;
     return false;
   }
 

@@ -66,8 +66,9 @@ import frc.robot.subsystems.Pixie;
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        if(m_index.is_cargo_in_index() == true) return true;
-        return false;
+        if (m_index.is_cargo_in_index())
+        System.out.println("Interupted");
+        return m_index.is_cargo_in_index();
     }
 
     @Override
@@ -88,19 +89,15 @@ import frc.robot.subsystems.Pixie;
             double x = m_pixie.Read_Pixy_x() - 240;
 
             // If the ball is in sight then go forward
-            if(x < 20 && x > -20 || center == true){
+            if(-20 < x && x < 20 || center == true){
                 double turn = 0;
-                if(x <= 10) turn = -.2;
-                if(x > 10) turn = .2;
-                drivesystem.mecanumDrive(0 , -.25, turn, 1);
+                System.out.println("x: " + x);
+                if(x <= 10) turn = -.15;
+                if(x > 10) turn = .15;
+                drivesystem.mecanumDrive(0 , -.35, turn, 1);
                 m_intake.cargointake();
                 m_index.cargo_index_in();
                 center = true;
-                if(m_index.is_cargo_in_index() == true) 
-                {
-                    end(false);
-                    System.out.println("Ball is in!");
-                }
             }
             else {
                 if(x <= 20){
