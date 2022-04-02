@@ -37,7 +37,6 @@ import frc.robot.subsystems.Pixie;
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        center = false;
         stage = 1;
         if (DriverStation.getAlliance() == DriverStation.Alliance.Blue) alliance = 1;
         else alliance = 2;

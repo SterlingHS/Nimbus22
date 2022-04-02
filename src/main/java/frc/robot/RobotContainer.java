@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -39,7 +40,6 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
 
-
     // Configure default commands
     drivesystem.setDefaultCommand(new Drive( drivesystem, driverController::getLeftX, driverController::getLeftY, driverController::getRightX) ); 
 
@@ -49,7 +49,7 @@ public class RobotContainer {
     m_chooser.addOption("Rotate 180", new TurnAngle(drivesystem, 180));
     m_chooser.addOption("Go forward for 1sec", new MoveTime(drivesystem, -.5, 1000));
     m_chooser.addOption("Pick Up Ball with Pixy", new SearchCargo(m_pixie, drivesystem, m_intake, m_index));
-    m_chooser.addOption("Smart Shooter 1", new SmartShooter1(m_shooter, m_limelight, m_index));
+    m_chooser.addOption("Smart Shooter 1", new SmartShooter1(m_shooter, m_limelight, m_index, drivesystem));
 
     SmartDashboard.putData("Auto Mode", m_chooser);
     
@@ -75,6 +75,10 @@ public class RobotContainer {
     PickUpBallBt.whileHeld(new PickUpBall( m_intake, m_index ) ,true);
     SmartDashboard.putData("IntakeCargoInBt",new IntakeCargoIn( m_intake ) );
 
+    // Button To PickUpBall2
+    final TriggerR2Button PickUpBallBt2 = new TriggerR2Button(driverController);
+    PickUpBallBt2.whenActive(new PickUpBall( m_intake, m_index ), true);
+
     // Button for Intake OUT
     final JoystickButton intakeCargoOutBt = new JoystickButton(driverController, XboxController.Button.kY.value);        
     intakeCargoOutBt.whileHeld(new IntakeCargoOut( m_intake ) ,true);
@@ -97,7 +101,7 @@ public class RobotContainer {
 
       // Button for SmartShooter
     final JoystickButton shootSmartCargoBT = new JoystickButton(driverController, XboxController.Button.kLeftBumper.value);        
-    shootSmartCargoBT.whenPressed(new SmartShooter1( m_shooter, m_limelight, m_index ) ,true);
+    shootSmartCargoBT.whenPressed(new SmartShooter1( m_shooter, m_limelight, m_index, drivesystem) ,true);
     //SmartDashboard.putData("shootSimpleCargoBT",new ShootSimpleCargo( m_shooter ) );
 
     // Button for IndexCargoIn
