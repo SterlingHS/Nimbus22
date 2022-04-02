@@ -49,6 +49,7 @@ public class RobotContainer {
     m_chooser.addOption("Go forward for 1sec", new MoveTime(drivesystem, -.5, 1000));
     m_chooser.addOption("Pick Up Ball with Pixy", new SearchCargo(m_pixie, drivesystem, m_intake, m_index));
     m_chooser.addOption("Smart Shooter 1", new SmartShooter1(m_shooter, m_limelight, m_index, drivesystem));
+    m_chooser.addOption("Smart Shooter 0", new SmartShooter0(m_shooter, m_limelight, m_index, RobotMap.Shoot1Volt, RobotMap.Anti1Volt));
 
     SmartDashboard.putData("Auto Mode", m_chooser);
     
@@ -77,6 +78,7 @@ public class RobotContainer {
     // Button To PickUpBall2
     final TriggerR2Button PickUpBallBt2 = new TriggerR2Button(driverController);
     PickUpBallBt2.whenActive(new PickUpBall( m_intake, m_index ), true);
+    PickUpBallBt2.whenInactive(new PickUpBallStop( m_intake, m_index ), true);
 
     // Button for Intake OUT
     final JoystickButton intakeCargoOutBt = new JoystickButton(driverController, XboxController.Button.kY.value);        
@@ -95,7 +97,7 @@ public class RobotContainer {
 
      // Button for SimpleShooter
     final JoystickButton shootSimpleCargoBT = new JoystickButton(driverController, XboxController.Button.kRightBumper.value);        
-    shootSimpleCargoBT.whileHeld(new SmartShooter0( m_shooter , m_limelight, m_index) ,true);
+    shootSimpleCargoBT.whileHeld(new SmartShooter0( m_shooter , m_limelight, m_index, 12*.4, 12*.4*1.4) ,true);
     //SmartDashboard.putData("shootSimpleCargoBT",new ShootSimpleCargo( m_shooter ) );
 
       // Button for SmartShooter
@@ -140,6 +142,7 @@ public class RobotContainer {
         RobotMap.INTAKECARGO_SPEED = SmartDashboard.getNumber("Intake Speed", RobotMap.INTAKECARGO_SPEED);
         RobotMap.INTAKESHOULDER_SPEED = SmartDashboard.getNumber("Shoulder Speed", RobotMap.INTAKESHOULDER_SPEED);
         SmartDashboard.putNumber("angle", drivesystem.getAngle());
+        SmartDashboard.putNumber("volt", m_shooter.volts_from_distance(m_limelight.Distance_to_target()));
 
         // Shooter
         SmartDashboard.putNumber("Current Speed", m_shooter.read_speed_shooter());

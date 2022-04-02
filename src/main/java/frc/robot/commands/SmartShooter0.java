@@ -1,6 +1,5 @@
 
 package frc.robot.commands;
-import frc.robot.RobotMap;
 import frc.robot.subsystems.Index;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Shooter;
@@ -13,9 +12,10 @@ public class SmartShooter0 extends CommandBase {
   private final Index m_index;
 
   private static long starting_time;
+  private static double ShootVolt, AntiTopVolt;
 
   /** Creates a new SmartShooter. */
-  public SmartShooter0(Shooter subsystem1, Limelight subsystem2, Index subsystem3) {
+  public SmartShooter0(Shooter subsystem1, Limelight subsystem2, Index subsystem3, double ShootVolt0, double AntiVolt0) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_shooter = subsystem1;
     addRequirements(m_shooter);
@@ -23,6 +23,9 @@ public class SmartShooter0 extends CommandBase {
     addRequirements(m_limelight);
     m_index = subsystem3;
     addRequirements(m_index);
+
+    AntiTopVolt = AntiVolt0;
+    ShootVolt=ShootVolt0;
   }
 
   // Called when the command is initially scheduled.
@@ -35,7 +38,7 @@ public class SmartShooter0 extends CommandBase {
   @Override
   public void execute() {
     
-      m_shooter.shootCargoPercent(RobotMap.Shoot0Speed); // Send value to motor
+      m_shooter.shootVolts(ShootVolt,AntiTopVolt); // Send value to motor
 
       if(get_timer()>1500)
       {

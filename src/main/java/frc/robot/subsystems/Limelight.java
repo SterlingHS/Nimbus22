@@ -7,6 +7,7 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 
 public class Limelight extends SubsystemBase {
   // variables
+  private static double last_ty = 0;
 
   /** Creates a new Limelight. */
   public Limelight() {
@@ -40,7 +41,11 @@ public class Limelight extends SubsystemBase {
 
   public double Distance_to_target()
   { // Returns distance in feet to target
-    double angle_of_elevation = Read_Limelight_ty()+RobotMap.limelight_angle;
+    double ty = Read_Limelight_ty();
+    if(ty == 0) ty = last_ty;
+    else last_ty = ty;
+
+    double angle_of_elevation = ty+RobotMap.limelight_angle;
     double distance=(9-RobotMap.limelight_height)/Math.tan(angle_of_elevation*Math.PI/180);
     //System.out.println("desired distance: " + distance + " - new_speed: " + Read_Limelight_ty());
     return distance;

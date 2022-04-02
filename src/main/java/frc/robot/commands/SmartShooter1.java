@@ -1,6 +1,5 @@
 
 package frc.robot.commands;
-import frc.robot.RobotMap;
 import frc.robot.subsystems.DriveSystem;
 import frc.robot.subsystems.Index;
 import frc.robot.subsystems.Limelight;
@@ -14,7 +13,6 @@ public class SmartShooter1 extends CommandBase {
   private final Index m_index;
   private final DriveSystem drivesystem;
 
-  private static boolean ready;
   private static long starting_time;
 
   /** Creates a new SmartShooter. */
@@ -27,14 +25,12 @@ public class SmartShooter1 extends CommandBase {
     m_index = subsystem3;
     addRequirements(m_index);
     drivesystem = susbsystem4;
-    
-    ready = false;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    ready = false;
+    start_timer();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -43,27 +39,18 @@ public class SmartShooter1 extends CommandBase {
     if(m_limelight.is_there_target())
     {
       double distance = m_limelight.Distance_to_target();
-      double speed_to_shoot = m_shooter.speed_from_distance(distance);
-      double power_to_shooter = m_shooter.power_from_speed(speed_to_shoot);
+      double volt_to_shoot = m_shooter.volts_from_distance(distance);
+     
       //System.out.println("Distance: " + distance + "Target Speed: " + speed_to_shoot +" - Power: " + power_to_shooter + " - Speed: " + m_shooter.read_speed_shooter() + " - Ready: " + ready);
-      m_shooter.shootCargoPercent(power_to_shooter); // Send value to motor
+      m_shooter.shootVolts(volt_to_shoot, 1.5*volt_to_shoot); // Send value to motor
 
-      double ty=m_limelight.Read_Limelight_ty();
+      double tx=m_limelight.Read_Limelight_tx();
 
-      if (ty < -30) drivesystem.turnLeft();
-      else if (ty >30) drivesystem.turnRight();
+      if (tx < -8) drivesystem.turnLeft();
+      else if (tx >8) drivesystem.turnRight();
            else drivesystem.stop();
 
-      if(m_shooter.read_speed_shooter()>(1-RobotMap.SPEED_ACCURACY)*speed_to_shoot && ready == false)
-      {
-        ready = true;
-        start_timer();
-      }
-      
-      if(ready == true)
-      {
-        m_index.cargo_index_in();
-      }
+      if(get_timer()>1000) m_index.cargo_index_in();
     }
   }
 
@@ -73,13 +60,12 @@ public class SmartShooter1 extends CommandBase {
     m_shooter.shootCargoStop();
     m_index.index_stop();
     drivesystem.stop();
-    ready = false;
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(ready == true && get_timer()>1500) return true;
+    if(get_timer()>2000) return true;
     return false;
   }
 

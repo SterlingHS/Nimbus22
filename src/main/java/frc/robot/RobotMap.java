@@ -51,7 +51,7 @@ public class RobotMap {
     public static int POV_BOTTOMLEFT_DIAGONAL = 225;
 
     // Limelight
-    public static double limelight_angle = 29;
+    public static double limelight_angle = 25;
     public static double limelight_height = 2;
 
     // Shooting variables
@@ -60,8 +60,11 @@ public class RobotMap {
     public static double SPEED_ACCURACY = .02;
     public static final double MAX_DISTANCE = 20;
     public static final double MIN_DISTANCE = 5;
-    public static final double Shoot0Speed = 0.37;
+    public static final double Shoot0Speed = 0.33;
     public static final double SHOOTER_ANTI_TOP_PERCENT = .80;
-
+    public static final double Shoot0Volt = 12*.38;
+    public static final double Anti0Volt = Shoot0Volt*.7;
+    public static final double Shoot1Volt = 12*.48;
+    public static final double Anti1Volt = Shoot1Volt*1.5;
 }
 

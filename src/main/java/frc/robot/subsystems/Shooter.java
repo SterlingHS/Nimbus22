@@ -56,10 +56,10 @@ public class Shooter extends SubsystemBase
         antiTopSpinMotor.set(-RobotMap.SHOOTER_ANTI_TOP_PERCENT);
     }
 
-    public void shootVolts(double outputVolts)
+    public void shootVolts(double ShooterVolt, double AntiTopVolt)
     {
-        shooterMotor.setVoltage(outputVolts);
-        antiTopSpinMotor.setVoltage(-outputVolts);
+        shooterMotor.setVoltage(ShooterVolt);
+        antiTopSpinMotor.setVoltage(-AntiTopVolt);
     }
 
     public void shootCargoStop()
@@ -82,7 +82,6 @@ public class Shooter extends SubsystemBase
         if (percent < -1) percent = -1;
         shooterMotor.set(percent);
         antiTopSpinMotor.set(-percent*1.5);
-        //shootVolts(12*percent);
     }
 
     
@@ -93,9 +92,23 @@ public class Shooter extends SubsystemBase
         return speed;
     }
 
+    public double volts_from_distance(double desired_distance)
+    { // Calculates speed for shooter in function of the distance to target
+        // 12 ft with .40
+        // 16 ft with .435 
+        // 20 ft with .47
+
+        double m = (.40-.47)/(12-20);
+        double b = .40 - m * 12;
+
+        double new_volt = (m*desired_distance+b)*12;
+        // System.out.println("desired distance: " + desired_distance + " - new_speed: " + new_speed);
+        return new_volt;
+    }
+
     public double speed_from_distance(double desired_distance)
     { // Calculates speed for shooter in function of the distance to target
-        // 13 ft with 140k
+        // 12 ft with .40
         // 10 ft with 120k 
         //  7 ft with 
 
