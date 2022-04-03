@@ -37,7 +37,7 @@ public class Pixie extends SubsystemBase
     public void periodic() 
     {
         // This method will be called once per scheduler run
-		getBiggestBlock();
+		// getBiggestBlock();
     }
 
     @Override
@@ -93,7 +93,7 @@ public class Pixie extends SubsystemBase
 		}
 		else
 		{
-			x = 0;
+			x = 240;
 			y = 0;
 			ball = false;
 		}

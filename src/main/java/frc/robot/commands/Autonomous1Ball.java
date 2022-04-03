@@ -46,14 +46,14 @@ public class Autonomous1Ball extends SequentialCommandGroup {
                 new SearchCargo(m_pixie, drivesystem, m_intake, m_index), // Searches and picks up ball
                 new TurnAngle(drivesystem, 180), // Turn to face ball
                 new SearchTarget(drivesystem, m_limelight),  // Turns to face target
-                new SmartShooter1(m_shooter, m_limelight, m_index, drivesystem)); // Shoots to target
+                new SmartShooter1(m_shooter, m_limelight, m_index, drivesystem), // Shoots to target
 
-                /*new SearchCargo(m_pixie, drivesystem, m_intake, m_index), // Searches and picks up ball
+                new SearchCargo(m_pixie, drivesystem, m_intake, m_index), // Searches and picks up ball
                 new SearchTarget(drivesystem, m_limelight),  // Turns to face target
                 new SmartShooter1(m_shooter, m_limelight, m_index, drivesystem), // Shoots to target
 
                 new SearchCargo(m_pixie, drivesystem, m_intake, m_index), // Searches and picks up ball
                 new SearchTarget(drivesystem, m_limelight),  // Turns to face target
-                new SmartShooter1(m_shooter, m_limelight, m_index, drivesystem)); // Shoots to target*/
+                new SmartShooter1(m_shooter, m_limelight, m_index, drivesystem)); // Shoots to target
   }
 }

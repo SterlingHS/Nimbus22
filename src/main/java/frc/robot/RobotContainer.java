@@ -81,6 +81,10 @@ public class RobotContainer {
     PickUpBallBt2.whenActive(new PickUpBall( m_intake, m_index ), true);
     PickUpBallBt2.whenInactive(new PickUpBallStop( m_intake, m_index ), true);
 
+    // Button To SmartShooter2
+    final TriggerL2Button smartShoot2Bt = new TriggerL2Button(driverController);
+    smartShoot2Bt.whenActive(new SmartShooter2( m_shooter, m_limelight, m_index, drivesystem ), true);
+
     // Button for Intake OUT
     final JoystickButton intakeCargoOutBt = new JoystickButton(driverController, XboxController.Button.kY.value);        
     intakeCargoOutBt.whileHeld(new IntakeCargoOut( m_intake ) ,true);

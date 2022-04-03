@@ -1,6 +1,5 @@
 
 package frc.robot.commands;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveSystem;
 import frc.robot.subsystems.Index;
@@ -19,7 +18,6 @@ import frc.robot.subsystems.Pixie;
     private final Index m_index;
 
     private static int stage;
-    private static int alliance; // True = Blue, False = Red
  
     public SearchCargo(Pixie sub2, DriveSystem sub3, Intake sub4, Index sub5) {
         drivesystem = sub3;
@@ -37,16 +35,6 @@ import frc.robot.subsystems.Pixie;
     @Override
     public void initialize() {
         stage = 1;
-        if (DriverStation.getAlliance() == DriverStation.Alliance.Blue) 
-        {
-            alliance = 1;
-            System.out.println("Blue Alliance");
-        }
-        else
-        {
-            alliance = 2;
-            System.out.println("Red Alliance");
-        }
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -87,15 +75,15 @@ import frc.robot.subsystems.Pixie;
         drivesystem.turnRight();
         m_intake.cargointake_stop();
         m_index.index_stop();
-        if(m_pixie.Read_Pixy_is_Ball() == true && m_pixie.Read_Pixy_signature() == alliance) stage = 2;
+        if(m_pixie.Read_Pixy_is_Ball() == true) stage = 2;
     }
 
     private void stage2()
     {
         double x = m_pixie.Read_Pixy_x() - 240;
 
-        if(x <= 20) drivesystem.turnLeft();
-        else        drivesystem.turnRight();
+        if(x > 20) drivesystem.turnLeft();
+        if(x < -20) drivesystem.turnRight();
             
         m_intake.cargointake_stop();
         m_index.index_stop();
@@ -110,9 +98,9 @@ import frc.robot.subsystems.Pixie;
         double turn = 0;
         double forward = -.20;
         //System.out.println("x: " + x);
-        if(x <= 10) turn = -.15;
+        if(x < -10) turn = -.15;
         if(x > 10)  turn = .15;
-        if(m_pixie.Read_Pixy_is_Ball()) forward = -0.35;
+        if(m_pixie.Read_Pixy_is_Ball()) forward = -0.5;
         drivesystem.mecanumDrive(0 , forward, turn, 1);
         m_intake.cargointake();
         m_index.cargo_index_in(); 
