@@ -22,6 +22,7 @@ public class Shoot0andDropIntake extends ParallelCommandGroup {
     m_limelight = subsystem2;
     m_index = subsystem3;
     m_intake = subsystem4;
-    addCommands(new SmartShooter0(m_shooter, m_limelight, m_index,RobotMap.Shoot0Volt,RobotMap.Anti0Volt), new IntakeShoulderDown(m_intake));
+    addCommands(new SmartShooter0(m_shooter, m_limelight, m_index,RobotMap.Shoot0Volt,RobotMap.Anti0Volt), 
+                new IntakeShoulderDown(m_intake));
   }
 }

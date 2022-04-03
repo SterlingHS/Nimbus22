@@ -1,7 +1,6 @@
 
 package frc.robot.commands;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveSystem;
 import frc.robot.subsystems.Index;
@@ -38,8 +37,16 @@ import frc.robot.subsystems.Pixie;
     @Override
     public void initialize() {
         stage = 1;
-        if (DriverStation.getAlliance() == DriverStation.Alliance.Blue) alliance = 1;
-        else alliance = 2;
+        if (DriverStation.getAlliance() == DriverStation.Alliance.Blue) 
+        {
+            alliance = 1;
+            System.out.println("Blue Alliance");
+        }
+        else
+        {
+            alliance = 2;
+            System.out.println("Red Alliance");
+        }
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -47,13 +54,6 @@ import frc.robot.subsystems.Pixie;
     public void execute() {
         m_pixie.getBiggestBlock();
         // System.out.println("Autonomous");
-        SmartDashboard.putNumber("Pixie x", m_pixie.Read_Pixy_x());
-        SmartDashboard.putNumber("Pixie y", m_pixie.Read_Pixy_y());
-        SmartDashboard.putBoolean("Pixie ball", m_pixie.Read_Pixy_is_Ball());
-        SmartDashboard.putNumber("Pixie angle", m_pixie.Read_Pixy_angle());
-        SmartDashboard.putNumber("Pixie signature", m_pixie.Read_Pixy_signature());
-        SmartDashboard.putNumber("Pixie dimx", m_pixie.Read_Pixy_dimx());
-        SmartDashboard.putNumber("Pixie dimy", m_pixie.Read_Pixy_dimy());
 
         if(stage == 1) stage1(); // Find ball
         if(stage == 2) stage2(); // Go to ball

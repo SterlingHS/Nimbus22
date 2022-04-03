@@ -55,13 +55,7 @@ public class RobotMap {
     public static double limelight_height = 2;
 
     // Shooting variables
-    public static double DISTANCE_TO_SHOOT = 10; // TBD with testing
-    public static double DISTANCE_ACCURACY = .1; // TBD with testing
     public static double SPEED_ACCURACY = .02;
-    public static final double MAX_DISTANCE = 20;
-    public static final double MIN_DISTANCE = 5;
-    public static final double Shoot0Speed = 0.33;
-    public static final double SHOOTER_ANTI_TOP_PERCENT = .80;
     public static final double Shoot0Volt = 12*.38;
     public static final double Anti0Volt = Shoot0Volt*.7;
     public static final double Shoot1Volt = 12*.48;

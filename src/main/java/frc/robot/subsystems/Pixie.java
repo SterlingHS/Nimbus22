@@ -1,6 +1,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import java.util.ArrayList;
@@ -36,7 +37,7 @@ public class Pixie extends SubsystemBase
     public void periodic() 
     {
         // This method will be called once per scheduler run
-		// getBiggestBlock();
+		getBiggestBlock();
     }
 
     @Override
@@ -57,22 +58,17 @@ public class Pixie extends SubsystemBase
 		// Gets the number of "blocks", identified targets, that match signature 1 on the Pixy2,
 		// does not wait for new data if none is available,
 		// and limits the number of returned blocks to 25, for a slight increase in efficiency
-		int blockCount = pixy.getCCC().getBlocks(false, Pixy2CCC.CCC_SIG1, 25);
-		//System.out.println("Found " + blockCount + " blocks!"); // Reports number of blocks found
+		int blockCount;
+		if(DriverStation.getAlliance() == DriverStation.Alliance.Blue)
+			blockCount = pixy.getCCC().getBlocks(false, Pixy2CCC.CCC_SIG1, 25);
+		else
+			blockCount = pixy.getCCC().getBlocks(false, Pixy2CCC.CCC_SIG2, 25);
+		// System.out.println("Found " + blockCount + " blocks!"); // Reports number of blocks found
 		// SmartDashboard.putNumber("Pixy BlocksCount", blockCount);
 
 		if (blockCount > 0)
 		{
 			ArrayList<Block> blocks = pixy.getCCC().getBlockCache(); // Gets a list of all blocks found by the Pixy2
-			/*for (Block block : blocks)
-			{
-				System.out.println(block.getSignature());
-				block.print();
-				if(block.getSignature() == 1)
-				{
-					blocks.remove(block);
-				}
-			}*/
 			if (blocks.size() > 0)
 			{
 				Block largestBlock = null;
@@ -83,16 +79,16 @@ public class Pixie extends SubsystemBase
 					} else if (block.getWidth() > largestBlock.getWidth()) {
 						largestBlock = block;
 					}
-				
 				}
 				ball = true;
 				x = largestBlock.getX();
 				y = largestBlock.getY();
 				angle = largestBlock.getAngle();
 				signature = largestBlock.getSignature();
+				// System.out.println("Signature:" + signature);
 				dimx = largestBlock.getWidth();
 				dimy = largestBlock.getHeight();
-				// largestBlock.print();
+				//largestBlock.print();
 			}
 		}
 		else
@@ -101,8 +97,6 @@ public class Pixie extends SubsystemBase
 			y = 0;
 			ball = false;
 		}
-
-
 	}
 	public double Read_Pixy_x()
 	{

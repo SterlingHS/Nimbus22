@@ -12,7 +12,8 @@ import frc.robot.subsystems.DriveSystem;
     private final DriveSystem drivesystem;
     private static long starting_time;
 
-    private static double time, speed;
+    private static double time;
+    private static double speed;
 
  
     public MoveTime(DriveSystem sub, double speed1, double time1) {
@@ -32,6 +33,7 @@ import frc.robot.subsystems.DriveSystem;
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
+        System.out.println("Speed: " + speed);
         if(get_timer()<time) drivesystem.mecanumDrive(0, speed, 0, 1);
         else drivesystem.stop();
     }
@@ -45,11 +47,8 @@ import frc.robot.subsystems.DriveSystem;
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        if(get_timer()>time)
-        {
-            end(false);
-            return true;
-        }
+        if(get_timer()>time) return true;
+
         return false;
     }
 
@@ -65,7 +64,6 @@ import frc.robot.subsystems.DriveSystem;
     
       private double get_timer(){
         double timer = System.currentTimeMillis() - starting_time;
-        System.out.println(timer);
         return timer;
       }
 }

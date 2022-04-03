@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
@@ -49,7 +50,7 @@ public class RobotContainer {
     m_chooser.addOption("Go forward for 1sec", new MoveTime(drivesystem, -.5, 1000));
     m_chooser.addOption("Pick Up Ball with Pixy", new SearchCargo(m_pixie, drivesystem, m_intake, m_index));
     m_chooser.addOption("Smart Shooter 1", new SmartShooter1(m_shooter, m_limelight, m_index, drivesystem));
-    m_chooser.addOption("Smart Shooter 0", new SmartShooter0(m_shooter, m_limelight, m_index, RobotMap.Shoot1Volt, RobotMap.Anti1Volt));
+    m_chooser.addOption("Smart Shooter 0", new SmartShooter0(m_shooter, m_limelight, m_index, RobotMap.Shoot0Volt, RobotMap.Anti0Volt));
 
     SmartDashboard.putData("Auto Mode", m_chooser);
     
@@ -153,8 +154,15 @@ public class RobotContainer {
         //Limelight
         SmartDashboard.putNumber("Distance", m_limelight.Distance_to_target());
         //SmartDashboard.putNumber("Angle Target", RobotMap.limelight_angle+m_limelight.Read_Limelight_ty());
-        SmartDashboard.putNumber("Speed Target", m_shooter.speed_from_distance(m_limelight.Distance_to_target()));
         //SmartDashboard.putNumber("Power Target", m_shooter.power_from_speed(m_shooter.speed_from_distance(m_limelight.Distance_to_target())));
 
+        SmartDashboard.putNumber("Pixie x", m_pixie.Read_Pixy_x());
+        SmartDashboard.putNumber("Pixie y", m_pixie.Read_Pixy_y());
+        SmartDashboard.putBoolean("Pixie ball", m_pixie.Read_Pixy_is_Ball());
+        SmartDashboard.putNumber("Pixie angle", m_pixie.Read_Pixy_angle());
+        SmartDashboard.putNumber("Pixie signature", m_pixie.Read_Pixy_signature());
+        SmartDashboard.putNumber("Pixie dimx", m_pixie.Read_Pixy_dimx());
+        SmartDashboard.putNumber("Pixie dimy", m_pixie.Read_Pixy_dimy());
+        SmartDashboard.putBoolean("IsBlue", DriverStation.getAlliance() == DriverStation.Alliance.Blue);
     }
 }

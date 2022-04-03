@@ -1,6 +1,7 @@
 
 package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.RobotMap;
 import frc.robot.subsystems.Index;
 import frc.robot.subsystems.Shooter;
 
@@ -31,7 +32,7 @@ public class ShootSimpleCargo extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        m_shooter.shootCargo();
+        m_shooter.shootVolts(RobotMap.Shoot1Volt,RobotMap.Anti1Volt);
         if(get_timer() > 1500) m_index.cargo_index_in();
         else m_index.index_stop();
     }

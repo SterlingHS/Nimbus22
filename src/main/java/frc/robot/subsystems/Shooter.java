@@ -50,12 +50,6 @@ public class Shooter extends SubsystemBase
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
-    public void shootCargo()
-    {
-        shooterMotor.set(RobotMap.SHOOT_CARGO_PERCENT);
-        antiTopSpinMotor.set(-RobotMap.SHOOTER_ANTI_TOP_PERCENT);
-    }
-
     public void shootVolts(double ShooterVolt, double AntiTopVolt)
     {
         shooterMotor.setVoltage(ShooterVolt);
@@ -104,22 +98,6 @@ public class Shooter extends SubsystemBase
         double new_volt = (m*desired_distance+b)*12;
         // System.out.println("desired distance: " + desired_distance + " - new_speed: " + new_speed);
         return new_volt;
-    }
-
-    public double speed_from_distance(double desired_distance)
-    { // Calculates speed for shooter in function of the distance to target
-        // 12 ft with .40
-        // 10 ft with 120k 
-        //  7 ft with 
-
-        if(desired_distance > RobotMap.MAX_DISTANCE || desired_distance < RobotMap.MIN_DISTANCE) return 0;
-
-        double m = (140-120)/(13-10);
-        double b = 140 - m * 13;
-
-        double new_speed = (m*desired_distance+b)*1000;
-        // System.out.println("desired distance: " + desired_distance + " - new_speed: " + new_speed);
-        return new_speed;
     }
 
     public double power_from_speed(double desired_speed)
