@@ -105,7 +105,7 @@ public class SmartShooter2 extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(get_timer()>3000) return true;
+    if(ready_shoot_ball2 == true && get_timer()>1500) return true;
     return false;
   }
 
