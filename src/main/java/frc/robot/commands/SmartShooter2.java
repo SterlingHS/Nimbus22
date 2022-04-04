@@ -13,6 +13,7 @@ public class SmartShooter2 extends CommandBase {
   private final Index m_index;
   private final DriveSystem drivesystem;
   private static int ball;
+  private static boolean ready_shoot_ball1;
   private static boolean ready_shoot_ball2;
 
   private static long starting_time;
@@ -34,6 +35,7 @@ public class SmartShooter2 extends CommandBase {
   public void initialize() {
     start_timer();
     ball = 1;
+    ready_shoot_ball1 = false;
     ready_shoot_ball2 = false;
   }
 
@@ -45,7 +47,6 @@ public class SmartShooter2 extends CommandBase {
       double distance = m_limelight.Distance_to_target();
       double volt_to_shoot = m_shooter.volts_from_distance(distance);
      
-      //System.out.println("Distance: " + distance + "Target Speed: " + speed_to_shoot +" - Power: " + power_to_shooter + " - Speed: " + m_shooter.read_speed_shooter() + " - Ready: " + ready);
       m_shooter.shootVolts(volt_to_shoot, 1.5*volt_to_shoot); // Send value to motor
 
       double tx=m_limelight.Read_Limelight_tx();
@@ -54,12 +55,22 @@ public class SmartShooter2 extends CommandBase {
       else if (tx >5) drivesystem.turnRight();
            else drivesystem.stop();
 
+      if(ready_shoot_ball1 == false)
+        if(m_index.is_cargo_in_index() == false) m_index.cargo_index_in();
+        else
+        {
+          m_index.index_stop();
+          ready_shoot_ball1 = true;
+          start_timer();
+        }
 
       if(ball == 1)
       {
         if(get_timer()>1000 && get_timer()<1500) m_index.cargo_index_in();
-        if(get_timer()>1500) ball=2;
+        else m_index.index_stop();
+        if(get_timer()>=1500) ball=2;
       }
+      
       if(ball == 2)
       {
         boolean cargoin = false;
