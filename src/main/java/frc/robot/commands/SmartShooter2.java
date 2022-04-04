@@ -44,17 +44,19 @@ public class SmartShooter2 extends CommandBase {
   public void execute() {
     if(m_limelight.is_there_target())
     {
+      // Calculates distance and power for the shooter
       double distance = m_limelight.Distance_to_target();
       double volt_to_shoot = m_shooter.volts_from_distance(distance);
      
       m_shooter.shootVolts(volt_to_shoot, 1.5*volt_to_shoot); // Send value to motor
 
+      // Check direction of the shoot and adjust if not centered
       double tx=m_limelight.Read_Limelight_tx();
-
       if (tx < -5) drivesystem.turnLeft();
-      else if (tx >5) drivesystem.turnRight();
+      else if (tx > 5) drivesystem.turnRight();
            else drivesystem.stop();
 
+      // Check if the first ball is ready to be shot in the indexer switches
       if(ready_shoot_ball1 == false)
         if(m_index.is_cargo_in_index() == false) m_index.cargo_index_in();
         else
@@ -64,13 +66,15 @@ public class SmartShooter2 extends CommandBase {
           start_timer();
         }
 
+      // Shoots the first ball after 1 sec.
       if(ball == 1)
       {
         if(get_timer()>1000 && get_timer()<1500) m_index.cargo_index_in();
         else m_index.index_stop();
         if(get_timer()>=1500) ball=2;
       }
-      
+
+      // Shoots the 2nd ball after 500ms of ball in indexer switches
       if(ball == 2)
       {
         boolean cargoin = false;
