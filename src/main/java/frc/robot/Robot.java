@@ -34,6 +34,7 @@ public class Robot extends TimedRobot {
     robotContainer = new RobotContainer();
     SmartDashboard.putNumber("Shooter Speed", RobotMap.SHOOT_CARGO_PERCENT);
     SmartDashboard.putNumber("Intake Speed", RobotMap.INTAKECARGO_SPEED);
+    
   
     //CameraServer.startAutomaticCapture();
   }

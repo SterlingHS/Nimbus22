@@ -1,9 +1,7 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.commands;
 import frc.robot.RobotMap;
+import frc.robot.subsystems.DriveSystem;
 import frc.robot.subsystems.Index;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Shooter;
@@ -14,12 +12,12 @@ public class SmartShooter1 extends CommandBase {
   private final Shooter m_shooter;
   private final Limelight m_limelight;
   private final Index m_index;
+  private final DriveSystem drivesystem;
 
-  private static boolean ready;
   private static long starting_time;
 
   /** Creates a new SmartShooter. */
-  public SmartShooter1(Shooter subsystem1, Limelight subsystem2, Index subsystem3) {
+  public SmartShooter1(Shooter subsystem1, Limelight subsystem2, Index subsystem3, DriveSystem susbsystem4) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_shooter = subsystem1;
     addRequirements(m_shooter);
@@ -27,13 +25,13 @@ public class SmartShooter1 extends CommandBase {
     addRequirements(m_limelight);
     m_index = subsystem3;
     addRequirements(m_index);
-    ready = false;
+    drivesystem = susbsystem4;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    ready = false;
+    start_timer();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -42,24 +40,33 @@ public class SmartShooter1 extends CommandBase {
     if(m_limelight.is_there_target())
     {
       double distance = m_limelight.Distance_to_target();
-      double speed_to_shoot = m_shooter.speed_from_distance(distance);
-      double power_to_shooter = m_shooter.power_from_speed(speed_to_shoot);
-      //System.out.println("Distance: " + distance + "Target Speed: " + speed_to_shoot +" - Power: " + power_to_shooter + " - Speed: " + m_shooter.read_speed_shooter() + " - Ready: " + ready);
-      m_shooter.shootCargoPercent(power_to_shooter); // Send value to motor
+      //double speed_to_shoot = m_shooter.speed_from_distance(distance);
+      double volt_to_shoot = m_shooter.volts_from_distance(distance);
+     
+      /*double actual_speed = m_shooter.read_speed_shooter();
+      double error_speed = (actual_speed-speed_to_shoot)/speed_to_shoot;
+      if( error_speed < -RobotMap.SPEED_ACCURACY )
+      {
+          volt_to_shoot *= (1+Math.abs(error_speed));
+      }
+      if( error_speed > RobotMap.SPEED_ACCURACY )
+      {
+        volt_to_shoot *= (1-Math.abs(error_speed));
+      }
+      if( volt_to_shoot > 10 ) volt_to_shoot = 10;
+      if( volt_to_shoot < 0 ) volt_to_shoot = 0;*/
 
-      if(m_shooter.read_speed_shooter()>(1-RobotMap.SPEED_ACCURACY)*speed_to_shoot && ready == false)
-      {
-        ready = true;
-        start_timer();
-        System.out.println("Timer Start");
-      }
-      
-      if(ready == true)
-      {
-        m_index.cargo_index_in();
-      }
+      //System.out.println("Distance: " + distance + "Target Speed: " + speed_to_shoot +" - Power: " + power_to_shooter + " - Speed: " + m_shooter.read_speed_shooter() + " - Ready: " + ready);
+      m_shooter.shootVolts(volt_to_shoot, 1.5*volt_to_shoot); // Send value to motor
+
+      double tx=m_limelight.Read_Limelight_tx();
+
+      if (tx < -8) drivesystem.turnLeft();
+      else if (tx >8) drivesystem.turnRight();
+           else drivesystem.stop();
+
+      if(get_timer()>1000) m_index.cargo_index_in();
     }
-    if(ready == true && get_timer()>2000) end(false);
   }
 
   // Called once the command ends or is interrupted.
@@ -67,13 +74,13 @@ public class SmartShooter1 extends CommandBase {
   public void end(boolean interrupted) {
     m_shooter.shootCargoStop();
     m_index.index_stop();
-    ready = false;
+    drivesystem.stop();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(ready == true && get_timer()>2000) return true;
+    if(get_timer()>2000) return true;
     return false;
   }
 
@@ -84,7 +91,7 @@ public class SmartShooter1 extends CommandBase {
 
   private double get_timer(){
     double timer = System.currentTimeMillis() - starting_time;
-    System.out.println(timer);
+    //System.out.println(timer);
     return timer;
   }
 

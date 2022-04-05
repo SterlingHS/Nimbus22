@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
@@ -39,17 +40,22 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
 
-
     // Configure default commands
     drivesystem.setDefaultCommand(new Drive( drivesystem, driverController::getLeftX, driverController::getLeftY, driverController::getRightX) ); 
 
     // Configure autonomous sendable chooser
     m_chooser.setDefaultOption("Auto Shoot and Back", new Autonomous1BallandBack( m_shooter, m_pixie, drivesystem, m_intake, m_index, m_limelight));
     m_chooser.addOption("Auto Shoot, Search-Shoot", new Autonomous1Ball( m_shooter, m_pixie, drivesystem, m_intake, m_index, m_limelight));
-
+    m_chooser.addOption("Rotate 180", new TurnAngle(drivesystem, 180));
+    m_chooser.addOption("Go forward for 1sec", new MoveTime(drivesystem, -.5, 1000));
+    m_chooser.addOption("Pick Up Ball with Pixy", new SearchCargo(m_pixie, drivesystem, m_intake, m_index));
+    m_chooser.addOption("Smart Shooter 1", new SmartShooter1(m_shooter, m_limelight, m_index, drivesystem));
+    m_chooser.addOption("Smart Shooter 0", new SmartShooter0(m_shooter, m_limelight, m_index, RobotMap.Shoot0Volt, RobotMap.Anti0Volt));
 
     SmartDashboard.putData("Auto Mode", m_chooser);
     
+    //drivesystem.calibrateGyro();
+    //drivesystem.resetAngle();
   }
 
   /*public static RobotContainer getInstance() {
@@ -70,6 +76,15 @@ public class RobotContainer {
     PickUpBallBt.whileHeld(new PickUpBall( m_intake, m_index ) ,true);
     SmartDashboard.putData("IntakeCargoInBt",new IntakeCargoIn( m_intake ) );
 
+    // Button To PickUpBall2
+    final TriggerR2Button PickUpBallBt2 = new TriggerR2Button(driverController);
+    PickUpBallBt2.whenActive(new PickUpBall( m_intake, m_index ), true);
+    PickUpBallBt2.whenInactive(new PickUpBallStop( m_intake, m_index ), true);
+
+    // Button To SmartShooter2
+    final TriggerL2Button smartShoot2Bt = new TriggerL2Button(driverController);
+    smartShoot2Bt.whenActive(new SmartShooter2( m_shooter, m_limelight, m_index, drivesystem ), true);
+
     // Button for Intake OUT
     final JoystickButton intakeCargoOutBt = new JoystickButton(driverController, XboxController.Button.kY.value);        
     intakeCargoOutBt.whileHeld(new IntakeCargoOut( m_intake ) ,true);
@@ -87,12 +102,12 @@ public class RobotContainer {
 
      // Button for SimpleShooter
     final JoystickButton shootSimpleCargoBT = new JoystickButton(driverController, XboxController.Button.kRightBumper.value);        
-    shootSimpleCargoBT.whileHeld(new ShootSimpleCargo( m_shooter , m_index) ,true);
+    shootSimpleCargoBT.whileHeld(new SmartShooter0( m_shooter , m_limelight, m_index, 12*.4, 12*.4*1.4) ,true);
     //SmartDashboard.putData("shootSimpleCargoBT",new ShootSimpleCargo( m_shooter ) );
 
       // Button for SmartShooter
     final JoystickButton shootSmartCargoBT = new JoystickButton(driverController, XboxController.Button.kLeftBumper.value);        
-    shootSmartCargoBT.whenPressed(new SmartShooter1( m_shooter, m_limelight, m_index ) ,true);
+    shootSmartCargoBT.whenPressed(new SmartShooter1( m_shooter, m_limelight, m_index, drivesystem) ,true);
     //SmartDashboard.putData("shootSimpleCargoBT",new ShootSimpleCargo( m_shooter ) );
 
     // Button for IndexCargoIn
@@ -104,6 +119,9 @@ public class RobotContainer {
     final JoystickButton IndexCargoOutBT = new JoystickButton(driverController, XboxController.Button.kX.value);        
     IndexCargoOutBT.whileHeld(new IndexBringCargoOut( m_index ) ,true);
     //SmartDashboard.putData("IndexBringCargoOutBT",new IndexBringCargoOut( m_index ) );
+
+    // Button to calibrate Navx
+    SmartDashboard.putData("Calibrate NavX",new CalibrateNavX(drivesystem) );
   }
 
   public XboxController getDriverController() {
@@ -128,6 +146,8 @@ public class RobotContainer {
         RobotMap.DRIVER_SLOWDOWN = SmartDashboard.getNumber("Drive speed", RobotMap.DRIVER_SLOWDOWN);
         RobotMap.INTAKECARGO_SPEED = SmartDashboard.getNumber("Intake Speed", RobotMap.INTAKECARGO_SPEED);
         RobotMap.INTAKESHOULDER_SPEED = SmartDashboard.getNumber("Shoulder Speed", RobotMap.INTAKESHOULDER_SPEED);
+        SmartDashboard.putNumber("angle", drivesystem.getAngle());
+        SmartDashboard.putNumber("volt", m_shooter.volts_from_distance(m_limelight.Distance_to_target()));
 
         // Shooter
         SmartDashboard.putNumber("Current Speed", m_shooter.read_speed_shooter());
@@ -138,8 +158,15 @@ public class RobotContainer {
         //Limelight
         SmartDashboard.putNumber("Distance", m_limelight.Distance_to_target());
         //SmartDashboard.putNumber("Angle Target", RobotMap.limelight_angle+m_limelight.Read_Limelight_ty());
-        SmartDashboard.putNumber("Speed Target", m_shooter.speed_from_distance(m_limelight.Distance_to_target()));
         //SmartDashboard.putNumber("Power Target", m_shooter.power_from_speed(m_shooter.speed_from_distance(m_limelight.Distance_to_target())));
 
+        SmartDashboard.putNumber("Pixie x", m_pixie.Read_Pixy_x());
+        SmartDashboard.putNumber("Pixie y", m_pixie.Read_Pixy_y());
+        SmartDashboard.putBoolean("Pixie ball", m_pixie.Read_Pixy_is_Ball());
+        SmartDashboard.putNumber("Pixie angle", m_pixie.Read_Pixy_angle());
+        SmartDashboard.putNumber("Pixie signature", m_pixie.Read_Pixy_signature());
+        SmartDashboard.putNumber("Pixie dimx", m_pixie.Read_Pixy_dimx());
+        SmartDashboard.putNumber("Pixie dimy", m_pixie.Read_Pixy_dimy());
+        SmartDashboard.putBoolean("IsBlue", DriverStation.getAlliance() == DriverStation.Alliance.Blue);
     }
 }

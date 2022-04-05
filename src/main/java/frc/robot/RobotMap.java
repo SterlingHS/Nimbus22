@@ -28,14 +28,15 @@ public class RobotMap {
     //Shooter Constant
     public static int SHOOTER_TOP_TALON_ID = 22;
     public static int SHOOTER_BOTTOM_TALON_ID = 23;
+    public static int SHOOTER_ANTI_TOP_ID = 21;
     public static double SHOOT_CARGO_PERCENT = 0.45;
     public static double REVERSE_CARGO_PERCENT = 0;
     public static final int ShooterEncoderChannel1 = 4;
     public static final int ShooterEncoderChannel2 = 5;
 
     //Index Constants
-    public static int INDEX_MOTOR_TALON_ID = 21;
-    public static double INDEX_MOTOR_SPEED = 0.6;
+    public static int INDEX_MOTOR_TALON_ID = 12;
+    public static double INDEX_MOTOR_SPEED = 0.45;
     public static int INDEXLIMITSWITCH_ID1 = 0;
     public static int INDEXLIMITSWITCH_ID2 = 1;
 
@@ -50,30 +51,14 @@ public class RobotMap {
     public static int POV_BOTTOMLEFT_DIAGONAL = 225;
 
     // Limelight
-    public static double limelight_angle = 29;
+    public static double limelight_angle = 25;
     public static double limelight_height = 2;
 
     // Shooting variables
-    public static double DISTANCE_TO_SHOOT = 10; // TBD with testing
-    public static double DISTANCE_ACCURACY = .1; // TBD with testing
-    public static double Kp = 1;
-    public static double Ki = 0;
-    public static double Kd = 0;
     public static double SPEED_ACCURACY = .02;
-    public static final double MAX_DISTANCE = 20;
-    public static final double MIN_DISTANCE = 5;
-    public static final double Shoot0Speed = 0.37;
-
-
-    // SHOOTING TABLE
-    public static double distance0 = 9;
-    public static double speed0 = 110;
-    public static double distance1 = 11;
-    public static double speed1 = 110;
-    public static double distance2 = 13;
-    public static double speed2 = 130;
-    public static double distance3 = 13;
-    public static double speed3 = 130;
-
+    public static final double Shoot0Volt = 12*.38;
+    public static final double Anti0Volt = Shoot0Volt*.7;
+    public static final double Shoot1Volt = 12*.48;
+    public static final double Anti1Volt = Shoot1Volt*1.5;
 }
 
