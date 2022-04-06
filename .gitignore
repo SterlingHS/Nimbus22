@@ -156,4 +156,7 @@ gradle-app.setting
 .settings/
 bin/
 
+# # Icon from IOS
+Icon
+
 # End of https://www.gitignore.io/api/c++,java,linux,macos,gradle,windows,visualstudiocode
