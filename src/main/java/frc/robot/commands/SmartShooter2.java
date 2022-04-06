@@ -57,7 +57,7 @@ public class SmartShooter2 extends CommandBase {
            else drivesystem.stop();
 
       // Check if the first ball is ready to be shot in the indexer switches
-      if(ready_shoot_ball1 == false)
+      if(ball == 1 && ready_shoot_ball1 == false)
         if(m_index.is_cargo_in_index() == false) m_index.cargo_index_in();
         else
         {
@@ -67,9 +67,9 @@ public class SmartShooter2 extends CommandBase {
         }
 
       // Shoots the first ball after 1 sec.
-      if(ball == 1)
+      if(ball == 1 && ready_shoot_ball1 == true)
       {
-        if(get_timer()>1000 && get_timer()<1500) m_index.cargo_index_in();
+        if(get_timer()>1000) m_index.cargo_index_in();
         else m_index.index_stop();
         if(get_timer()>=1500) ball=2;
       }
@@ -80,12 +80,12 @@ public class SmartShooter2 extends CommandBase {
         boolean cargoin = false;
         if(m_index.is_cargo_in_index() == false && ready_shoot_ball2 == false) 
           cargoin = true;
-        else 
-          if(ready_shoot_ball2 == false)
-          {
-            start_timer();
-            ready_shoot_ball2 = true;
-          }
+        if(m_index.is_cargo_in_index() == true && ready_shoot_ball2 == false) 
+        {  
+          cargoin = false;
+          start_timer();
+          ready_shoot_ball2 = true;
+        }
         if(ready_shoot_ball2 == true && get_timer() > 500) cargoin = true;
         
         if(cargoin == true) m_index.cargo_index_in();
