@@ -83,6 +83,9 @@ private AHRS navx_device;
     public void forward(){
         mecanumDrive(0,-0.35,0,1);
     }
+    public void forwardSpeed(double speed){
+        mecanumDrive(0,-speed,0,1);
+    }
     public void backward(){
         mecanumDrive(0,0.35,0,1);
     }

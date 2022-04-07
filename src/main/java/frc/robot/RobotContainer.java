@@ -42,10 +42,10 @@ public class RobotContainer {
 
     // Configure default commands
     drivesystem.setDefaultCommand(new Drive( drivesystem, driverController::getLeftX, driverController::getLeftY, driverController::getRightX) ); 
-
+    
     // Configure autonomous sendable chooser
-    m_chooser.setDefaultOption("Auto Shoot and Back", new Autonomous1BallandBack( m_shooter, m_pixie, drivesystem, m_intake, m_index, m_limelight));
-    m_chooser.addOption("Auto Shoot, Search-Shoot", new Autonomous1Ball( m_shooter, m_pixie, drivesystem, m_intake, m_index, m_limelight));
+    m_chooser.setDefaultOption("Auto Shoot, Search-Shoot", new Autonomous1Ball( m_shooter, m_pixie, drivesystem, m_intake, m_index, m_limelight));
+    m_chooser.addOption("Auto Shoot and Back", new Autonomous1BallandBack( m_shooter, m_pixie, drivesystem, m_intake, m_index, m_limelight));
     m_chooser.addOption("Rotate 180", new TurnAngle(drivesystem, 180));
     m_chooser.addOption("Go forward for 1sec", new MoveTime(drivesystem, -.5, 1000));
     m_chooser.addOption("Pick Up Ball with Pixy", new SearchCargo(m_pixie, drivesystem, m_intake, m_index));
@@ -71,10 +71,12 @@ public class RobotContainer {
   private void configureButtonBindings() {
     // Create some buttons
 
-    // Button To PickUpBall
-    //final JoystickButton PickUpBallBt = new JoystickButton(driverController, XboxController.Button.kA.value);        
-    //PickUpBallBt.whileHeld(new PickUpBall( m_intake, m_index ) ,true);
-    //SmartDashboard.putData("IntakeCargoInBt",new IntakeCargoIn( m_intake ) );
+    // Button To climbing speed
+    final JoystickButton climbingSpeedBt = new JoystickButton(driverController, XboxController.Button.kA.value);        
+    climbingSpeedBt.whileHeld(new moveSpeed( drivesystem, RobotMap.climbingSpeed ) ,true);
+
+    final POVButton climbingSpeedBackBt = new POVButton(driverController,RobotMap.POV_LEFT); 
+     climbingSpeedBackBt.whileHeld(new moveSpeed( drivesystem, RobotMap.climbingSpeedBack ) ,true);
 
     // Button To PickUpBall2
     final TriggerR2Button PickUpBallBt2 = new TriggerR2Button(driverController);

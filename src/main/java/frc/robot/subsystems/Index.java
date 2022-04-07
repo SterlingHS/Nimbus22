@@ -58,7 +58,7 @@ public class Index extends SubsystemBase
 
     public boolean is_cargo_in_index()
     {
-        return (indexLimitSwitch1.get() || indexLimitSwitch2.get());
+        return(indexLimitSwitch1.get() == false || indexLimitSwitch2.get() == false);
     }
 }
 

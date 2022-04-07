@@ -4,6 +4,7 @@ import frc.robot.subsystems.DriveSystem;
 import frc.robot.subsystems.Index;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Shooter;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class SmartShooter2 extends CommandBase {
@@ -86,7 +87,7 @@ public class SmartShooter2 extends CommandBase {
           start_timer();
           ready_shoot_ball2 = true;
         }
-        if(ready_shoot_ball2 == true && get_timer() > 500) cargoin = true;
+        if(ready_shoot_ball2 == true && get_timer() > 1000) cargoin = true;
         
         if(cargoin == true) m_index.cargo_index_in();
         else m_index.index_stop();

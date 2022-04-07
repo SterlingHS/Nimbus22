@@ -84,12 +84,16 @@ public class Intake extends SubsystemBase
 
     public boolean is_intake_up()
     {
-        return shoulderLimitSwitchUP.get();
+        boolean shoulder = shoulderLimitSwitchUP.get();
+        if (shoulder == true) return false;
+        return true;
     }
 
     public boolean is_intake_down()
     {
-        return shoulderLimitSwitchDOWN.get();
+        boolean shoulder = shoulderLimitSwitchDOWN.get();
+        if (shoulder == true) return false;
+        return true;
     }
 }
 

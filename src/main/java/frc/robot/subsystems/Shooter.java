@@ -92,7 +92,7 @@ public class Shooter extends SubsystemBase
         // 16 ft with .435 
         // 20 ft with .47
 
-        double m = (.40-.47)/(12-20);
+        double m = (.4-.5)/(9-20);
         double b = .40 - m * 12;
 
         double new_volt = (m*desired_distance+b)*12;

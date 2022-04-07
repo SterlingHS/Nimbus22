@@ -24,6 +24,8 @@ public class RobotMap {
     public static int X_AXIS = 0;
     public static int Y_AXIS = 1;
     public static int Z_AXIS = 4;
+    public static double climbingSpeed = .45;
+    public static double climbingSpeedBack = -.45;
 
     //Shooter Constant
     public static int SHOOTER_TOP_TALON_ID = 22;
@@ -41,10 +43,10 @@ public class RobotMap {
     public static int INDEXLIMITSWITCH_ID2 = 1;
 
     //POV Buttons
-    public static int POV_UP = 90;
-    public static int POV_DOWN = 270;
-    public static int POV_LEFT = 180;
-    public static int POV_RIGHT = 0;
+    public static int POV_LEFT = 90;
+    public static int POV_RIGHT = 270;
+    public static int POV_UP = 0;
+    public static int POV_DOWN = 180;
     public static int POV_TOPRIGHT_DIAGONAL = 45;
     public static int POV_BOTTOMRIGHT_DIAGONAL = 315;
     public static int POV_TOPLEFT_DIAGONAL = 135;
