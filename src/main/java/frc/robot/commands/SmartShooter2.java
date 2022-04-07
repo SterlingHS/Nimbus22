@@ -46,10 +46,15 @@ public class SmartShooter2 extends CommandBase {
     if(m_limelight.is_there_target())
     {
       // Calculates distance and power for the shooter
-      double distance = m_limelight.Distance_to_target();
-      double volt_to_shoot = m_shooter.volts_from_distance(distance);
+      // double distance = m_limelight.Distance_to_target();
+      // double volt_to_shoot = m_shooter.volts_from_distance(distance);
      
-      m_shooter.shootVolts(volt_to_shoot, 1.5*volt_to_shoot); // Send value to motor
+      // m_shooter.shootVolts(volt_to_shoot, 1.5*volt_to_shoot); // Send value to motor
+
+      double distance = m_limelight.Distance_to_target();
+      double speed_to_shoot = m_shooter.speed_from_distance(distance);
+      double shootpercent = m_shooter.power_from_speed(speed_to_shoot);
+      m_shooter.shootCargoPercent(shootpercent);
 
       // Check direction of the shoot and adjust if not centered
       double tx=m_limelight.Read_Limelight_tx();

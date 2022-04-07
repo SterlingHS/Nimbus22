@@ -58,9 +58,9 @@ public class RobotMap {
 
     // Shooting variables
     public static double SPEED_ACCURACY = .02;
-    public static final double Shoot0Volt = 12*.38;
+    public static final double Shoot0Volt = 12*.41;
     public static final double Anti0Volt = Shoot0Volt*.7;
-    public static final double Shoot1Volt = 12*.48;
+    public static final double Shoot1Volt = 12*.47;
     public static final double Anti1Volt = Shoot1Volt*1.5;
 }
 

@@ -40,9 +40,14 @@ public class SmartShooter1 extends CommandBase {
     if(m_limelight.is_there_target())
     {
       double distance = m_limelight.Distance_to_target();
-      //double speed_to_shoot = m_shooter.speed_from_distance(distance);
-      double volt_to_shoot = m_shooter.volts_from_distance(distance);
+      double speed_to_shoot = m_shooter.speed_from_distance(distance);
+      double shootpercent = m_shooter.power_from_speed(speed_to_shoot);
+      m_shooter.shootCargoPercent(shootpercent);
+
+      // double volt_to_shoot = m_shooter.volts_from_distance(distance);
+      // m_shooter.shootVolts(volt_to_shoot, 1.5*volt_to_shoot); // Send value to motor
      
+
       /*double actual_speed = m_shooter.read_speed_shooter();
       double error_speed = (actual_speed-speed_to_shoot)/speed_to_shoot;
       if( error_speed < -RobotMap.SPEED_ACCURACY )
@@ -57,7 +62,7 @@ public class SmartShooter1 extends CommandBase {
       if( volt_to_shoot < 0 ) volt_to_shoot = 0;*/
 
       //System.out.println("Distance: " + distance + "Target Speed: " + speed_to_shoot +" - Power: " + power_to_shooter + " - Speed: " + m_shooter.read_speed_shooter() + " - Ready: " + ready);
-      m_shooter.shootVolts(volt_to_shoot, 1.5*volt_to_shoot); // Send value to motor
+      m_shooter.shootCargoPercent(shootpercent);
 
       double tx=m_limelight.Read_Limelight_tx();
 
