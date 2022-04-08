@@ -44,6 +44,7 @@ public class SmartShooter1 extends CommandBase {
       double distance = m_limelight.Distance_to_target();
       double speed_to_shoot = m_shooter.speed_from_distance(distance);
       double shootpercent = m_shooter.power_from_speed(speed_to_shoot);
+      shootpercent = 0.2;
       m_shooter.shootCargoPercent(shootpercent);
 
       // double volt_to_shoot = m_shooter.volts_from_distance(distance);
@@ -68,16 +69,18 @@ public class SmartShooter1 extends CommandBase {
 
       double tx=m_limelight.Read_Limelight_tx();
 
-      if (tx < -8) drivesystem.turnLeft();
-      else if (tx >8) drivesystem.turnRight();
+      if (tx < -5) drivesystem.turnLeft();
+      else if (tx >5) drivesystem.turnRight();
            else drivesystem.stop();
 
       // if(get_timer()>1000) m_index.cargo_index_in();
-      if(m_shooter.read_speed_shooter()>speed_to_shoot || get_timer()>2000 || ready_shoot == true) 
+      if(m_shooter.read_speed_shooter()>speed_to_shoot || get_timer() > 2000) ready_shoot = true;
+      if(ready_shoot == true)
       {
         m_index.cargo_index_in();
-        ready_shoot = true;
-      }
+        start_timer();
+      } 
+      else m_index.index_stop();
     }
   }
 
@@ -92,7 +95,7 @@ public class SmartShooter1 extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(get_timer()>2000) return true;
+    if(ready_shoot == true && get_timer()>1000) return true;
     return false;
   }
 

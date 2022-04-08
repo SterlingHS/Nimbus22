@@ -111,7 +111,7 @@ public class Shooter extends SubsystemBase
         // 10 ft with 80k 
         //  7 ft with 
 
-        double m = (120-80)/(17-10);
+        double m = (120-90)/(17-10);
         double b = 80 - m * 10;
 
         double new_speed = (m*desired_distance+b)*1000;
