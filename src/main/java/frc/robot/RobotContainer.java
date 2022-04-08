@@ -149,13 +149,11 @@ public class RobotContainer {
         RobotMap.INTAKECARGO_SPEED = SmartDashboard.getNumber("Intake Speed", RobotMap.INTAKECARGO_SPEED);
         RobotMap.INTAKESHOULDER_SPEED = SmartDashboard.getNumber("Shoulder Speed", RobotMap.INTAKESHOULDER_SPEED);
         SmartDashboard.putNumber("angle", drivesystem.getAngle());
-        SmartDashboard.putNumber("volt", m_shooter.volts_from_distance(m_limelight.Distance_to_target()));
-
+        
         // Shooter
         SmartDashboard.putNumber("Current Speed", m_shooter.read_speed_shooter());
+        SmartDashboard.putNumber("Desired Speed", m_shooter.speed_from_distance(m_limelight.Distance_to_target()));
 
-        //Limit switches
-        //SmartDashboard.putBoolean("Index Limit switch",m_index.is_cargo_in_index());
 
         //Limelight
         SmartDashboard.putNumber("Distance", m_limelight.Distance_to_target());
