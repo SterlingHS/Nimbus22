@@ -54,6 +54,7 @@ public class SmartShooter2 extends CommandBase {
       double distance = m_limelight.Distance_to_target();
       double speed_to_shoot = m_shooter.speed_from_distance(distance);
       double shootpercent = m_shooter.power_from_speed(speed_to_shoot);
+      shootpercent = .3;
       m_shooter.shootCargoPercent(shootpercent);
 
       // Check direction of the shoot and adjust if not centered
@@ -61,7 +62,13 @@ public class SmartShooter2 extends CommandBase {
       if (tx < -5) drivesystem.turnLeft();
       else if (tx > 5) drivesystem.turnRight();
            else drivesystem.stop();
-
+      
+      if(get_timer()<2000) m_index.index_stop();
+      if(2000<get_timer() && get_timer()<2300) m_index.cargo_index_in();
+      if(2300<get_timer() && get_timer()<3500) m_index.index_stop();
+      if(3500<get_timer()) m_index.cargo_index_in();
+      
+           /*
       // Check if the first ball is ready to be shot in the indexer switches
       if(ball == 1 && ready_shoot_ball1 == false)
         if(m_index.is_cargo_in_index() == false) m_index.cargo_index_in();
@@ -96,7 +103,7 @@ public class SmartShooter2 extends CommandBase {
         
         if(cargoin == true) m_index.cargo_index_in();
         else m_index.index_stop();
-      }
+      }*/
     }
   }
 
@@ -111,7 +118,7 @@ public class SmartShooter2 extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(ready_shoot_ball2 == true && get_timer()>2000) return true;
+    if(get_timer()>4000) return true;
     return false;
   }
 

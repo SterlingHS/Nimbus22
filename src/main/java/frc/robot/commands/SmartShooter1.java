@@ -14,8 +14,8 @@ public class SmartShooter1 extends CommandBase {
   private final Index m_index;
   private final DriveSystem drivesystem;
 
-  private static long starting_time;
-  private static boolean ready_shoot;
+  private long starting_time;
+  private boolean ready_shoot;
 
   /** Creates a new SmartShooter. */
   public SmartShooter1(Shooter subsystem1, Limelight subsystem2, Index subsystem3, DriveSystem susbsystem4) {
@@ -44,7 +44,7 @@ public class SmartShooter1 extends CommandBase {
       double distance = m_limelight.Distance_to_target();
       double speed_to_shoot = m_shooter.speed_from_distance(distance);
       double shootpercent = m_shooter.power_from_speed(speed_to_shoot);
-      shootpercent = 0.2;
+      //shootpercent = 0.3;
       m_shooter.shootCargoPercent(shootpercent);
 
       // double volt_to_shoot = m_shooter.volts_from_distance(distance);
@@ -65,7 +65,7 @@ public class SmartShooter1 extends CommandBase {
       if( volt_to_shoot < 0 ) volt_to_shoot = 0;*/
 
       //System.out.println("Distance: " + distance + "Target Speed: " + speed_to_shoot +" - Power: " + power_to_shooter + " - Speed: " + m_shooter.read_speed_shooter() + " - Ready: " + ready);
-      m_shooter.shootCargoPercent(shootpercent);
+      //m_shooter.shootCargoPercent(shootpercent);
 
       double tx=m_limelight.Read_Limelight_tx();
 
@@ -73,14 +73,17 @@ public class SmartShooter1 extends CommandBase {
       else if (tx >5) drivesystem.turnRight();
            else drivesystem.stop();
 
-      // if(get_timer()>1000) m_index.cargo_index_in();
-      if(m_shooter.read_speed_shooter()>speed_to_shoot || get_timer() > 2000) ready_shoot = true;
-      if(ready_shoot == true)
+      if(get_timer()>2000) m_index.cargo_index_in();
+      /*if(ready_shoot == false)
       {
-        m_index.cargo_index_in();
-        start_timer();
-      } 
-      else m_index.index_stop();
+        if(m_shooter.read_speed_shooter()>speed_to_shoot || get_timer() > 2000)
+        {
+          ready_shoot = true;
+          start_timer();
+        }
+        m_index.index_stop();
+      }
+      else m_index.cargo_index_in(); */
     }
   }
 
@@ -95,7 +98,7 @@ public class SmartShooter1 extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(ready_shoot == true && get_timer()>1000) return true;
+    if(get_timer()>3000) return true;
     return false;
   }
 
