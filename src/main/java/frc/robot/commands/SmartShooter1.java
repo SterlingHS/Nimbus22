@@ -69,8 +69,8 @@ public class SmartShooter1 extends CommandBase {
 
       double tx=m_limelight.Read_Limelight_tx();
 
-      if (tx < -5) drivesystem.turnLeft();
-      else if (tx >5) drivesystem.turnRight();
+      if (tx <-5) drivesystem.turnLeft();
+      else if (tx > 5) drivesystem.turnRight();
            else drivesystem.stop();
 
       if(get_timer()>2000) m_index.cargo_index_in();

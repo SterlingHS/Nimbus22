@@ -143,12 +143,12 @@ public class RobotContainer {
  public void update_smartboard(){     
        
         // SmartDashboard.putNumber("shooter speed",RobotMap.SHOOT_CARGO_SPEED);
-        RobotMap.SHOOT_CARGO_PERCENT = SmartDashboard.getNumber("shooter speed", RobotMap.SHOOT_CARGO_PERCENT);
+        /*RobotMap.SHOOT_CARGO_PERCENT = SmartDashboard.getNumber("shooter speed", RobotMap.SHOOT_CARGO_PERCENT);
         RobotMap.INDEX_MOTOR_SPEED = SmartDashboard.getNumber("Index speed", RobotMap.INDEX_MOTOR_SPEED);
         RobotMap.DRIVER_SLOWDOWN = SmartDashboard.getNumber("Drive speed", RobotMap.DRIVER_SLOWDOWN);
         RobotMap.INTAKECARGO_SPEED = SmartDashboard.getNumber("Intake Speed", RobotMap.INTAKECARGO_SPEED);
-        RobotMap.INTAKESHOULDER_SPEED = SmartDashboard.getNumber("Shoulder Speed", RobotMap.INTAKESHOULDER_SPEED);
-        SmartDashboard.putNumber("angle", drivesystem.getAngle());
+        RobotMap.INTAKESHOULDER_SPEED = SmartDashboard.getNumber("Shoulder Speed", RobotMap.INTAKESHOULDER_SPEED);*/
+       // SmartDashboard.putNumber("angle", drivesystem.getAngle());
         
         // Shooter
         SmartDashboard.putNumber("Current Speed", m_shooter.read_speed_shooter());
@@ -160,13 +160,13 @@ public class RobotContainer {
         //SmartDashboard.putNumber("Angle Target", RobotMap.limelight_angle+m_limelight.Read_Limelight_ty());
         //SmartDashboard.putNumber("Power Target", m_shooter.power_from_speed(m_shooter.speed_from_distance(m_limelight.Distance_to_target())));
 
-        SmartDashboard.putNumber("Pixie x", m_pixie.Read_Pixy_x());
+        /*SmartDashboard.putNumber("Pixie x", m_pixie.Read_Pixy_x());
         SmartDashboard.putNumber("Pixie y", m_pixie.Read_Pixy_y());
         SmartDashboard.putBoolean("Pixie ball", m_pixie.Read_Pixy_is_Ball());
         SmartDashboard.putNumber("Pixie angle", m_pixie.Read_Pixy_angle());
         SmartDashboard.putNumber("Pixie signature", m_pixie.Read_Pixy_signature());
         SmartDashboard.putNumber("Pixie dimx", m_pixie.Read_Pixy_dimx());
         SmartDashboard.putNumber("Pixie dimy", m_pixie.Read_Pixy_dimy());
-        SmartDashboard.putBoolean("IsBlue", DriverStation.getAlliance() == DriverStation.Alliance.Blue);
+        SmartDashboard.putBoolean("IsBlue", DriverStation.getAlliance() == DriverStation.Alliance.Blue);*/
     }
 }
