@@ -34,7 +34,7 @@ import frc.robot.subsystems.DriveSystem;
     @Override
     public void execute() {
         System.out.println("Speed: " + speed);
-        if(get_timer()<time) drivesystem.mecanumDrive(0, speed, 0, 1);
+        if(get_timer()<time) drivesystem.mecanumDrive(0, .5, 0, 1);
         else drivesystem.stop();
     }
 

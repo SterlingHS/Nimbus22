@@ -8,6 +8,10 @@ import edu.wpi.first.wpilibj.CounterBase;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
+import java.util.ArrayList;
+
+import javax.xml.crypto.Data;
+
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 /**
@@ -21,6 +25,7 @@ public class Shooter extends SubsystemBase
     private WPI_TalonSRX antiTopSpinMotor;
     private MotorControllerGroup shooterMotor;
     private final Encoder m_encoder;
+    private ArrayList<Double> Data_speed;
 
     /**
     *
@@ -34,11 +39,13 @@ public class Shooter extends SubsystemBase
         m_encoder = new Encoder(RobotMap.ShooterEncoderChannel1, RobotMap.ShooterEncoderChannel2,true, CounterBase.EncodingType.k4X);
         m_encoder.setSamplesToAverage(10);
         m_encoder.setReverseDirection(false);
+        Data_speed = new ArrayList<Double>();
     }
 
     @Override
     public void periodic() 
-    {}
+    {
+    }
 
     @Override
     public void simulationPeriodic() 
@@ -112,6 +119,17 @@ public class Shooter extends SubsystemBase
         double new_speed = (m*desired_distance+b)*1000;
         // System.out.println("desired distance: " + desired_distance + " - new_speed: " + new_speed);
         return new_speed;
+    }
+
+    public double distance_speed_data(double distance){ 
+        return 0;
+    }
+
+    public void init_data_speed(){
+        for (int i = 0; i < 25; i++) {
+            Data_speed.add((double) (40/7)*i+23);
+        }
+        //Data_speed.set(5, (double) 5);
     }
 
     public double power_from_speed(double desired_speed)
