@@ -54,7 +54,7 @@ public class SmartShooter2 extends CommandBase {
       double distance = m_limelight.Distance_to_target();
       double speed_to_shoot = m_shooter.speed_from_distance(distance);
       double shootpercent = m_shooter.power_from_speed(speed_to_shoot);
-      shootpercent = .3;
+      //shootpercent = .3;
       m_shooter.shootCargoPercent(shootpercent);
 
       // Check direction of the shoot and adjust if not centered
