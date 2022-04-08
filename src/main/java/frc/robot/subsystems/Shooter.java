@@ -102,12 +102,12 @@ public class Shooter extends SubsystemBase
 
     public double speed_from_distance(double desired_distance)
     { // Calculates speed for shooter in function of the distance to target
-        // 13 ft with 140k
-        // 10 ft with 120k 
+        // 13 ft with 100k
+        // 10 ft with 80k 
         //  7 ft with 
 
-        double m = (140-120)/(13-10);
-        double b = 140 - m * 13;
+        double m = (120-80)/(17-10);
+        double b = 80 - m * 10;
 
         double new_speed = (m*desired_distance+b)*1000;
         // System.out.println("desired distance: " + desired_distance + " - new_speed: " + new_speed);

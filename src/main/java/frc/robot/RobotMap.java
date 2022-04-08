@@ -33,8 +33,8 @@ public class RobotMap {
     public static int SHOOTER_ANTI_TOP_ID = 21;
     public static double SHOOT_CARGO_PERCENT = 0.45;
     public static double REVERSE_CARGO_PERCENT = 0;
-    public static final int ShooterEncoderChannel1 = 4;
-    public static final int ShooterEncoderChannel2 = 5;
+    public static final int ShooterEncoderChannel1 = 5;
+    public static final int ShooterEncoderChannel2 = 6;
 
     //Index Constants
     public static int INDEX_MOTOR_TALON_ID = 12;
