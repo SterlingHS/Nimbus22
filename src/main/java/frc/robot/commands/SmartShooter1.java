@@ -15,6 +15,7 @@ public class SmartShooter1 extends CommandBase {
   private final DriveSystem drivesystem;
 
   private static long starting_time;
+  private static boolean ready_shoot;
 
   /** Creates a new SmartShooter. */
   public SmartShooter1(Shooter subsystem1, Limelight subsystem2, Index subsystem3, DriveSystem susbsystem4) {
@@ -32,6 +33,7 @@ public class SmartShooter1 extends CommandBase {
   @Override
   public void initialize() {
     start_timer();
+    ready_shoot = false;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -70,7 +72,12 @@ public class SmartShooter1 extends CommandBase {
       else if (tx >8) drivesystem.turnRight();
            else drivesystem.stop();
 
-      if(get_timer()>1000) m_index.cargo_index_in();
+      // if(get_timer()>1000) m_index.cargo_index_in();
+      if(m_shooter.read_speed_shooter()>speed_to_shoot || get_timer()>2000 || ready_shoot == true) 
+      {
+        m_index.cargo_index_in();
+        ready_shoot = true;
+      }
     }
   }
 

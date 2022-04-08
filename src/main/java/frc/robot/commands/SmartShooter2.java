@@ -75,9 +75,9 @@ public class SmartShooter2 extends CommandBase {
       // Shoots the first ball after 1 sec.
       if(ball == 1 && ready_shoot_ball1 == true)
       {
-        if(get_timer()>1000) m_index.cargo_index_in();
+        if(get_timer()>1500) m_index.cargo_index_in();
         else m_index.index_stop();
-        if(get_timer()>=1500) ball=2;
+        if(get_timer()>=1200) ball=2;
       }
 
       // Shoots the 2nd ball after 500ms of ball in indexer switches
@@ -92,7 +92,7 @@ public class SmartShooter2 extends CommandBase {
           start_timer();
           ready_shoot_ball2 = true;
         }
-        if(ready_shoot_ball2 == true && get_timer() > 1000) cargoin = true;
+        if(ready_shoot_ball2 == true && get_timer() > 1500) cargoin = true;
         
         if(cargoin == true) m_index.cargo_index_in();
         else m_index.index_stop();
@@ -111,7 +111,7 @@ public class SmartShooter2 extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(ready_shoot_ball2 == true && get_timer()>1500) return true;
+    if(ready_shoot_ball2 == true && get_timer()>2000) return true;
     return false;
   }
 
