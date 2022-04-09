@@ -15,7 +15,7 @@ public class SmartShooter1 extends CommandBase {
   private final DriveSystem drivesystem;
 
   private long starting_time;
-  private boolean ready_shoot;
+  // private boolean ready_shoot;
 
   /** Creates a new SmartShooter. */
   public SmartShooter1(Shooter subsystem1, Limelight subsystem2, Index subsystem3, DriveSystem susbsystem4) {
@@ -33,7 +33,7 @@ public class SmartShooter1 extends CommandBase {
   @Override
   public void initialize() {
     start_timer();
-    ready_shoot = false;
+    // ready_shoot = false;
   }
 
   // Called every time the scheduler runs while the command is scheduled.

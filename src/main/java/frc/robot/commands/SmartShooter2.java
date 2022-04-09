@@ -13,9 +13,9 @@ public class SmartShooter2 extends CommandBase {
   private final Limelight m_limelight;
   private final Index m_index;
   private final DriveSystem drivesystem;
-  private static int ball;
-  private static boolean ready_shoot_ball1;
-  private static boolean ready_shoot_ball2;
+  // private static int ball;
+  // private static boolean ready_shoot_ball1;
+  // private static boolean ready_shoot_ball2;
 
   private static long starting_time;
 
@@ -35,9 +35,9 @@ public class SmartShooter2 extends CommandBase {
   @Override
   public void initialize() {
     start_timer();
-    ball = 1;
-    ready_shoot_ball1 = false;
-    ready_shoot_ball2 = false;
+    // ball = 1;
+    // ready_shoot_ball1 = false;
+    // ready_shoot_ball2 = false;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
