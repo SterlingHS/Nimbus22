@@ -110,8 +110,14 @@ public class Shooter extends SubsystemBase
         // 15 ft with 90k
         //  7 ft with 75k
 
-        double m = (90-75)/(15-7);
-        double b = 75 - m * 7;
+        double x1 = 7;
+        double y1 = 75;
+
+        double x2 = 15;
+        double y2 = 90;
+
+        double m = (y2-y1)/(x2-x1);
+        double b = y1 - m * x1;
 
         double new_speed = (m*desired_distance+b)*1000;
         // System.out.println("desired distance: " + desired_distance + " - new_speed: " + new_speed);

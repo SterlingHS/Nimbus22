@@ -75,7 +75,7 @@ private AHRS navx_device;
     }
     public void turnRight() {
         mecanumDrive(0,0,0.5,1);
-    }// might need to swap the negative signs
+    }
 
     public void turnLeft(){
         mecanumDrive(0,0,-0.5,1);

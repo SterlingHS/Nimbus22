@@ -40,8 +40,8 @@ public class Autonomous1Ball extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(new Shoot0andDropIntake(m_shooter, m_limelight, m_index, m_intake), // Shoots to top hopper and drops intake
-                new TurnAngle(drivesystem, 180), // Turn to face ball
-                //new MoveTime(drivesystem, -0.5, 500), // Get closer to ball
+                new TurnAngle(drivesystem, 170), // Turn to face ball
+                //new MoveTime(drivesystem, -0.5, 200), // Get closer to ball
 
                 new SearchCargo(m_pixie, drivesystem, m_intake, m_index), // Searches and picks up ball
                 new TurnAngle(drivesystem, 180), // Turn to face ball

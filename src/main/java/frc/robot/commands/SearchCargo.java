@@ -97,9 +97,9 @@ import frc.robot.subsystems.Pixie;
         // If the ball is in sight then go forward
         double turn = 0;
         double forward = -.20;
-        //System.out.println("x: " + x);
-        if(x < -10) turn = -.15;
-        if(x > 10)  turn = .15;
+        System.out.println("x: " + x);
+        if(x < -10) turn = -.2;
+        if(x > 10)  turn = .2;
         if(m_pixie.Read_Pixy_is_Ball()) forward = -0.5;
         drivesystem.mecanumDrive(0 , forward, turn, 1);
         m_intake.cargointake();

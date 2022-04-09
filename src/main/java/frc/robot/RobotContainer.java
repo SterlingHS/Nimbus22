@@ -104,7 +104,7 @@ public class RobotContainer {
 
      // Button for SimpleShooter
     final JoystickButton shootSimpleCargoBT = new JoystickButton(driverController, XboxController.Button.kRightBumper.value);        
-    shootSimpleCargoBT.whileHeld(new SmartShooter0( m_shooter , m_limelight, m_index, 12*.4, 12*.4*1.4) ,true);
+    shootSimpleCargoBT.whileHeld(new SmartShooter0( m_shooter , m_limelight, m_index, 12*.3, 12*.3*1.5) ,true);
     //SmartDashboard.putData("shootSimpleCargoBT",new ShootSimpleCargo( m_shooter ) );
 
       // Button for SmartShooter
