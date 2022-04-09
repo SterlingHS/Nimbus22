@@ -57,12 +57,12 @@ private AHRS navx_device;
 
     public void mecanumDrive(double X, double Y, double Z, double slowdown_factor) 
     {
-        if(slowdown_factor < 1 && slowdown_factor >= 0)
+        /*if(slowdown_factor < 1 && slowdown_factor >= 0)
         {
             X*=slowdown_factor;
             Y*=slowdown_factor;
             Z*=slowdown_factor;
-        }
+        }*/
 
         mecanumDrive1.driveCartesian(-X, Y, -Z);
     }

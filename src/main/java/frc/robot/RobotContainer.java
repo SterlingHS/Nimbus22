@@ -153,7 +153,6 @@ public class RobotContainer {
         SmartDashboard.putNumber("Current Speed", m_shooter.read_speed_shooter());
         SmartDashboard.putNumber("Desired Speed", m_shooter.speed_from_distance(m_limelight.Distance_to_target()));
 
-
         //Limelight
         SmartDashboard.putNumber("Distance", m_limelight.Distance_to_target());
         //SmartDashboard.putNumber("Angle Target", RobotMap.limelight_angle+m_limelight.Read_Limelight_ty());
