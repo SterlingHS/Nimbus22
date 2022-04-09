@@ -25,7 +25,7 @@ public class RobotMap {
     public static int Y_AXIS = 1;
     public static int Z_AXIS = 4;
     public static double climbingSpeed = .45;
-    public static double climbingSpeedBack = -.45;
+    public static double climbingSpeedBack = -.55;
 
     //Shooter Constant
     public static int SHOOTER_TOP_TALON_ID = 22;
