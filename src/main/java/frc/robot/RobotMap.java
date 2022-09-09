@@ -62,5 +62,7 @@ public class RobotMap {
     public static final double Anti0Volt = Shoot0Volt*.7;
     public static final double Shoot1Volt = 12*.47;
     public static final double Anti1Volt = Shoot1Volt*1.5;
+
+    // A comment
 }
 
